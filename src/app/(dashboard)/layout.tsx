@@ -1,4 +1,5 @@
 import { Sidebar } from "@/components/layout/Sidebar";
+import { OnboardingModal } from "@/components/onboarding/OnboardingModal";
 
 export default function DashboardLayout({
     children,
@@ -11,6 +12,7 @@ export default function DashboardLayout({
             <main className="pl-64 min-h-screen transition-all duration-300">
                 {children}
             </main>
+            <OnboardingModal />
         </div>
     );
 }
