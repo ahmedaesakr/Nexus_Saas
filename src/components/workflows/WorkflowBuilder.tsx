@@ -77,6 +77,14 @@ function Flow({
         event.dataTransfer.dropEffect = 'move';
     }, []);
 
+    const isValidConnection = useCallback(
+        (connection: Connection | Edge) => {
+            if (connection.source === connection.target) return false;
+            return true;
+        },
+        []
+    );
+
     const onDrop = useCallback(
         (event: React.DragEvent) => {
             event.preventDefault();
@@ -84,6 +92,16 @@ function Flow({
             const type = event.dataTransfer.getData('application/reactflow');
             if (typeof type === 'undefined' || !type) {
                 return;
+            }
+
+            // Validation: Max 1 Trigger
+            if (type === 'trigger') {
+                const hasTrigger = nodes.some((n) => n.type === 'trigger');
+                if (hasTrigger) {
+                    // Ideally show a toast here
+                    alert("Only one Trigger node is allowed per workflow.");
+                    return;
+                }
             }
 
             const position = screenToFlowPosition({
@@ -100,7 +118,7 @@ function Flow({
 
             setNodes((nds) => nds.concat(newNode));
         },
-        [screenToFlowPosition, setNodes],
+        [screenToFlowPosition, setNodes, nodes],
     );
 
     const onNodeClick = useCallback((event: React.MouseEvent, node: Node) => {
@@ -123,6 +141,7 @@ function Flow({
                 onPaneClick={onPaneClick}
                 onDrop={onDrop}
                 onDragOver={onDragOver}
+                isValidConnection={isValidConnection}
                 nodeTypes={nodeTypes}
                 fitView
                 className="touch-none"

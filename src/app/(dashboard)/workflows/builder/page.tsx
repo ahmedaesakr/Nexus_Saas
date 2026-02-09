@@ -110,7 +110,7 @@ export default function WorkflowBuilderPage() {
                                         className="p-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg cursor-grab active:cursor-grabbing transition-all flex items-center gap-3 group"
                                     >
                                         <div className={`w-8 h-8 rounded bg-primary/10 flex items-center justify-center transition-colors
-                                            ${node === 'Trigger' ? 'text-green-400 bg-green-500/10' :
+                                            ${node === 'Trigger' ? 'text-amber-400 bg-amber-500/10' :
                                                 node === 'Action' ? 'text-blue-400 bg-blue-500/10' :
                                                     node === 'Condition' ? 'text-amber-400 bg-amber-500/10' :
                                                         node === 'Loop' ? 'text-purple-400 bg-purple-500/10' :

@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { StepRoleSelection } from "./StepRoleSelection";
 import { StepGoals } from "./StepGoals";
 import { StepTemplateSelect } from "./StepTemplateSelect";
+import { StepIntegration } from "./StepIntegration";
+import { ProgressSidebar } from "./ProgressSidebar";
 import { StepCompletion } from "./StepCompletion";
 
 export function OnboardingModal() {
@@ -33,13 +35,12 @@ export function OnboardingModal() {
     }, []);
 
     if (!mounted || !isOpen) return null;
+
     const handleComplete = () => {
         setIsOpen(false);
         localStorage.setItem("nexus_onboarding_complete", "true");
         router.push("/dashboard");
     };
-
-    if (!isOpen) return null;
 
     return (
         <AnimatePresence>
@@ -49,18 +50,14 @@ export function OnboardingModal() {
                 exit={{ opacity: 0 }}
                 className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
             >
-                <div className="w-full max-w-2xl bg-[#0c1018] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
-                    {/* Progress Bar */}
-                    <div className="h-1 bg-white/5 w-full">
-                        <motion.div
-                            className="h-full bg-primary"
-                            initial={{ width: "0%" }}
-                            animate={{ width: `${(step / 4) * 100}%` }}
-                            transition={{ duration: 0.3 }}
-                        />
+                <div className="w-full max-w-5xl bg-[#0c1018] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative flex h-[600px]">
+                    {/* Sidebar */}
+                    <div className="w-64 flex-shrink-0 border-r border-white/5 bg-[#050a14]">
+                        <ProgressSidebar step={step} />
                     </div>
 
-                    <div className="p-8 min-h-[400px] flex flex-col">
+                    {/* Content */}
+                    <div className="flex-1 p-8 flex flex-col overflow-y-auto custom-scrollbar relative">
                         <AnimatePresence mode="wait">
                             {step === 1 && (
                                 <StepRoleSelection
@@ -89,8 +86,15 @@ export function OnboardingModal() {
                                 />
                             )}
                             {step === 4 && (
-                                <StepCompletion
+                                <StepIntegration
                                     key="step4"
+                                    onNext={handleNext} // Go to 5 (Completion)
+                                    onBack={() => setStep(3)}
+                                />
+                            )}
+                            {step === 5 && (
+                                <StepCompletion
+                                    key="step5"
                                     userData={userData}
                                     onComplete={handleComplete}
                                 />
