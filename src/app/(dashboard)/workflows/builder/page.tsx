@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { WorkflowBuilder } from "@/components/workflows/WorkflowBuilder";
 
 export default function WorkflowBuilderPage() {
     const [isDeploying, setIsDeploying] = useState(false);
@@ -93,35 +94,9 @@ export default function WorkflowBuilderPage() {
                     </div>
                 </div>
 
-                {/* Canvas Area (Placeholder for XYFlow) */}
-                <div className="flex-1 bg-[#050a14] relative overflow-hidden bg-[url('/grid.svg')] bg-opacity-5">
-                    <div className="absolute inset-0 flex items-center justify-center text-gray-500">
-                        <div className="text-center">
-                            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/10 animate-pulse">
-                                <span className="material-symbols-outlined text-4xl text-gray-600">drag_indicator</span>
-                            </div>
-                            <p className="font-medium">Drag nodes here to specify workflow logic</p>
-                            <p className="text-sm text-gray-600 mt-2">React Flow Canvas Placeholder</p>
-                        </div>
-                    </div>
-
-                    {/* Toolbar */}
-                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 p-2 bg-[#0c1018] border border-white/10 rounded-xl shadow-2xl flex items-center gap-1">
-                        <button className="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-colors" title="Zoom Out">
-                            <span className="material-symbols-outlined">remove</span>
-                        </button>
-                        <span className="text-xs font-mono text-gray-500 w-12 text-center">100%</span>
-                        <button className="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-colors" title="Zoom In">
-                            <span className="material-symbols-outlined">add</span>
-                        </button>
-                        <div className="w-px h-6 bg-white/10 mx-1" />
-                        <button className="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-colors" title="Fit View">
-                            <span className="material-symbols-outlined">center_focus_strong</span>
-                        </button>
-                        <button className="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-colors" title="Layout">
-                            <span className="material-symbols-outlined">auto_fix_high</span>
-                        </button>
-                    </div>
+                {/* Canvas Area */}
+                <div className="flex-1 bg-[#050a14] relative overflow-hidden">
+                    <WorkflowBuilder />
                 </div>
 
                 {/* Properties Panel */}

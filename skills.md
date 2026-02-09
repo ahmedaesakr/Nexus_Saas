@@ -5,7 +5,7 @@ This file defines the active skills for this project. These skills are automatic
 ## 📁 Source Directory
 `C:\Users\Administrator\.gemini\antigravity\global_skills`
 
-## 🚀 Active Skills (28 Total)
+## 🚀 Active Skills (31 Total)
 
 ---
 
@@ -156,6 +156,25 @@ This file defines the active skills for this project. These skills are automatic
 - **Focus**: Creating new agent skills.
 - **Usage**: Use when building custom skills to extend agent capabilities.
 - **Reference**: `global_skills/skill-creator/SKILL.md`
+
+---
+
+### 📦 SaaS & AI Workflow
+
+#### 29. SaaS Architecture
+- **Focus**: Multi-tenancy, billing, auth, and enterprise patterns.
+- **Rules**: Shared DB with tenant ID, NextAuth + Prisma, Stripe integration, RBAC, API-first design.
+- **Reference**: `global_skills/saas-architecture/SKILL.md`
+
+#### 30. SaaS Planning
+- **Focus**: Product validation, pricing strategy, go-to-market.
+- **Rules**: MoSCoW prioritization, 2026 trends, competitive analysis frameworks.
+- **Reference**: `global_skills/saas-planning/SKILL.md`
+
+#### 31. AI Workflow Automation
+- **Focus**: Visual workflow builders, AI agent execution, integrations.
+- **Rules**: Graph-based workflow representation, agentic loops, tool calling, real-time monitoring.
+- **Reference**: `global_skills/ai-workflow-automation/SKILL.md`
 
 ---
 
