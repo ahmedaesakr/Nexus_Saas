@@ -93,7 +93,10 @@ export function PricingSection() {
                         <span className={`text-sm font-medium ${!isYearly ? 'text-white' : 'text-gray-500'}`}>Monthly</span>
                         <button
                             onClick={() => setIsYearly(!isYearly)}
-                            className="w-14 h-7 bg-white/10 rounded-full relative transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[#050a14]"
+                            className="w-14 h-7 bg-white/10 rounded-full relative transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[#050a14] cursor-pointer"
+                            role="switch"
+                            aria-checked={isYearly}
+                            aria-label="Toggle yearly billing"
                         >
                             <div className={`w-5 h-5 rounded-full bg-primary absolute top-1 transition-all ${isYearly ? 'left-8' : 'left-1'}`} />
                         </button>
