@@ -1,26 +1,50 @@
 {
-  "name": "app",
+  "name": "nexus-flow",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
-    "next": "16.1.6",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "@anthropic-ai/sdk": "^0.24.0",
+    "@auth/prisma-adapter": "^2.4.0",
+    "@hookform/resolvers": "^3.9.0",
+    "@prisma/client": "^5.16.0",
+    "@stripe/stripe-js": "^4.0.0",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@xyflow/react": "^12.0.0",
+    "ai": "^3.2.0",
+    "bullmq": "^5.8.0",
+    "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
+    "framer-motion": "^11.2.0",
+    "lucide-react": "^0.395.0",
+    "next": "14.2.4",
+    "next-auth": "^5.0.0-beta.19",
+    "openai": "^4.52.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.52.0",
+    "recharts": "^2.12.7",
+    "stripe": "^15.12.0",
+    "tailwind-merge": "^2.3.0",
+    "uuid": "^10.0.0",
+    "zod": "^3.23.8",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.1.6",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@types/node": "^20.14.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.4",
+    "postcss": "^8.4.38",
+    "prisma": "^5.16.0",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.5.0"
   }
 }

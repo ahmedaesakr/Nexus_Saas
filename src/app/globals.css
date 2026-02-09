@@ -1,38 +1,155 @@
 @import "tailwindcss";
 
+/* ============================================
+   NEXUS DAM - 2026 UI/UX DESIGN SYSTEM
+   Based on: UI/UX Trends 2026, Motion UX 2026,
+   Swiss Design Web, and Vercel Best Practices
+   ============================================ */
+
 :root {
-  /* Nexus Brand Colors */
+  /* === Brand Colors === */
   --primary: #0d59f2;
   --primary-hover: #0b4bcc;
+  --primary-glow: rgba(13, 89, 242, 0.4);
+
+  /* === Curated Color Palette: Midnight Nexus === */
+  --midnight-950: #02040a;
+  --midnight-900: #050a14;
+  --midnight-800: #0c1018;
+  --midnight-700: #0f1623;
+  --midnight-600: #1a2238;
+  --midnight-500: #2d374f;
+
+  /* === Light Mode Colors === */
   --background-light: #f5f6f8;
-  --background-dark: #0f1623;
+  --surface-light: #ffffff;
+  --text-primary-light: #0f172a;
+  --text-secondary-light: #64748b;
+
+  /* === Dark Mode Colors === */
+  --background-dark: #050a14;
   --sidebar-dark: #0d121c;
-  
-  /* Modern UI - Liquid Glass/Bento Trends */
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --surface-dark: #0c1018;
+  --text-primary-dark: #f8fafc;
+  --text-secondary-dark: #94a3b8;
+
+  /* === Layout Variables (Locked Grid) === */
+  --pad-mobile: 16px;
+  /* px-4 */
+  --pad-desktop: 32px;
+  /* px-8 */
+  --max-width: 100%;
+  /* LOCKED to edges, no max-width cap */
+
+  /* === 2026 Liquid Glass System === */
   --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg-elevated: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border-strong: rgba(255, 255, 255, 0.15);
+  --glass-blur: 20px;
+  --glass-saturate: 180%;
+
+  /* === Semantic Colors === */
+  --success: #22c55e;
+  --success-bg: rgba(34, 197, 94, 0.1);
+  --warning: #f59e0b;
+  --warning-bg: rgba(245, 158, 11, 0.1);
+  --error: #ef4444;
+  --error-bg: rgba(239, 68, 68, 0.1);
+  --info: #3b82f6;
+  --info-bg: rgba(59, 130, 246, 0.1);
+
+  /* === Motion UX 2026 Timing === */
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 800ms;
+
+  /* === Easing Functions === */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* === Spacing Scale === */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* === Border Radius Scale === */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* === Shadows === */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.2);
+  --shadow-glow: 0 0 40px var(--primary-glow);
+  --shadow-glow-lg: 0 0 60px var(--primary-glow);
+
+  /* === Neumorphism (Clean 2026) === */
+  --neu-bg: #e0e5ec;
+  --neu-shadow-light: #ffffff;
+  --neu-shadow-dark: #a3b1c6;
 }
 
+/* === Dark Mode Variables === */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: var(--background-dark);
-    --foreground: #ffffff;
+    --foreground: var(--text-primary-dark);
+    --surface: var(--surface-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
   }
 }
 
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
 body {
   background: var(--background-light);
-  color: #0f172a;
-  font-family: var(--font-inter), sans-serif;
+  color: var(--text-primary-light);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body.dark {
   background: var(--background-dark);
-  color: #ffffff;
+  color: var(--text-primary-dark);
 }
 
-/* Material Symbols Font Setup */
+/* Smooth scrolling with performance consideration */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Selection styling */
+::selection {
+  background: var(--primary);
+  color: white;
+}
+
+/* ============================================
+   MATERIAL SYMBOLS ICONS
+   ============================================ */
+
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
@@ -50,21 +167,516 @@ body.dark {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Animations from Motion UX Skill */
+/* ============================================
+   2026 LIQUID GLASS SYSTEM
+   ============================================ */
+
+.liquid-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.05) 100%);
+  pointer-events: none;
+}
+
+.liquid-glass-elevated {
+  background: var(--glass-bg-elevated);
+  border: 1px solid var(--glass-border-strong);
+}
+
+/* ============================================
+   CLEAN NEUMORPHISM 2026
+   ============================================ */
+
+.neu-card {
+  background: var(--neu-bg);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    8px 8px 16px var(--neu-shadow-dark),
+    -8px -8px 16px var(--neu-shadow-light);
+}
+
+.neu-button {
+  background: var(--neu-bg);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 16px 32px;
+  box-shadow:
+    4px 4px 8px var(--neu-shadow-dark),
+    -4px -4px 8px var(--neu-shadow-light);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.neu-button:hover {
+  box-shadow:
+    2px 2px 4px var(--neu-shadow-dark),
+    -2px -2px 4px var(--neu-shadow-light);
+}
+
+.neu-button:active {
+  box-shadow:
+    inset 4px 4px 8px var(--neu-shadow-dark),
+    inset -4px -4px 8px var(--neu-shadow-light);
+}
+
+/* ============================================
+   TACTILE CLAYMORPHISM 2.0 (2026)
+   ============================================ */
+
+.clay-button {
+  background: linear-gradient(145deg, #6366f1, #4f46e5);
+  border: none;
+  border-radius: var(--radius-xl);
+  padding: 16px 32px;
+  color: white;
+  font-weight: 600;
+  box-shadow:
+    0 10px 30px rgba(99, 102, 241, 0.4),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.2),
+    inset 0 4px 0 rgba(255, 255, 255, 0.2);
+  transform-style: preserve-3d;
+  transition: all var(--duration-normal) var(--ease-spring);
+  cursor: pointer;
+}
+
+.clay-button:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    0 20px 40px rgba(99, 102, 241, 0.5),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.2),
+    inset 0 4px 0 rgba(255, 255, 255, 0.3);
+}
+
+.clay-button:active {
+  transform: translateY(2px) scale(0.98);
+  box-shadow:
+    0 5px 15px rgba(99, 102, 241, 0.3),
+    inset 0 4px 0 rgba(0, 0, 0, 0.2),
+    inset 0 -2px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Primary Clay Button (Brand Color) */
+.clay-button-primary {
+  background: linear-gradient(145deg, #0d59f2, #0b4bcc);
+  box-shadow:
+    0 10px 30px var(--primary-glow),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.2),
+    inset 0 4px 0 rgba(255, 255, 255, 0.2);
+}
+
+.clay-button-primary:hover {
+  box-shadow:
+    0 20px 40px rgba(13, 89, 242, 0.5),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.2),
+    inset 0 4px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   BENTO GRID LAYOUTS
+   ============================================ */
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: var(--space-md);
+  padding: var(--space-md);
+}
+
+.bento-item {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-lg);
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.bento-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--glass-border-strong);
+}
+
+.bento-item.featured {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.bento-item.wide {
+  grid-column: span 2;
+}
+
+.bento-item.tall {
+  grid-row: span 2;
+}
+
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
+  }
+
+  .bento-item.featured {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+}
+
+/* ============================================
+   HYPERBOLD TYPOGRAPHY (2026 Trend)
+   ============================================ */
+
+.hyperbold {
+  font-size: clamp(3rem, 10vw, 10rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+/* Fluid Typography Scale */
+.text-fluid-sm {
+  font-size: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
+}
+
+.text-fluid-base {
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+}
+
+.text-fluid-lg {
+  font-size: clamp(1.25rem, 1rem + 1vw, 2rem);
+}
+
+.text-fluid-xl {
+  font-size: clamp(1.5rem, 1rem + 2vw, 3rem);
+}
+
+.text-fluid-2xl {
+  font-size: clamp(2rem, 1rem + 4vw, 5rem);
+}
+
+.text-fluid-3xl {
+  font-size: clamp(3rem, 1rem + 8vw, 10rem);
+}
+
+/* ============================================
+   MICRO-INTERACTIONS & ANIMATIONS
+   ============================================ */
+
+/* Tactile Button States */
+.btn-tactile {
+  transition: transform var(--duration-fast) var(--ease-spring);
+}
+
+.btn-tactile:hover {
+  transform: scale(1.03);
+}
+
+.btn-tactile:active {
+  transform: scale(0.97);
+  transition-duration: var(--duration-instant);
+}
+
+/* Hover Lift Effect */
+.hover-lift {
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Glow on Hover */
+.hover-glow {
+  transition: box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.hover-glow:hover {
+  box-shadow: var(--shadow-glow);
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+
+/* Skeleton Pulse */
+.skeleton {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.05) 100%);
+  background-size: 200% 100%;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes skeleton-pulse {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Spinner */
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Slow spin for 3D viewer indicator */
+.animate-spin-slow {
+  animation: spin 3s linear infinite;
+}
+
+/* ============================================
+   ENTRANCE ANIMATIONS
+   ============================================ */
+
 @keyframes slideInRight {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .animate-slide-in-right {
-  animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slideInRight var(--duration-slow) var(--ease-out);
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeIn var(--duration-normal) var(--ease-out);
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp var(--duration-slow) var(--ease-out);
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--duration-normal) var(--ease-out);
+}
+
+/* Staggered animations for lists */
+.stagger-children>* {
+  animation: fadeInUp var(--duration-slow) var(--ease-out) forwards;
+  opacity: 0;
+}
+
+.stagger-children>*:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.stagger-children>*:nth-child(2) {
+  animation-delay: 50ms;
+}
+
+.stagger-children>*:nth-child(3) {
+  animation-delay: 100ms;
+}
+
+.stagger-children>*:nth-child(4) {
+  animation-delay: 150ms;
+}
+
+.stagger-children>*:nth-child(5) {
+  animation-delay: 200ms;
+}
+
+.stagger-children>*:nth-child(6) {
+  animation-delay: 250ms;
+}
+
+/* ============================================
+   SCROLL PROGRESS BAR
+   ============================================ */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), #6366f1);
+  transform-origin: left;
+  z-index: 9999;
+  animation: scroll-progress linear;
+  animation-timeline: scroll();
+}
+
+@keyframes scroll-progress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --text-secondary-dark: #d1d5db;
+  }
+
+  .liquid-glass,
+  .bento-item {
+    border-width: 2px;
+  }
+}
+
+/* Focus Visible for Keyboard Users */
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Touch Targets - Minimum 44x44px */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary), #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient Background */
+.gradient-primary {
+  background: linear-gradient(135deg, var(--primary), #6366f1);
+}
+
+/* Blur Background */
+.blur-bg {
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom Scrollbar */
+.scrollbar-custom::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }

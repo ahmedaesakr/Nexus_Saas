@@ -1,0 +1,185 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==================== AUTH ====================
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  role          Role      @default(MEMBER)
+  
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  
+  workflows     Workflow[]
+  executions    Execution[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Organization {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  logo        String?
+  
+  plan        Plan     @default(FREE)
+  stripeCustomerId String?
+  
+  users       User[]
+  workflows   Workflow[]
+  agents      Agent[]
+  integrations Integration[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  MEMBER
+  VIEWER
+}
+
+enum Plan {
+  FREE
+  STARTER
+  PRO
+  ENTERPRISE
+}
+
+// ==================== WORKFLOWS ====================
+model Workflow {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  icon        String?
+  
+  // Visual builder data (nodes, edges, etc.)
+  definition  Json
+  
+  status      WorkflowStatus @default(DRAFT)
+  isTemplate  Boolean  @default(false)
+  
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  
+  createdById String
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  
+  executions  Execution[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum WorkflowStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  ARCHIVED
+}
+
+// ==================== AI AGENTS ====================
+model Agent {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  avatar      String?
+  
+  // Agent configuration
+  systemPrompt String   @db.Text
+  model       String   @default("claude-3-sonnet")
+  temperature Float    @default(0.7)
+  tools       Json     // Available tools/functions
+  
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ==================== EXECUTIONS ====================
+model Execution {
+  id          String   @id @default(cuid())
+  
+  workflowId  String
+  workflow    Workflow @relation(fields: [workflowId], references: [id])
+  
+  triggeredById String?
+  triggeredBy   User?    @relation(fields: [triggeredById], references: [id])
+  
+  status      ExecutionStatus @default(PENDING)
+  
+  // Input data that triggered this execution
+  input       Json?
+  
+  // Result data after completion
+  output      Json?
+  
+  // Step-by-step logs
+  logs        ExecutionLog[]
+  
+  startedAt   DateTime?
+  completedAt DateTime?
+  
+  createdAt   DateTime @default(now())
+}
+
+model ExecutionLog {
+  id          String   @id @default(cuid())
+  
+  executionId String
+  execution   Execution @relation(fields: [executionId], references: [id])
+  
+  nodeId      String   // Which node in the workflow
+  nodeName    String
+  
+  status      String
+  message     String?
+  data        Json?
+  
+  timestamp   DateTime @default(now())
+}
+
+enum ExecutionStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+// ==================== INTEGRATIONS ====================
+model Integration {
+  id          String   @id @default(cuid())
+  
+  provider    String   // "slack", "gmail", "salesforce", etc.
+  name        String
+  
+  // OAuth tokens (encrypted)
+  accessToken  String?
+  refreshToken String?
+  expiresAt    DateTime?
+  
+  // Provider-specific config
+  config      Json?
+  
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
