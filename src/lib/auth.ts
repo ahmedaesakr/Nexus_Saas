@@ -31,35 +31,20 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 const { email, password } = credentials;
 
                 // --- MOCK/ADMIN LOGIN (Nexus Flow Easy Mode) ---
-                // In development/demo, allow "admin@nexus.flow" / "admin" to bypass password check or simplify it
+                // In development/demo, allow "admin@nexus.flow" / "admin" to bypass password check AND DB check
                 if (
                     email === "admin@nexus.flow" &&
                     password === "admin"
                 ) {
-                    // Check if admin user exists in DB
-                    let user = await prisma.user.findUnique({
-                        where: { email: email as string },
-                    });
-
-                    // Create admin if not exists (Auto-Seeding)
-                    if (!user) {
-                        user = await prisma.user.create({
-                            data: {
-                                email: email as string,
-                                name: "Nexus Admin",
-                                role: "OWNER",
-                                organization: {
-                                    create: {
-                                        name: "Nexus Corp",
-                                        slug: "nexus-corp",
-                                        plan: "ENTERPRISE",
-                                    },
-                                },
-                            },
-                        });
-                    }
-
-                    return user;
+                    // Return a mock user object directly, bypassing Prisma
+                    return {
+                        id: "mock-admin-id",
+                        name: "Nexus Admin",
+                        email: "admin@nexus.flow",
+                        image: "https://i.pravatar.cc/150?u=admin",
+                        role: "OWNER", // Custom property
+                        organizationId: "mock-org-id" // Custom property
+                    };
                 }
 
                 // Normal Auth Logic (Replace with bcrypt.compare later)
@@ -82,31 +67,34 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     ],
     callbacks: {
         // Add user.id and role to session
-        session: async ({ session, user, token }) => {
-            if (session.user) {
-                if (token.sub) {
-                    session.user.id = token.sub;
+        session: async ({ session, token }) => {
+            if (session.user && token.sub) {
+                session.user.id = token.sub;
+
+                // MOCK ADMIN BYPASS
+                if (session.user.email === "admin@nexus.flow") {
+                    // @ts-ignore
+                    session.user.role = "OWNER";
+                    // @ts-ignore
+                    session.user.organizationId = "mock-org-id";
+                    return session;
                 }
 
-                // Fetch role from DB if using JWT strategy (adapter + credentials often means JWT)
-                // Since we use PrismaAdapter with Credentials, session strategy defaults to "jwt" usually
-                // Let's ensure role is passed
-                if (token.role) {
-                    // @ts-ignore
-                    session.user.role = token.role;
-                }
+                try {
+                    // Fetch org ID
+                    const dbUser = await prisma.user.findUnique({
+                        where: { id: session.user.id },
+                        select: { organizationId: true, role: true }
+                    });
 
-                // Fetch org ID
-                const dbUser = await prisma.user.findUnique({
-                    where: { id: session.user.id },
-                    select: { organizationId: true, role: true }
-                });
-
-                if (dbUser) {
-                    // @ts-ignore
-                    session.user.organizationId = dbUser.organizationId;
-                    // @ts-ignore
-                    session.user.role = dbUser.role;
+                    if (dbUser) {
+                        // @ts-ignore
+                        session.user.organizationId = dbUser.organizationId;
+                        // @ts-ignore
+                        session.user.role = dbUser.role;
+                    }
+                } catch (e) {
+                    console.warn("DB Session fetch failed, using fallback");
                 }
             }
             return session;
