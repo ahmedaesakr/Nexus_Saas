@@ -2,6 +2,13 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { SolutionsSection } from "@/components/landing/SolutionsSection";
+import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
+import { PricingSection } from "@/components/landing/PricingSection";
+import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
+import { FAQSection } from "@/components/landing/FAQSection";
+import { EnhancedFooter } from "@/components/landing/EnhancedFooter";
+import { FinalCTA } from "@/components/landing/FinalCTA";
 
 export default function LandingPage() {
   return (
@@ -16,12 +23,12 @@ export default function LandingPage() {
       {/* Navbar */}
       <nav className="relative z-50 border-b border-white/5 backdrop-blur-md">
         <div className="container h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-2xl font-bold tracking-tighter">
+          <Link href="/" className="flex items-center gap-2 text-2xl font-bold tracking-tighter">
             <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-[0_0_20px_rgba(13,89,242,0.5)]">
               <span className="material-symbols-outlined text-white">dataset</span>
             </div>
             Nexus Flow
-          </div>
+          </Link>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
             <Link href="#features" className="hover:text-white transition-colors">Features</Link>
             <Link href="#solutions" className="hover:text-white transition-colors">Solutions</Link>
@@ -173,22 +180,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-white/10 py-20 bg-[#02040a]">
-        <div className="container">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
-            <div className="flex items-center gap-2 text-xl font-bold text-gray-400">
-              <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                <span className="material-symbols-outlined text-gray-400 text-lg">dataset</span>
-              </div>
-              Nexus Flow
-            </div>
-            <div className="text-sm text-gray-500">
-              © 2026 Nexus Flow Inc. All rights reserved.
-            </div>
-          </div>
-        </div>
-      </footer>
+      <SolutionsSection />
+      <HowItWorksSection />
+      <TestimonialsSection />
+      <PricingSection />
+      <FAQSection />
+      <FinalCTA />
+      <EnhancedFooter />
     </div>
   );
 }
