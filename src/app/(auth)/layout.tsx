@@ -53,9 +53,9 @@ export default function AuthLayout({
                         Back to Home
                     </Link>
                 </div>
-                <div className="w-full max-w-md space-y-8 animate-fade-in delay-100">
+                <main id="main-content" className="w-full max-w-md space-y-8 animate-fade-in delay-100">
                     {children}
-                </div>
+                </main>
             </div>
         </div>
     );

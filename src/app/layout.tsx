@@ -91,6 +91,12 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} antialiased selection:bg-primary selection:text-white`}>
+        <a
+          href="#main-content"
+          className="absolute left-0 top-[-100px] z-[100] bg-primary text-white px-4 py-2 rounded-br-lg focus:top-0 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white"
+        >
+          Skip to content
+        </a>
         <Providers key="providers">
           {children}
         </Providers>
