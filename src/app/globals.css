@@ -28,6 +28,16 @@
 
   /* === Dark Mode Colors === */
   --background-dark: #050a14;
+  --surface-dark: #0c1018; /* Card Background */
+
+  /* Theme Colors */
+  --bg-deepest: #02040a;
+  --bg-base: #050a14;
+  --bg-surface: #0c1018;
+  --bg-elevated: #1e293b;
+
+  --color-primary: #0d59f2;
+  --color-primary-hover: #3374f4;
   --sidebar-dark: #0d121c;
   --surface-dark: #0c1018;
   --text-primary-dark: #f8fafc;

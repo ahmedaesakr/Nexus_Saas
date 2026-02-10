@@ -6,9 +6,6 @@ import {
     MiniMap,
     Controls,
     Background,
-    useNodesState,
-    useEdgesState,
-    addEdge,
     Connection,
     Edge,
     MarkerType,
@@ -16,7 +13,6 @@ import {
     useReactFlow,
     Node,
     OnNodesChange,
-    applyNodeChanges,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 
@@ -29,26 +25,12 @@ import { DelayNode } from "./nodes/DelayNode";
 
 const nodeTypes = {
     "ai-agent": AgentNode,
-    "trigger": TriggerNode,
-    "action": ActionNode,
-    "condition": ConditionNode,
-    "loop": LoopNode,
-    "delay": DelayNode,
+    trigger: TriggerNode,
+    action: ActionNode,
+    condition: ConditionNode,
+    loop: LoopNode,
+    delay: DelayNode,
 };
-
-const initialNodes: Node[] = [
-    {
-        id: "agent-1",
-        type: "ai-agent",
-        position: { x: 250, y: 5 },
-        data: { label: "Sales Outreach Agent", model: "claude-3-5-sonnet", tools: ["gmail", "linkedin"] },
-    },
-];
-
-const initialEdges: Edge[] = [];
-
-let id = 0;
-const getId = () => `dndnode_${id++}`;
 
 interface WorkflowBuilderProps {
     nodes: Node[];
@@ -110,7 +92,7 @@ function Flow({
             });
 
             const newNode: Node = {
-                id: getId(),
+                id: crypto.randomUUID(),
                 type,
                 position,
                 data: { label: `${type} node` },

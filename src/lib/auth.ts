@@ -3,6 +3,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import GitHub from "next-auth/providers/github";
+import { compare } from "bcryptjs";
 import { prisma } from "./db";
 import { ZodError } from "zod";
 import { signInSchema } from "./validators"; // We'll create this later
@@ -47,7 +48,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     };
                 }
 
-                // Normal Auth Logic (Replace with bcrypt.compare later)
+                // Normal Auth Logic
                 const user = await prisma.user.findUnique({
                     where: { email: email as string },
                 });
@@ -56,9 +57,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     return null;
                 }
 
-                // For now, simple string comparison (Use bcrypt in production!)
-                if (password === user.password) {
-                    return user;
+                const isPasswordValid = await compare(password as string, user.password);
+
+                if (isPasswordValid) {
+                    return {
+                        ...user,
+                        organizationId: user.organizationId || undefined,
+                        // Ensure other fields match if necessary
+                    };
                 }
 
                 return null;
@@ -88,8 +94,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     });
 
                     if (dbUser) {
-                        // @ts-ignore
-                        session.user.organizationId = dbUser.organizationId;
+                        // @ts-ignore: handling prisma null vs next-auth undefined
+                        session.user.organizationId = dbUser.organizationId || undefined;
                         // @ts-ignore
                         session.user.role = dbUser.role;
                     }
@@ -101,7 +107,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         },
         jwt: async ({ token, user }) => {
             if (user) {
-                token.id = user.id;
+                token.id = user.id || "";
                 // @ts-ignore
                 token.role = user.role;
             }

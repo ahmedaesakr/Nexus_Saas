@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 /**
- * Dynamic Sitemap Generator for Nexus DAM SaaS
+ * Dynamic Sitemap Generator for Nexus Flow AI Platform
  * 
  * This sitemap follows programmatic SEO best practices:
  * - All important pages are included
@@ -11,7 +11,7 @@ import { MetadataRoute } from 'next';
  */
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://nexus.app';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://nexusflow.app';
     const currentDate = new Date();
 
     return [
@@ -31,15 +31,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         // Core Features
         {
-            url: `${baseUrl}/assets`,
+            url: `${baseUrl}/workflows`,
             lastModified: currentDate,
             changeFrequency: 'daily',
             priority: 0.9,
         },
         {
-            url: `${baseUrl}/analytics`,
+            url: `${baseUrl}/agents`,
             lastModified: currentDate,
             changeFrequency: 'daily',
+            priority: 0.9,
+        },
+        {
+            url: `${baseUrl}/templates`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
             priority: 0.8,
         },
         {

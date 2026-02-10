@@ -3,7 +3,15 @@ import { NextResponse } from "next/server";
 
 export default auth((req) => {
     const isLoggedIn = !!req.auth;
-    const isOnDashboard = req.nextUrl.pathname.startsWith("/dashboard");
+    const isOnDashboard =
+        req.nextUrl.pathname.startsWith("/dashboard") ||
+        req.nextUrl.pathname.startsWith("/workflows") ||
+        req.nextUrl.pathname.startsWith("/agents") ||
+        req.nextUrl.pathname.startsWith("/executions") ||
+        req.nextUrl.pathname.startsWith("/integrations") ||
+        req.nextUrl.pathname.startsWith("/users") ||
+        req.nextUrl.pathname.startsWith("/settings") ||
+        req.nextUrl.pathname.startsWith("/templates");
     const isOnAuth = req.nextUrl.pathname.startsWith("/login") || req.nextUrl.pathname.startsWith("/signup");
 
     if (isOnDashboard) {

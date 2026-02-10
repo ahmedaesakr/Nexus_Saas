@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: 'Settings',
-    description: 'Configure your Nexus DAM workspace settings, brand appearance, team permissions, and billing.',
+    description: 'Configure your Nexus Flow workspace settings, brand appearance, team permissions, and billing.',
     alternates: {
         canonical: '/settings',
     },

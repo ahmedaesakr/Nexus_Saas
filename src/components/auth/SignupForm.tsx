@@ -3,18 +3,59 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { signIn } from "next-auth/react";
 
 export function SignupForm() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        password: ""
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData(prev => ({ ...prev, [e.target.id]: e.target.value }));
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
-        // Simulate signup delay
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        setIsLoading(false);
-        router.push("/dashboard");
+
+        try {
+            const res = await fetch("/api/auth/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            if (!res.ok) {
+                const data = await res.json();
+                throw new Error(data.message || "Something went wrong");
+            }
+
+            toast.success("Account created! Signing you in...");
+
+            // Auto sign-in
+            const result = await signIn("credentials", {
+                email: formData.email,
+                password: formData.password,
+                redirect: false,
+            });
+
+            if (result?.error) {
+                toast.error("Account created but failed to auto-login. Please login manually.");
+                router.push("/login");
+            } else {
+                router.push("/dashboard");
+            }
+
+        } catch (error: any) {
+            toast.error(error.message);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -26,9 +67,11 @@ export function SignupForm() {
                 <input
                     id="name"
                     type="text"
+                    value={formData.name}
+                    onChange={handleChange}
                     placeholder="John Doe"
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white placeholder:text-gray-500 transition-all"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white placeholder:text-gray-500 transition-all focus:bg-white/10"
                 />
             </div>
 
@@ -39,9 +82,11 @@ export function SignupForm() {
                 <input
                     id="email"
                     type="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="name@company.com"
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white placeholder:text-gray-500 transition-all"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white placeholder:text-gray-500 transition-all focus:bg-white/10"
                 />
             </div>
 
@@ -52,10 +97,12 @@ export function SignupForm() {
                 <input
                     id="password"
                     type="password"
+                    value={formData.password}
+                    onChange={handleChange}
                     placeholder="Create a password"
                     required
                     minLength={8}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white placeholder:text-gray-500 transition-all"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white placeholder:text-gray-500 transition-all focus:bg-white/10"
                 />
                 <p className="text-xs text-gray-500">Must be at least 8 characters</p>
             </div>

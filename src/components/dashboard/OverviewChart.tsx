@@ -1,6 +1,3 @@
-"use strict";
-"use client";
-
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const data = [
@@ -32,7 +29,7 @@ export function OverviewChart() {
                             <stop offset="95%" stopColor="#0d59f2" stopOpacity={0} />
                         </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1e293b" />
                     <XAxis
                         dataKey="name"
                         axisLine={false}
@@ -47,11 +44,13 @@ export function OverviewChart() {
                     />
                     <Tooltip
                         contentStyle={{
-                            backgroundColor: '#fff',
+                            backgroundColor: '#0c1018',
                             borderRadius: '8px',
-                            border: '1px solid #e5e7eb',
-                            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                            border: '1px solid #1e293b',
+                            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.5)',
+                            color: '#fff'
                         }}
+                        itemStyle={{ color: '#fff' }}
                     />
                     <Area
                         type="monotone"

@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 /**
- * Robots.txt Generator for Nexus DAM SaaS
+ * Robots.txt Generator for Nexus Flow AI Platform
  * 
  * Best practices implemented:
  * - Allow all crawlers by default
@@ -11,7 +11,7 @@ import { MetadataRoute } from 'next';
  */
 
 export default function robots(): MetadataRoute.Robots {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://nexus.app';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://nexusflow.app';
 
     return {
         rules: [
