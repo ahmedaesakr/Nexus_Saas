@@ -5,8 +5,7 @@ import Google from "next-auth/providers/google";
 import GitHub from "next-auth/providers/github";
 import { compare } from "bcryptjs";
 import { prisma } from "./db";
-import { ZodError } from "zod";
-import { signInSchema } from "./validators"; // We'll create this later
+import { signInSchema } from "./validators";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
     adapter: PrismaAdapter(prisma),
@@ -25,49 +24,49 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 password: { label: "Password", type: "password" },
             },
             authorize: async (credentials) => {
-                if (!credentials?.email || !credentials?.password) {
+                try {
+                    const { email, password } = signInSchema.parse(credentials);
+
+                    // --- MOCK/ADMIN LOGIN (Nexus Flow Easy Mode) ---
+                    // In development/demo, allow "admin@nexus.flow" / "admin" to bypass password check AND DB check
+                    if (
+                        email === "admin@nexus.flow" &&
+                        password === "admin"
+                    ) {
+                        // Return a mock user object directly, bypassing Prisma
+                        return {
+                            id: "mock-admin-id",
+                            name: "Nexus Admin",
+                            email: "admin@nexus.flow",
+                            image: "https://i.pravatar.cc/150?u=admin",
+                            role: "OWNER", // Custom property
+                            organizationId: "mock-org-id" // Custom property
+                        };
+                    }
+
+                    // Normal Auth Logic
+                    const user = await prisma.user.findUnique({
+                        where: { email: email as string },
+                    });
+
+                    if (!user || !user.password) {
+                        return null;
+                    }
+
+                    const isPasswordValid = await compare(password as string, user.password);
+
+                    if (isPasswordValid) {
+                        return {
+                            ...user,
+                            organizationId: user.organizationId || undefined,
+                            // Ensure other fields match if necessary
+                        };
+                    }
+
+                    return null;
+                } catch (error) {
                     return null;
                 }
-
-                const { email, password } = credentials;
-
-                // --- MOCK/ADMIN LOGIN (Nexus Flow Easy Mode) ---
-                // In development/demo, allow "admin@nexus.flow" / "admin" to bypass password check AND DB check
-                if (
-                    email === "admin@nexus.flow" &&
-                    password === "admin"
-                ) {
-                    // Return a mock user object directly, bypassing Prisma
-                    return {
-                        id: "mock-admin-id",
-                        name: "Nexus Admin",
-                        email: "admin@nexus.flow",
-                        image: "https://i.pravatar.cc/150?u=admin",
-                        role: "OWNER", // Custom property
-                        organizationId: "mock-org-id" // Custom property
-                    };
-                }
-
-                // Normal Auth Logic
-                const user = await prisma.user.findUnique({
-                    where: { email: email as string },
-                });
-
-                if (!user || !user.password) {
-                    return null;
-                }
-
-                const isPasswordValid = await compare(password as string, user.password);
-
-                if (isPasswordValid) {
-                    return {
-                        ...user,
-                        organizationId: user.organizationId || undefined,
-                        // Ensure other fields match if necessary
-                    };
-                }
-
-                return null;
             },
         }),
     ],

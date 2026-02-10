@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Node, Edge } from "@xyflow/react";
 
@@ -18,23 +18,12 @@ export function TestRunModal({
     const [logs, setLogs] = useState<string[]>([]);
     const [isRunning, setIsRunning] = useState(false);
 
-    useEffect(() => {
-        if (isOpen) {
-            setLogs([]);
-            setIsRunning(true);
-            runSimulation();
-        }
-    }, [isOpen]);
-
-    const runSimulation = async () => {
+    const runSimulation = useCallback(async () => {
         const addLog = (msg: string) => setLogs((prev) => [...prev, msg]);
 
         addLog("🚀 Starting workflow execution...");
         await new Promise((r) => setTimeout(r, 800));
 
-        // Sort nodes by simplistic dependency (not real DAG topo sort for now)
-        // Just execute in order of appearance or simple logic
-        // Find triggers first
         const triggers = nodes.filter((n) => n.type === "trigger");
         if (triggers.length === 0) {
             addLog("⚠️ No trigger found. Starting with first node...");
@@ -55,7 +44,6 @@ export function TestRunModal({
                 addLog(`  🔌 Action ${node.data.service} executed.`);
             }
 
-            // Simulate edge traversal
             const connectedEdges = edges.filter(e => e.source === node.id);
             if (connectedEdges.length > 0) {
                 addLog(`  → Flowing to next step...`);
@@ -65,7 +53,15 @@ export function TestRunModal({
         await new Promise((r) => setTimeout(r, 500));
         addLog("✅ Workflow execution completed successfully.");
         setIsRunning(false);
-    };
+    }, [nodes, edges]);
+
+    useEffect(() => {
+        if (isOpen) {
+            setLogs([]);
+            setIsRunning(true);
+            runSimulation();
+        }
+    }, [isOpen, runSimulation]);
 
     if (!isOpen) return null;
 
@@ -95,9 +91,9 @@ export function TestRunModal({
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 className={`border-l-2 pl-3 py-1 ${log.includes("✅") ? "border-green-500 text-green-400" :
-                                        log.includes("⚠️") ? "border-yellow-500 text-yellow-400" :
-                                            log.includes("🚀") ? "border-blue-500 text-blue-400" :
-                                                "border-gray-700 text-gray-300"
+                                    log.includes("⚠️") ? "border-yellow-500 text-yellow-400" :
+                                        log.includes("🚀") ? "border-blue-500 text-blue-400" :
+                                            "border-gray-700 text-gray-300"
                                     }`}
                             >
                                 {log}

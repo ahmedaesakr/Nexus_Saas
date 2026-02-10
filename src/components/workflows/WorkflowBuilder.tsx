@@ -13,8 +13,10 @@ import {
     useReactFlow,
     Node,
     OnNodesChange,
+    OnEdgesChange,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
+import { toast } from "sonner";
 
 import { AgentNode } from "./nodes/AgentNode";
 import { TriggerNode } from "./nodes/TriggerNode";
@@ -36,7 +38,7 @@ interface WorkflowBuilderProps {
     nodes: Node[];
     edges: Edge[];
     onNodesChange: OnNodesChange;
-    onEdgesChange: any; // OnEdgesChange type is simpler
+    onEdgesChange: OnEdgesChange;
     onConnect: (connection: Connection) => void;
     setNodes: React.Dispatch<React.SetStateAction<Node[]>>;
     onNodeSelect?: (node: Node | null) => void;
@@ -80,8 +82,7 @@ function Flow({
             if (type === 'trigger') {
                 const hasTrigger = nodes.some((n) => n.type === 'trigger');
                 if (hasTrigger) {
-                    // Ideally show a toast here
-                    alert("Only one Trigger node is allowed per workflow.");
+                    toast.warning("Only one Trigger node is allowed per workflow.");
                     return;
                 }
             }
