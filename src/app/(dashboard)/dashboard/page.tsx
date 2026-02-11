@@ -1,6 +1,16 @@
 "use client";
 
+import { useState } from "react";
+
 export default function DashboardPage() {
+    const [isRefreshing, setIsRefreshing] = useState(false);
+
+    const handleRefresh = () => {
+        setIsRefreshing(true);
+        // Simulate refresh delay
+        setTimeout(() => setIsRefreshing(false), 1000);
+    };
+
     return (
         <div className="p-8 container animate-fade-in space-y-8">
             {/* Welcome Header */}
@@ -11,8 +21,14 @@ export default function DashboardPage() {
                 </div>
                 <div className="flex items-center gap-3">
                     <span className="text-sm text-gray-500">Last updated: Just now</span>
-                    <button className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-colors">
-                        <span className="material-symbols-outlined">refresh</span>
+                    <button
+                        onClick={handleRefresh}
+                        disabled={isRefreshing}
+                        aria-label="Refresh dashboard"
+                        title="Refresh dashboard"
+                        className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        <span className={`material-symbols-outlined ${isRefreshing ? "animate-spin" : ""}`}>refresh</span>
                     </button>
                 </div>
             </div>
