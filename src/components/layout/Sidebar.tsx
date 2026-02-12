@@ -36,6 +36,7 @@ export function Sidebar() {
             <button
                 onClick={() => setIsMobileOpen(true)}
                 className="md:hidden fixed top-4 left-4 z-50 p-2 bg-[#0c1018] border border-white/10 rounded-lg text-white shadow-lg"
+                aria-label="Toggle navigation menu"
             >
                 <span className="material-symbols-outlined">menu</span>
             </button>
@@ -71,6 +72,7 @@ export function Sidebar() {
                     <button
                         onClick={() => setIsMobileOpen(false)}
                         className="md:hidden text-gray-500 hover:text-white"
+                        aria-label="Close navigation menu"
                     >
                         <span className="material-symbols-outlined">close</span>
                     </button>
@@ -87,6 +89,7 @@ export function Sidebar() {
                                     <Link
                                         key={item.name}
                                         href={item.href}
+                                        aria-current={isActive ? "page" : undefined}
                                         className={cn(
                                             "flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 group relative overflow-hidden",
                                             isActive
@@ -119,6 +122,7 @@ export function Sidebar() {
                                     <Link
                                         key={item.name}
                                         href={item.href}
+                                        aria-current={isActive ? "page" : undefined}
                                         className={cn(
                                             "flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 group relative",
                                             isActive
@@ -173,6 +177,7 @@ export function Sidebar() {
                             onClick={() => signOut()}
                             className="text-gray-500 hover:text-white transition-colors p-1 rounded hover:bg-white/10"
                             title="Sign Out"
+                            aria-label="Sign out"
                         >
                             <span className="material-symbols-outlined text-lg">logout</span>
                         </button>
