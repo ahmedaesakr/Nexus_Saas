@@ -72,6 +72,8 @@ export function Navbar() {
                     <button
                         className="md:hidden p-2 text-gray-300 hover:text-white"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                        aria-expanded={mobileMenuOpen}
                     >
                         <span className="material-symbols-outlined text-2xl">
                             {mobileMenuOpen ? "close" : "menu"}
