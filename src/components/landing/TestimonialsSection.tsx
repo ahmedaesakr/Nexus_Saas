@@ -51,7 +51,7 @@ export function TestimonialsSection() {
                         >
                             <span className="material-symbols-outlined text-4xl text-primary/20 absolute top-8 left-8">format_quote</span>
                             <p className="text-gray-300 mb-8 relative z-10 pt-6 italic leading-relaxed">
-                                "{t.quote}"
+                                &quot;{t.quote}&quot;
                             </p>
                             <div className="flex items-center gap-4">
                                 <div className="w-10 h-10 rounded-full bg-white/10 overflow-hidden">

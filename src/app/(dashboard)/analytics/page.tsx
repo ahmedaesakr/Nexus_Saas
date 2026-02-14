@@ -31,7 +31,7 @@ export default function AnalyticsPage() {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">Advanced Analytics Coming Soon</h3>
                 <p className="text-gray-400 max-w-md mx-auto">
-                    We're building detailed insights into your execution history, AI token usage, and time saved.
+                    We&apos;re building detailed insights into your execution history, AI token usage, and time saved.
                     Stay tuned for updates.
                 </p>
             </div>

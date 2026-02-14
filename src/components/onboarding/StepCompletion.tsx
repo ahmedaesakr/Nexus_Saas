@@ -19,9 +19,9 @@ export function StepCompletion({
                 <span className="material-symbols-outlined text-green-400 text-5xl">check_circle</span>
             </div>
 
-            <h2 className="text-3xl font-bold text-white mb-4">You're all set!</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">You&apos;re all set!</h2>
             <p className="text-gray-400 max-w-md mb-8">
-                We've configured your workspace for <strong>{userData.role}</strong>.
+                We&apos;ve configured your workspace for <strong>{userData.role}</strong>.
                 {userData.templateId !== "scratch" && " Your started template is ready."}
             </p>
 

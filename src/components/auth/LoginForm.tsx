@@ -8,6 +8,7 @@ import { signIn } from "next-auth/react";
 export function LoginForm() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -107,14 +108,26 @@ export function LoginForm() {
                             Forgot password?
                         </Link>
                     </div>
-                    <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        placeholder="••••••••"
-                        required
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white placeholder:text-gray-500 transition-all"
-                    />
+                    <div className="relative">
+                        <input
+                            id="password"
+                            name="password"
+                            type={showPassword ? "text" : "password"}
+                            placeholder="••••••••"
+                            required
+                            className="w-full px-4 py-3 pr-10 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white placeholder:text-gray-500 transition-all"
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors flex items-center justify-center p-1 rounded-md hover:bg-white/5"
+                            aria-label={showPassword ? "Hide password" : "Show password"}
+                        >
+                            <span className="material-symbols-outlined text-lg">
+                                {showPassword ? "visibility_off" : "visibility"}
+                            </span>
+                        </button>
+                    </div>
                 </div>
 
                 <button

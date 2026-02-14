@@ -16,7 +16,7 @@ export function ProgressSidebar({ step }: { step: number }) {
             <div className="space-y-6">
                 <div>
                     <h3 className="text-white font-bold text-lg mb-1">Setup Nexus</h3>
-                    <p className="text-xs text-gray-500">Let's personalize your workspace.</p>
+                    <p className="text-xs text-gray-500">Let&apos;s personalize your workspace.</p>
                 </div>
 
                 <div className="space-y-1 relative">
