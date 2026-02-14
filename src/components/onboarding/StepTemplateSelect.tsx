@@ -64,7 +64,7 @@ export function StepTemplateSelect({
             className="flex flex-col h-full"
         >
             <h2 className="text-2xl font-bold text-white mb-2">Choose a starting point</h2>
-            <p className="text-gray-400 mb-8">We've selected some templates based on your role.</p>
+            <p className="text-gray-400 mb-8">We&apos;ve selected some templates based on your role.</p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 overflow-y-auto pr-2 custom-scrollbar">
                 {displayTemplates.map((template) => (

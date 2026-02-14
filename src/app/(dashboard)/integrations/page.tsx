@@ -96,7 +96,7 @@ export default function IntegrationsPage() {
                         <span className="material-symbols-outlined text-gray-400 text-xl">add</span>
                     </div>
                     <h3 className="text-sm font-bold text-white mb-1">Request App</h3>
-                    <p className="text-xs text-gray-500">Don't see what you need?</p>
+                    <p className="text-xs text-gray-500">Don&apos;t see what you need?</p>
                 </button>
             </div>
         </div>

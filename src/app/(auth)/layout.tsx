@@ -34,7 +34,7 @@ export default function AuthLayout({
                                 <span key={i} className="material-symbols-outlined text-yellow-500 text-sm">star</span>
                             ))}
                         </div>
-                        <p className="text-lg font-medium mb-6 leading-relaxed">"Nexus Flow completely transformed how we handle sales ops. It feels like magic."</p>
+                        <p className="text-lg font-medium mb-6 leading-relaxed">&quot;Nexus Flow completely transformed how we handle sales ops. It feels like magic.&quot;</p>
                         <div className="flex items-center gap-4">
                             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center text-white font-bold text-lg">AC</div>
                             <div>
