@@ -15,12 +15,12 @@ export function BentoFeatureGrid() {
                     {/* Visual Builder - Large Card */}
                     <div className="md:col-span-2 md:row-span-2 bg-[#0c1018]/50 border border-white/10 rounded-3xl p-10 relative group overflow-hidden hover:border-white/20 transition-all hover:bg-[#0c1018]">
                         <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-30 transition-opacity rotate-12 translate-x-10 -translate-y-10">
-                            <span className="material-symbols-outlined text-9xl">account_tree</span>
+                            <span className="material-symbols-outlined text-9xl" aria-hidden="true">account_tree</span>
                         </div>
                         <div className="relative z-10 h-full flex flex-col justify-between">
                             <div>
                                 <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center mb-6">
-                                    <span className="material-symbols-outlined text-primary text-2xl">drag_indicator</span>
+                                    <span className="material-symbols-outlined text-primary text-2xl" aria-hidden="true">drag_indicator</span>
                                 </div>
                                 <h3 className="text-3xl font-bold mb-4">Visual Workflow Builder</h3>
                                 <p className="text-gray-400 text-lg max-w-md">
@@ -42,7 +42,7 @@ export function BentoFeatureGrid() {
                     {/* AI Agents */}
                     <div className="bg-[#0c1018]/50 border border-white/10 rounded-3xl p-8 relative group hover:-translate-y-2 transition-transform duration-300 hover:bg-[#0c1018] hover:shadow-xl">
                         <div className="w-12 h-12 rounded-lg bg-indigo-500/20 flex items-center justify-center mb-6">
-                            <span className="material-symbols-outlined text-indigo-400 text-2xl">psychology</span>
+                            <span className="material-symbols-outlined text-indigo-400 text-2xl" aria-hidden="true">psychology</span>
                         </div>
                         <h3 className="text-xl font-bold mb-3">AI Agent Studio</h3>
                         <p className="text-gray-400">Train custom agents with your own data and instructions to handle specific tasks.</p>
@@ -51,7 +51,7 @@ export function BentoFeatureGrid() {
                     {/* Integrations */}
                     <div className="bg-[#0c1018]/50 border border-white/10 rounded-3xl p-8 relative group hover:-translate-y-2 transition-transform duration-300 hover:bg-[#0c1018] hover:shadow-xl">
                         <div className="w-12 h-12 rounded-lg bg-pink-500/20 flex items-center justify-center mb-6">
-                            <span className="material-symbols-outlined text-pink-400 text-2xl">hub</span>
+                            <span className="material-symbols-outlined text-pink-400 text-2xl" aria-hidden="true">hub</span>
                         </div>
                         <h3 className="text-xl font-bold mb-3">50+ Integrations</h3>
                         <p className="text-gray-400">Connect seamlessly with Slack, Gmail, Salesforce, HubSpot, and your internal APIs.</p>
@@ -61,7 +61,7 @@ export function BentoFeatureGrid() {
                     <div className="md:col-span-3 bg-[#0c1018]/50 border border-white/10 rounded-3xl p-8 flex flex-col md:flex-row items-center gap-8 hover:bg-[#0c1018] transition-colors group">
                         <div className="flex-1">
                             <div className="w-12 h-12 rounded-lg bg-green-500/20 flex items-center justify-center mb-6">
-                                <span className="material-symbols-outlined text-green-400 text-2xl">monitoring</span>
+                                <span className="material-symbols-outlined text-green-400 text-2xl" aria-hidden="true">monitoring</span>
                             </div>
                             <h3 className="text-2xl font-bold mb-3">Real-Time ROI Analytics</h3>
                             <p className="text-gray-400 text-lg">

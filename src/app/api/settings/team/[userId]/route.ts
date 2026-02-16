@@ -29,7 +29,7 @@ function canAssignRole(actorRole: Role, nextRole: Role): boolean {
 }
 
 export async function PATCH(
-  _req: Request,
+  req: Request,
   { params }: { params: Promise<{ userId: string }> }
 ) {
   try {

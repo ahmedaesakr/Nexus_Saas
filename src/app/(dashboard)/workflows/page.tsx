@@ -1,8 +1,49 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { formatDistanceToNow } from "date-fns";
+
+interface Workflow {
+    id: string;
+    name: string;
+    description: string | null;
+    icon: string | null;
+    status: string;
+    updatedAt: string;
+    createdBy: { id: string; name: string | null; email: string };
+    _count: { executions: number };
+}
 
 export default function WorkflowsPage() {
+    const [workflows, setWorkflows] = useState<Workflow[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch("/api/workflows")
+            .then((res) => (res.ok ? res.json() : []))
+            .then(setWorkflows)
+            .catch(() => setWorkflows([]))
+            .finally(() => setLoading(false));
+    }, []);
+
+    const activeCount = workflows.filter((w) => w.status === "ACTIVE").length;
+    const totalExecutions = workflows.reduce((sum, w) => sum + w._count.executions, 0);
+
+    if (loading) {
+        return (
+            <div className="p-8 container animate-fade-in space-y-8">
+                <div className="h-8 w-48 bg-white/5 rounded animate-pulse" />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {[1, 2, 3].map((i) => <div key={i} className="h-28 rounded-2xl bg-white/5 animate-pulse" />)}
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {[1, 2, 3].map((i) => <div key={i} className="h-64 rounded-2xl bg-white/5 animate-pulse" />)}
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="p-8 container animate-fade-in space-y-8">
             {/* Header */}
@@ -27,79 +68,73 @@ export default function WorkflowsPage() {
                         <div className="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
                             <span className="material-symbols-outlined text-green-400">play_circle</span>
                         </div>
-                        <span className="text-xs text-green-400 bg-green-500/10 px-2 py-1 rounded-full">+12%</span>
                     </div>
                     <p className="text-gray-400 text-sm mb-1">Active Workflows</p>
-                    <p className="text-2xl font-bold text-white">8</p>
+                    <p className="text-2xl font-bold text-white">{activeCount}</p>
                 </div>
                 <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
                     <div className="flex justify-between items-start mb-4">
                         <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
                             <span className="material-symbols-outlined text-blue-400">bolt</span>
                         </div>
-                        <span className="text-xs text-blue-400 bg-blue-500/10 px-2 py-1 rounded-full">+24%</span>
                     </div>
                     <p className="text-gray-400 text-sm mb-1">Total Executions</p>
-                    <p className="text-2xl font-bold text-white">1,240</p>
+                    <p className="text-2xl font-bold text-white">{totalExecutions.toLocaleString()}</p>
                 </div>
                 <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
                     <div className="flex justify-between items-start mb-4">
                         <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                            <span className="material-symbols-outlined text-purple-400">timer</span>
+                            <span className="material-symbols-outlined text-purple-400">layers</span>
                         </div>
-                        <span className="text-xs text-purple-400 bg-purple-500/10 px-2 py-1 rounded-full">High</span>
                     </div>
-                    <p className="text-gray-400 text-sm mb-1">Time Saved</p>
-                    <p className="text-2xl font-bold text-white">45h</p>
+                    <p className="text-gray-400 text-sm mb-1">Total Workflows</p>
+                    <p className="text-2xl font-bold text-white">{workflows.length}</p>
                 </div>
             </div>
 
             {/* Workflow Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[1, 2, 3].map((i) => (
-                    <div
-                        key={i}
+                {workflows.map((workflow) => (
+                    <Link
+                        key={workflow.id}
+                        href={`/workflows/builder?id=${workflow.id}`}
                         className="group relative p-6 bg-[#0c1018] border border-white/10 rounded-2xl hover:border-primary/30 transition-all hover:-translate-y-1 cursor-pointer overflow-hidden"
                     >
-                        {/* Hover Glow */}
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
                         <div className="flex justify-between items-start mb-6">
                             <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-primary/30 transition-colors">
                                 <span className="material-symbols-outlined text-gray-400 group-hover:text-primary transition-colors">
-                                    {i === 1 ? 'mail' : i === 2 ? 'support_agent' : 'campaign'}
+                                    {workflow.icon || "account_tree"}
                                 </span>
-                            </div>
-                            <div className="dropdown relative">
-                                <button className="text-gray-500 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors">
-                                    <span className="material-symbols-outlined">more_vert</span>
-                                </button>
                             </div>
                         </div>
 
                         <div className="mb-6">
                             <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors">
-                                {i === 1 ? 'Sales Outreach' : i === 2 ? 'Support Ticket Triage' : 'Lead Qualification'}
+                                {workflow.name}
                             </h3>
                             <p className="text-sm text-gray-400 line-clamp-2">
-                                {i === 1
-                                    ? 'Automatically send follow-up emails to leads who haven\'t responded in 3 days.'
-                                    : i === 2
-                                        ? 'Categorize incoming support tickets using AI and assign to the right agent.'
-                                        : 'Score new leads based on company size and industry data enrichment.'}
+                                {workflow.description || "No description"}
                             </p>
                         </div>
 
                         <div className="flex items-center justify-between pt-4 border-t border-white/5">
                             <div className="flex items-center gap-2">
-                                <div className={`w-2 h-2 rounded-full ${i === 1 ? 'bg-green-500 animate-pulse' : 'bg-gray-500'}`} />
-                                <span className="text-xs font-medium text-gray-400">
-                                    {i === 1 ? 'Active' : 'Draft'}
+                                <div className={`w-2 h-2 rounded-full ${
+                                    workflow.status === "ACTIVE" ? "bg-green-500 animate-pulse" :
+                                    workflow.status === "PAUSED" ? "bg-amber-500" :
+                                    "bg-gray-500"
+                                }`} />
+                                <span className="text-xs font-medium text-gray-400 capitalize">
+                                    {workflow.status.toLowerCase()}
                                 </span>
                             </div>
-                            <span className="text-xs text-gray-500">Edited 2h ago</span>
+                            <span className="text-xs text-gray-500">
+                                {formatDistanceToNow(new Date(workflow.updatedAt), { addSuffix: true })}
+                            </span>
                         </div>
-                    </div>
+                    </Link>
                 ))}
 
                 {/* Create New Card */}

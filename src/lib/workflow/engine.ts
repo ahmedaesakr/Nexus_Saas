@@ -7,21 +7,28 @@ export interface WorkflowJobData {
   input: Record<string, any>;
 }
 
-export const workflowQueue = new Queue<WorkflowJobData>("workflow-execution", {
-  connection: {
-    host: process.env.REDIS_HOST || "localhost",
-    port: parseInt(process.env.REDIS_PORT || "6379"),
-  },
-  defaultJobOptions: {
-    attempts: 3,
-    backoff: {
-      type: "exponential",
-      delay: 1000,
-    },
-    removeOnComplete: true,
-    removeOnFail: false,
-  },
-});
+let _workflowQueue: Queue<WorkflowJobData> | null = null;
+
+function getWorkflowQueue(): Queue<WorkflowJobData> {
+  if (!_workflowQueue) {
+    _workflowQueue = new Queue<WorkflowJobData>("workflow-execution", {
+      connection: {
+        host: process.env.REDIS_HOST || "localhost",
+        port: parseInt(process.env.REDIS_PORT || "6379"),
+      },
+      defaultJobOptions: {
+        attempts: 3,
+        backoff: {
+          type: "exponential",
+          delay: 1000,
+        },
+        removeOnComplete: true,
+        removeOnFail: false,
+      },
+    });
+  }
+  return _workflowQueue;
+}
 
 export function createWorkflowWorker() {
   return new Worker<WorkflowJobData>(
@@ -244,7 +251,7 @@ function executeLoopNode(node: any, input: any): any {
 }
 
 export async function addWorkflowToQueue(executionId: string, workflowId: string, input: Record<string, any> = {}) {
-  await workflowQueue.add("execute", {
+  await getWorkflowQueue().add("execute", {
     executionId,
     workflowId,
     input,

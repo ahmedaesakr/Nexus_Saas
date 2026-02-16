@@ -73,6 +73,7 @@ export function Navbar() {
                     <button
                         className="md:hidden p-2 text-gray-300 hover:text-white"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                     >
                         {mobileMenuOpen ? (
                             <Icons.Close className="w-6 h-6" />

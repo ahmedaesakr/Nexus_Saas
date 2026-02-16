@@ -1,36 +1,122 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { WorkflowBuilder } from "@/components/workflows/WorkflowBuilder";
 import { PropertiesPanel } from "@/components/workflows/PropertiesPanel";
 import { TestRunModal } from "@/components/workflows/TestRunModal";
 import { useNodesState, useEdgesState, addEdge, Connection, Edge, Node, MarkerType } from "@xyflow/react";
 
-const initialNodes: Node[] = [
+const defaultNodes: Node[] = [
     {
         id: "trigger-1",
         type: "trigger",
         position: { x: 250, y: 5 },
         data: { label: "New Lead (Webhook)", type: "webhook" },
     },
-    {
-        id: "agent-1",
-        type: "ai-agent",
-        position: { x: 250, y: 150 },
-        data: { label: "Lead Qualifier", model: "claude-3-5-sonnet", tools: ["crm"] },
-    },
 ];
 
-const initialEdges: Edge[] = [
-    { id: "e1-2", source: "trigger-1", target: "agent-1", animated: true, markerEnd: { type: MarkerType.ArrowClosed } }
-];
+const defaultEdges: Edge[] = [];
 
-export default function WorkflowBuilderPage() {
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+function BuilderContent() {
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const workflowId = searchParams.get("id");
+
+    const [nodes, setNodes, onNodesChange] = useNodesState(defaultNodes);
+    const [edges, setEdges, onEdgesChange] = useEdgesState(defaultEdges);
     const [selectedNode, setSelectedNode] = useState<Node | null>(null);
     const [isTestRunOpen, setIsTestRunOpen] = useState(false);
+
+    const [workflowName, setWorkflowName] = useState("Untitled Workflow");
+    const [workflowStatus, setWorkflowStatus] = useState("DRAFT");
+    const [currentId, setCurrentId] = useState<string | null>(workflowId);
+    const [saving, setSaving] = useState(false);
+    const [loading, setLoading] = useState(!!workflowId);
+    const [isEditing, setIsEditing] = useState(false);
+
+    // Load existing workflow
+    useEffect(() => {
+        if (!workflowId) return;
+        fetch(`/api/workflows/${workflowId}`)
+            .then((res) => {
+                if (!res.ok) throw new Error("Failed to load workflow");
+                return res.json();
+            })
+            .then((wf) => {
+                setWorkflowName(wf.name);
+                setWorkflowStatus(wf.status);
+                setCurrentId(wf.id);
+                const def = wf.definition || { nodes: [], edges: [] };
+                if (def.nodes?.length) setNodes(def.nodes);
+                if (def.edges?.length) setEdges(def.edges);
+            })
+            .catch(() => toast.error("Failed to load workflow"))
+            .finally(() => setLoading(false));
+    }, [workflowId, setNodes, setEdges]);
+
+    const handleSave = async () => {
+        setSaving(true);
+        try {
+            const definition = { nodes, edges };
+
+            if (currentId) {
+                // Update existing
+                const res = await fetch(`/api/workflows/${currentId}`, {
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name: workflowName, definition }),
+                });
+                if (!res.ok) throw new Error("Failed to save");
+                toast.success("Workflow saved");
+            } else {
+                // Create new
+                const res = await fetch("/api/workflows", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name: workflowName, definition }),
+                });
+                if (!res.ok) {
+                    const err = await res.json();
+                    throw new Error(err.message || "Failed to create");
+                }
+                const wf = await res.json();
+                setCurrentId(wf.id);
+                router.replace(`/workflows/builder?id=${wf.id}`);
+                toast.success("Workflow created");
+            }
+        } catch (error: any) {
+            toast.error(error.message);
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    const handlePublish = async () => {
+        if (!currentId) {
+            await handleSave();
+        }
+        if (!currentId) return;
+
+        setSaving(true);
+        try {
+            const definition = { nodes, edges };
+            const res = await fetch(`/api/workflows/${currentId}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name: workflowName, definition, status: "ACTIVE" }),
+            });
+            if (!res.ok) throw new Error("Failed to publish");
+            setWorkflowStatus("ACTIVE");
+            toast.success("Workflow published!");
+        } catch (error: any) {
+            toast.error(error.message);
+        } finally {
+            setSaving(false);
+        }
+    };
 
     const onConnect = useCallback(
         (params: Connection) => setEdges((eds) => addEdge({ ...params, animated: true, markerEnd: { type: MarkerType.ArrowClosed } }, eds)),
@@ -51,6 +137,17 @@ export default function WorkflowBuilderPage() {
         setSelectedNode(node);
     };
 
+    if (loading) {
+        return (
+            <div className="h-[calc(100vh-64px)] flex items-center justify-center bg-[#0c1018] -m-8">
+                <div className="flex items-center gap-3 text-gray-400">
+                    <div className="w-5 h-5 border-2 border-gray-500 border-t-primary rounded-full animate-spin" />
+                    Loading workflow...
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="h-[calc(100vh-64px)] flex flex-col bg-[#0c1018] overflow-hidden -m-8 rounded-none">
             {/* Builder Header */}
@@ -61,22 +158,54 @@ export default function WorkflowBuilderPage() {
                     </Link>
                     <div>
                         <div className="flex items-center gap-2">
-                            <h1 className="text-sm font-bold text-white">Lead Qualification Workflow</h1>
-                            <span className="material-symbols-outlined text-gray-500 text-sm cursor-pointer hover:text-white">edit</span>
+                            {isEditing ? (
+                                <input
+                                    type="text"
+                                    value={workflowName}
+                                    onChange={(e) => setWorkflowName(e.target.value)}
+                                    onBlur={() => setIsEditing(false)}
+                                    onKeyDown={(e) => e.key === "Enter" && setIsEditing(false)}
+                                    aria-label="Workflow name"
+                                    autoFocus
+                                    className="text-sm font-bold text-white bg-white/10 border border-white/20 rounded px-2 py-0.5 outline-none focus:border-primary"
+                                />
+                            ) : (
+                                <>
+                                    <h1 className="text-sm font-bold text-white">{workflowName}</h1>
+                                    <button type="button" onClick={() => setIsEditing(true)}>
+                                        <span className="material-symbols-outlined text-gray-500 text-sm cursor-pointer hover:text-white">edit</span>
+                                    </button>
+                                </>
+                            )}
                         </div>
-                        <p className="text-xs text-gray-500">Draft • Autosaved</p>
+                        <p className="text-xs text-gray-500 capitalize">{workflowStatus.toLowerCase()}{currentId ? "" : " • Unsaved"}</p>
                     </div>
                 </div>
 
                 <div className="flex items-center gap-3">
                     <button
+                        type="button"
+                        onClick={handleSave}
+                        disabled={saving}
+                        className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white text-sm font-medium rounded-lg transition-colors flex items-center gap-2 disabled:opacity-50"
+                    >
+                        <span className="material-symbols-outlined text-lg">save</span>
+                        {saving ? "Saving..." : "Save"}
+                    </button>
+                    <button
+                        type="button"
                         onClick={() => setIsTestRunOpen(true)}
                         className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white text-sm font-medium rounded-lg transition-colors flex items-center gap-2"
                     >
                         <span className="material-symbols-outlined text-lg">play_arrow</span>
                         Test Run
                     </button>
-                    <button className="px-4 py-2 bg-primary hover:bg-primary-hover text-white text-sm font-bold rounded-lg transition-colors shadow-[0_0_15px_rgba(13,89,242,0.3)] btn-tactile flex items-center gap-2">
+                    <button
+                        type="button"
+                        onClick={handlePublish}
+                        disabled={saving}
+                        className="px-4 py-2 bg-primary hover:bg-primary-hover text-white text-sm font-bold rounded-lg transition-colors shadow-[0_0_15px_rgba(13,89,242,0.3)] btn-tactile flex items-center gap-2 disabled:opacity-50"
+                    >
                         <span className="material-symbols-outlined text-lg">rocket_launch</span>
                         Publish
                     </button>
@@ -179,5 +308,20 @@ export default function WorkflowBuilderPage() {
                 edges={edges}
             />
         </div>
+    );
+}
+
+export default function WorkflowBuilderPage() {
+    return (
+        <Suspense fallback={
+            <div className="h-[calc(100vh-64px)] flex items-center justify-center bg-[#0c1018] -m-8">
+                <div className="flex items-center gap-3 text-gray-400">
+                    <div className="w-5 h-5 border-2 border-gray-500 border-t-primary rounded-full animate-spin" />
+                    Loading...
+                </div>
+            </div>
+        }>
+            <BuilderContent />
+        </Suspense>
     );
 }

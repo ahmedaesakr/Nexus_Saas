@@ -49,7 +49,7 @@ export function TestimonialsSection() {
                             transition={{ delay: i * 0.1 }}
                             className="p-8 rounded-2xl bg-[#050a14] border border-white/5 relative"
                         >
-                            <span className="material-symbols-outlined text-4xl text-primary/20 absolute top-8 left-8">format_quote</span>
+                            <span className="material-symbols-outlined text-4xl text-primary/20 absolute top-8 left-8" aria-hidden="true">format_quote</span>
                             <p className="text-gray-300 mb-8 relative z-10 pt-6 italic leading-relaxed">
                                 "{t.quote}"
                             </p>
@@ -62,7 +62,7 @@ export function TestimonialsSection() {
                                 </div>
                                 <div>
                                     <h4 className="text-white font-bold text-sm">{t.author}</h4>
-                                    <p className="text-gray-500 text-xs">{t.role}, {t.company}</p>
+                                    <p className="text-gray-400 text-xs">{t.role}, {t.company}</p>
                                 </div>
                             </div>
                         </motion.div>

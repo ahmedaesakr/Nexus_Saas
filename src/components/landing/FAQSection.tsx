@@ -51,9 +51,10 @@ export function FAQSection() {
                             <button
                                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                                 className="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors focus:outline-none"
+                                aria-expanded={openIndex === index}
                             >
                                 <span className="font-semibold text-white">{faq.question}</span>
-                                <span className={`material-symbols-outlined transition-transform duration-300 ${openIndex === index ? 'rotate-180 text-primary' : 'text-gray-500'}`}>
+                                <span className={`material-symbols-outlined transition-transform duration-300 ${openIndex === index ? 'rotate-180 text-primary' : 'text-gray-500'}`} aria-hidden="true">
                                     expand_more
                                 </span>
                             </button>
