@@ -1,7 +1,6 @@
-import { Role } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { canAssignTeamRole, canManageTeam, getAuthContext } from "@/lib/server/auth-context";
+import { canAssignTeamRole, canManageTeam, getAuthContext, type Role } from "@/lib/server/auth-context";
 import { createInviteToken } from "@/lib/server/invite-token";
 import { sendTeamInviteEmail } from "@/lib/email";
 

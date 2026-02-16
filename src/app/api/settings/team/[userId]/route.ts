@@ -1,29 +1,28 @@
-import { Role } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db";
-import { canManageTeam, getAuthContext } from "@/lib/server/auth-context";
+import { canManageTeam, getAuthContext, type Role } from "@/lib/server/auth-context";
 
 const updateRoleSchema = z.object({
   role: z.enum(["ADMIN", "MEMBER", "VIEWER"]),
 });
 
-function canModifyTarget(actorRole: Role, targetRole: Role): boolean {
-  if (actorRole === Role.OWNER) {
+function canModifyTarget(actorRole: Role, targetRole: string): boolean {
+  if (actorRole === "OWNER") {
     return true;
   }
-  if (actorRole === Role.ADMIN) {
-    return targetRole !== Role.OWNER && targetRole !== Role.ADMIN;
+  if (actorRole === "ADMIN") {
+    return targetRole !== "OWNER" && targetRole !== "ADMIN";
   }
   return false;
 }
 
-function canAssignRole(actorRole: Role, nextRole: Role): boolean {
-  if (actorRole === Role.OWNER) {
-    return nextRole !== Role.OWNER;
+function canAssignRole(actorRole: Role, nextRole: string): boolean {
+  if (actorRole === "OWNER") {
+    return nextRole !== "OWNER";
   }
-  if (actorRole === Role.ADMIN) {
-    return nextRole === Role.MEMBER || nextRole === Role.VIEWER;
+  if (actorRole === "ADMIN") {
+    return nextRole === "MEMBER" || nextRole === "VIEWER";
   }
   return false;
 }
@@ -133,7 +132,7 @@ export async function DELETE(
       where: { id: target.id },
       data: {
         organizationId: null,
-        role: Role.MEMBER,
+        role: "MEMBER",
       },
     });
 

@@ -36,7 +36,18 @@ export async function GET(
       return NextResponse.json({ message: "Execution not found" }, { status: 404 });
     }
 
-    return NextResponse.json(execution);
+    // Parse JSON string fields for SQLite compatibility
+    const response = {
+      ...execution,
+      input: typeof execution.input === "string" ? JSON.parse(execution.input) : execution.input,
+      output: typeof execution.output === "string" ? JSON.parse(execution.output) : execution.output,
+      logs: execution.logs.map((log) => ({
+        ...log,
+        data: typeof log.data === "string" ? JSON.parse(log.data) : log.data,
+      })),
+    };
+
+    return NextResponse.json(response);
   } catch (error) {
     console.error("Error fetching execution:", error);
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });

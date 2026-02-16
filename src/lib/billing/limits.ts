@@ -1,12 +1,10 @@
-import { Plan } from "@prisma/client";
-
 export type PlanLimits = {
   workflows: number | null;
   agents: number | null;
   monthlyExecutions: number | null;
 };
 
-export const PLAN_LIMITS: Record<Plan, PlanLimits> = {
+export const PLAN_LIMITS: Record<string, PlanLimits> = {
   FREE: {
     workflows: 3,
     agents: 2,

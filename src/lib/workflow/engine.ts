@@ -57,7 +57,7 @@ export function createWorkflowWorker() {
           throw new Error("Workflow not found");
         }
 
-        const definition = workflow.definition as any;
+        const definition = typeof workflow.definition === "string" ? JSON.parse(workflow.definition) : workflow.definition;
         const nodes = definition.nodes || [];
         const edges = definition.edges || [];
 
@@ -77,7 +77,7 @@ export function createWorkflowWorker() {
               nodeName: node.data?.label || node.type,
               status: "COMPLETED",
               message: `Node executed successfully`,
-              data: nodeResult,
+              data: JSON.stringify(nodeResult),
             },
           });
 
@@ -91,7 +91,7 @@ export function createWorkflowWorker() {
           data: {
             status: "COMPLETED",
             completedAt: new Date(),
-            output: results,
+            output: JSON.stringify(results),
           },
         });
 

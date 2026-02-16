@@ -44,7 +44,12 @@ export async function GET(req: Request) {
       orderBy: { updatedAt: "desc" },
     });
 
-    return NextResponse.json(workflows);
+    const parsedWorkflows = workflows.map((w) => ({
+      ...w,
+      definition: typeof w.definition === "string" ? JSON.parse(w.definition) : w.definition,
+    }));
+
+    return NextResponse.json(parsedWorkflows);
   } catch (error) {
     console.error("Error fetching workflows:", error);
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
@@ -91,7 +96,7 @@ export async function POST(req: Request) {
         name: data.name,
         description: data.description,
         icon: data.icon,
-        definition: data.definition,
+        definition: JSON.stringify(data.definition),
         status: data.status,
         isTemplate: data.isTemplate,
         organizationId: context.organizationId,

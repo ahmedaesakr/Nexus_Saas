@@ -39,7 +39,13 @@ export async function GET(
       return NextResponse.json({ message: "Agent not found" }, { status: 404 });
     }
 
-    return NextResponse.json(agent);
+    // Parse JSON fields for SQLite compatibility
+    const response = {
+      ...agent,
+      tools: agent.tools ? JSON.parse(agent.tools) : [],
+    };
+
+    return NextResponse.json(response);
   } catch (error) {
     console.error("Error fetching agent:", error);
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
@@ -74,9 +80,15 @@ export async function PATCH(
       return NextResponse.json({ message: "Agent not found" }, { status: 404 });
     }
 
+    // Stringify JSON fields for SQLite compatibility
+    const updateData: any = { ...data };
+    if (data.tools) {
+      updateData.tools = JSON.stringify(data.tools);
+    }
+
     const agent = await prisma.agent.update({
       where: { id },
-      data,
+      data: updateData,
     });
 
     return NextResponse.json(agent);

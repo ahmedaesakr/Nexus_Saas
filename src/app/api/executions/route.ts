@@ -39,7 +39,14 @@ export async function GET(req: Request) {
       take: 100,
     });
 
-    return NextResponse.json(executions);
+    // Parse JSON string fields for SQLite compatibility
+    const parsed = executions.map((e) => ({
+      ...e,
+      input: typeof e.input === "string" ? JSON.parse(e.input) : e.input,
+      output: typeof e.output === "string" ? JSON.parse(e.output) : e.output,
+    }));
+
+    return NextResponse.json(parsed);
   } catch (error) {
     console.error("Error fetching executions:", error);
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });

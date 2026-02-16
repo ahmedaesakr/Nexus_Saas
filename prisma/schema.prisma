@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 // ==================== AUTH ====================
@@ -15,7 +15,7 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
-  role          Role      @default(MEMBER)
+  role          String      @default("MEMBER")
   
   organizationId String?
   organization   Organization? @relation(fields: [organizationId], references: [id])
@@ -33,7 +33,7 @@ model Organization {
   slug        String   @unique
   logo        String?
   
-  plan        Plan     @default(FREE)
+  plan        String     @default("FREE")
   stripeCustomerId String?
   
   users       User[]
@@ -45,19 +45,7 @@ model Organization {
   updatedAt   DateTime @updatedAt
 }
 
-enum Role {
-  OWNER
-  ADMIN
-  MEMBER
-  VIEWER
-}
 
-enum Plan {
-  FREE
-  STARTER
-  PRO
-  ENTERPRISE
-}
 
 // ==================== WORKFLOWS ====================
 model Workflow {
@@ -67,9 +55,9 @@ model Workflow {
   icon        String?
   
   // Visual builder data (nodes, edges, etc.)
-  definition  Json
+  definition  String
   
-  status      WorkflowStatus @default(DRAFT)
+  status      String @default("DRAFT")
   isTemplate  Boolean  @default(false)
   
   organizationId String
@@ -84,12 +72,7 @@ model Workflow {
   updatedAt   DateTime @updatedAt
 }
 
-enum WorkflowStatus {
-  DRAFT
-  ACTIVE
-  PAUSED
-  ARCHIVED
-}
+
 
 // ==================== AI AGENTS ====================
 model Agent {
@@ -99,10 +82,10 @@ model Agent {
   avatar      String?
   
   // Agent configuration
-  systemPrompt String   @db.Text
+  systemPrompt String
   model       String   @default("claude-3-sonnet")
   temperature Float    @default(0.7)
-  tools       Json     // Available tools/functions
+  tools       String     // Available tools/functions
   
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id])
@@ -121,13 +104,13 @@ model Execution {
   triggeredById String?
   triggeredBy   User?    @relation(fields: [triggeredById], references: [id])
   
-  status      ExecutionStatus @default(PENDING)
+  status      String @default("PENDING")
   
   // Input data that triggered this execution
-  input       Json?
+  input       String?
   
   // Result data after completion
-  output      Json?
+  output      String?
   
   // Step-by-step logs
   logs        ExecutionLog[]
@@ -149,18 +132,12 @@ model ExecutionLog {
   
   status      String
   message     String?
-  data        Json?
+  data        String?
   
   timestamp   DateTime @default(now())
 }
 
-enum ExecutionStatus {
-  PENDING
-  RUNNING
-  COMPLETED
-  FAILED
-  CANCELLED
-}
+
 
 // ==================== INTEGRATIONS ====================
 model Integration {
@@ -175,7 +152,7 @@ model Integration {
   expiresAt    DateTime?
   
   // Provider-specific config
-  config      Json?
+  config      String?
   
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id])

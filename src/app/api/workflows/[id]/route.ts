@@ -46,7 +46,13 @@ export async function GET(
       return NextResponse.json({ message: "Workflow not found" }, { status: 404 });
     }
 
-    return NextResponse.json(workflow);
+    // Parse JSON string fields for SQLite compatibility
+    const response = {
+      ...workflow,
+      definition: typeof workflow.definition === "string" ? JSON.parse(workflow.definition) : workflow.definition,
+    };
+
+    return NextResponse.json(response);
   } catch (error) {
     console.error("Error fetching workflow:", error);
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
@@ -82,9 +88,15 @@ export async function PATCH(
       return NextResponse.json({ message: "Workflow not found" }, { status: 404 });
     }
 
+    // Stringify JSON fields for SQLite compatibility
+    const updateData: any = { ...data };
+    if (data.definition) {
+      updateData.definition = JSON.stringify(data.definition);
+    }
+
     const workflow = await prisma.workflow.update({
       where: { id },
-      data,
+      data: updateData,
     });
 
     return NextResponse.json(workflow);

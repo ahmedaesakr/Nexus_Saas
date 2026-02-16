@@ -3,7 +3,7 @@ import { hash } from "bcryptjs";
 import { prisma } from "@/lib/db";
 import { z } from "zod";
 import { verifyInviteToken } from "@/lib/server/invite-token";
-import { Role } from "@prisma/client";
+import type { Role } from "@/lib/server/auth-context";
 
 const registerSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),

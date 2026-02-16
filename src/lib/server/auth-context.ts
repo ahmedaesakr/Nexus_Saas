@@ -1,5 +1,6 @@
-import { Role } from "@prisma/client";
 import { auth } from "@/lib/auth";
+
+export type Role = "OWNER" | "ADMIN" | "MEMBER" | "VIEWER";
 
 export type AuthContext = {
   userId: string;
@@ -12,7 +13,7 @@ const ROLE_SET = new Set<string>(["OWNER", "ADMIN", "MEMBER", "VIEWER"]);
 
 function parseRole(role?: string): Role {
   if (!role || !ROLE_SET.has(role)) {
-    return Role.MEMBER;
+    return "MEMBER";
   }
   return role as Role;
 }
@@ -35,31 +36,31 @@ export async function getAuthContext(): Promise<AuthContext | null> {
 }
 
 export function canManageBilling(role: Role): boolean {
-  return role === Role.OWNER || role === Role.ADMIN;
+  return role === "OWNER" || role === "ADMIN";
 }
 
 export function canWriteAutomation(role: Role): boolean {
-  return role === Role.OWNER || role === Role.ADMIN || role === Role.MEMBER;
+  return role === "OWNER" || role === "ADMIN" || role === "MEMBER";
 }
 
 export function canDeleteAutomation(role: Role): boolean {
-  return role === Role.OWNER || role === Role.ADMIN;
+  return role === "OWNER" || role === "ADMIN";
 }
 
 export function canManageTeam(role: Role): boolean {
-  return role === Role.OWNER || role === Role.ADMIN;
+  return role === "OWNER" || role === "ADMIN";
 }
 
 export function canManageOrganizationSettings(role: Role): boolean {
-  return role === Role.OWNER || role === Role.ADMIN;
+  return role === "OWNER" || role === "ADMIN";
 }
 
 export function canAssignTeamRole(actorRole: Role, nextRole: Role): boolean {
-  if (actorRole === Role.OWNER) {
-    return nextRole === Role.ADMIN || nextRole === Role.MEMBER || nextRole === Role.VIEWER;
+  if (actorRole === "OWNER") {
+    return nextRole === "ADMIN" || nextRole === "MEMBER" || nextRole === "VIEWER";
   }
-  if (actorRole === Role.ADMIN) {
-    return nextRole === Role.MEMBER || nextRole === Role.VIEWER;
+  if (actorRole === "ADMIN") {
+    return nextRole === "MEMBER" || nextRole === "VIEWER";
   }
   return false;
 }

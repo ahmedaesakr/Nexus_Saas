@@ -80,7 +80,7 @@ export async function POST(req: Request) {
         workflowId,
         triggeredById: context.userId,
         status: "PENDING",
-        input: input || {},
+        input: JSON.stringify(input || {}),
       },
     });
 

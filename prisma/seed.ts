@@ -1,4 +1,4 @@
-import { PrismaClient, Role, Plan, WorkflowStatus, ExecutionStatus } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { hash } from "bcryptjs";
 
 const prisma = new PrismaClient();
@@ -20,7 +20,7 @@ async function main() {
     data: {
       name: "Nexus Demo",
       slug: "nexus-demo",
-      plan: Plan.PRO,
+      plan: "PRO",
     },
   });
 
@@ -32,7 +32,7 @@ async function main() {
       name: "Alex Chen",
       email: "alex@nexusflow.app",
       password,
-      role: Role.OWNER,
+      role: "OWNER",
       organizationId: org.id,
     },
   });
@@ -42,7 +42,7 @@ async function main() {
       name: "Sarah Miller",
       email: "sarah@nexusflow.app",
       password,
-      role: Role.ADMIN,
+      role: "ADMIN",
       organizationId: org.id,
     },
   });
@@ -52,7 +52,7 @@ async function main() {
       name: "Jordan Lee",
       email: "jordan@nexusflow.app",
       password,
-      role: Role.MEMBER,
+      role: "MEMBER",
       organizationId: org.id,
     },
   });
@@ -63,8 +63,8 @@ async function main() {
       name: "Sales Outreach",
       description: "Automatically send follow-up emails to leads who haven't responded in 3 days.",
       icon: "mail",
-      status: WorkflowStatus.ACTIVE,
-      definition: {
+      status: "ACTIVE",
+      definition: JSON.stringify({
         nodes: [
           { id: "trigger-1", type: "trigger", position: { x: 250, y: 5 }, data: { label: "New Lead (Webhook)", type: "webhook" } },
           { id: "agent-1", type: "ai-agent", position: { x: 250, y: 150 }, data: { label: "Lead Qualifier", model: "claude-3-5-sonnet" } },
@@ -74,7 +74,7 @@ async function main() {
           { id: "e1-2", source: "trigger-1", target: "agent-1", animated: true },
           { id: "e2-3", source: "agent-1", target: "action-1", animated: true },
         ],
-      },
+      }),
       organizationId: org.id,
       createdById: owner.id,
     },
@@ -85,8 +85,8 @@ async function main() {
       name: "Support Ticket Triage",
       description: "Categorize incoming support tickets using AI and assign to the right agent.",
       icon: "support_agent",
-      status: WorkflowStatus.ACTIVE,
-      definition: {
+      status: "ACTIVE",
+      definition: JSON.stringify({
         nodes: [
           { id: "trigger-1", type: "trigger", position: { x: 250, y: 5 }, data: { label: "New Ticket", type: "webhook" } },
           { id: "agent-1", type: "ai-agent", position: { x: 250, y: 150 }, data: { label: "Ticket Classifier" } },
@@ -96,7 +96,7 @@ async function main() {
           { id: "e1-2", source: "trigger-1", target: "agent-1", animated: true },
           { id: "e2-3", source: "agent-1", target: "condition-1", animated: true },
         ],
-      },
+      }),
       organizationId: org.id,
       createdById: admin.id,
     },
@@ -107,8 +107,8 @@ async function main() {
       name: "Lead Qualification",
       description: "Score new leads based on company size and industry data enrichment.",
       icon: "campaign",
-      status: WorkflowStatus.DRAFT,
-      definition: {
+      status: "DRAFT",
+      definition: JSON.stringify({
         nodes: [
           { id: "trigger-1", type: "trigger", position: { x: 250, y: 5 }, data: { label: "Form Submission", type: "webhook" } },
           { id: "action-1", type: "action", position: { x: 250, y: 150 }, data: { label: "Enrich Data" } },
@@ -116,7 +116,7 @@ async function main() {
         edges: [
           { id: "e1-2", source: "trigger-1", target: "action-1", animated: true },
         ],
-      },
+      }),
       organizationId: org.id,
       createdById: owner.id,
     },
@@ -127,8 +127,8 @@ async function main() {
       name: "Data Sync",
       description: "Sync customer records between CRM and marketing platform every hour.",
       icon: "sync",
-      status: WorkflowStatus.ACTIVE,
-      definition: { nodes: [], edges: [] },
+      status: "ACTIVE",
+      definition: JSON.stringify({ nodes: [], edges: [] }),
       organizationId: org.id,
       createdById: admin.id,
     },
@@ -143,7 +143,7 @@ async function main() {
         model: "claude-3-5-sonnet",
         temperature: 0.3,
         systemPrompt: "You are a customer support specialist. Classify tickets by urgency and draft helpful responses.",
-        tools: JSON.parse('["ticket_classify", "draft_response", "escalate"]'),
+        tools: JSON.stringify(["ticket_classify", "draft_response", "escalate"]),
         organizationId: org.id,
       },
       {
@@ -152,7 +152,7 @@ async function main() {
         model: "claude-3-5-sonnet",
         temperature: 0.7,
         systemPrompt: "You are a sales outreach specialist. Write personalized emails based on prospect data.",
-        tools: JSON.parse('["email_send", "crm_lookup", "calendar_check"]'),
+        tools: JSON.stringify(["email_send", "crm_lookup", "calendar_check"]),
         organizationId: org.id,
       },
       {
@@ -161,7 +161,7 @@ async function main() {
         model: "claude-3-5-sonnet",
         temperature: 0.5,
         systemPrompt: "You are a recruiting assistant. Screen candidate resumes and schedule interviews.",
-        tools: JSON.parse('["resume_parse", "calendar_schedule", "email_send"]'),
+        tools: JSON.stringify(["resume_parse", "calendar_schedule", "email_send"]),
         organizationId: org.id,
       },
       {
@@ -170,7 +170,7 @@ async function main() {
         model: "claude-3-5-sonnet",
         temperature: 0.2,
         systemPrompt: "You are a data analyst. Analyze metrics and generate clear reports.",
-        tools: JSON.parse('["query_database", "generate_chart", "export_report"]'),
+        tools: JSON.stringify(["query_database", "generate_chart", "export_report"]),
         organizationId: org.id,
       },
     ],
@@ -186,19 +186,19 @@ async function main() {
     const createdAt = new Date(now.getTime() - minutesAgo * 60 * 1000);
     const durationMs = Math.floor(Math.random() * 120000) + 5000;
 
-    const status: ExecutionStatus =
+    const status: string =
       i === 1 ? "RUNNING" :
-      i === 4 ? "FAILED" :
-      i === 7 ? "PENDING" :
-      "COMPLETED";
+        i === 4 ? "FAILED" :
+          i === 7 ? "PENDING" :
+            "COMPLETED";
 
     const execution = await prisma.execution.create({
       data: {
         workflowId: wf.id,
         triggeredById: i % 2 === 0 ? owner.id : admin.id,
         status,
-        input: { source: "webhook", data: { leadId: `lead_${i}` } },
-        output: status === "COMPLETED" ? { result: "success", processed: true } : undefined,
+        input: JSON.stringify({ source: "webhook", data: { leadId: `lead_${i}` } }),
+        output: status === "COMPLETED" ? JSON.stringify({ result: "success", processed: true }) : undefined,
         startedAt: status !== "PENDING" ? createdAt : undefined,
         completedAt: status === "COMPLETED" || status === "FAILED"
           ? new Date(createdAt.getTime() + durationMs)
@@ -251,8 +251,8 @@ async function main() {
   // Create integrations
   await prisma.integration.createMany({
     data: [
-      { provider: "slack", name: "Slack", config: { workspace: "nexus-demo" }, organizationId: org.id },
-      { provider: "github", name: "GitHub", config: { org: "nexus-demo" }, organizationId: org.id },
+      { provider: "slack", name: "Slack", config: JSON.stringify({ workspace: "nexus-demo" }), organizationId: org.id },
+      { provider: "github", name: "GitHub", config: JSON.stringify({ org: "nexus-demo" }), organizationId: org.id },
     ],
   });
 

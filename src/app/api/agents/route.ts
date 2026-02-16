@@ -28,7 +28,13 @@ export async function GET(req: Request) {
       orderBy: { createdAt: "desc" },
     });
 
-    return NextResponse.json(agents);
+    // Parse JSON string fields for SQLite compatibility
+    const parsedAgents = agents.map((a) => ({
+      ...a,
+      tools: typeof a.tools === "string" ? JSON.parse(a.tools) : a.tools,
+    }));
+
+    return NextResponse.json(parsedAgents);
   } catch (error) {
     console.error("Error fetching agents:", error);
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
@@ -70,9 +76,15 @@ export async function POST(req: Request) {
       );
     }
 
+    // Stringify JSON fields for SQLite compatibility
+    const createData: any = { ...data };
+    if (Array.isArray(data.tools)) {
+      createData.tools = JSON.stringify(data.tools);
+    }
+
     const agent = await prisma.agent.create({
       data: {
-        ...data,
+        ...createData,
         organizationId: context.organizationId,
       },
     });

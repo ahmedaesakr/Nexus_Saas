@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { Role } from "@prisma/client";
+import type { Role } from "@/lib/server/auth-context";
 
 type InvitePayload = {
   email: string;
@@ -59,7 +59,8 @@ export function verifyInviteToken(token: string): InvitePayload | null {
     if (!payload.email || !payload.organizationId || !payload.role || !payload.invitedById || !payload.exp) {
       return null;
     }
-    if (!Object.values(Role).includes(payload.role)) {
+    const VALID_ROLES: string[] = ["OWNER", "ADMIN", "MEMBER", "VIEWER"];
+    if (!VALID_ROLES.includes(payload.role)) {
       return null;
     }
     if (payload.exp < Date.now()) {
