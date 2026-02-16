@@ -14,6 +14,17 @@ export interface WorkflowNodeData extends Record<string, unknown> {
     config?: Record<string, any>;
     status?: 'idle' | 'running' | 'success' | 'error';
     icon?: string;
+    // AI Agent specific
+    model?: string;
+    promptPreview?: string;
+    tools?: any[];
+    temperature?: number;
+    // Trigger/Action specific
+    type?: string;
+    service?: string;
+    configPreview?: string;
+    // Condition specific
+    expression?: string;
 }
 
 export type IntegrationType = 'slack' | 'gmail' | 'google-sheets' | 'salesforce' | 'hubspot';

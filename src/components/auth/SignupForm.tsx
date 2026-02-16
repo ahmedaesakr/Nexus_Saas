@@ -2,16 +2,19 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { signIn } from "next-auth/react";
 
 export function SignupForm() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const inviteToken = searchParams.get("invite") || "";
+    const invitedEmail = searchParams.get("email") || "";
     const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
-        email: "",
+        email: invitedEmail,
         password: ""
     });
 
@@ -27,7 +30,10 @@ export function SignupForm() {
             const res = await fetch("/api/auth/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({
+                    ...formData,
+                    inviteToken: inviteToken || undefined,
+                }),
             });
 
             if (!res.ok) {
@@ -86,6 +92,7 @@ export function SignupForm() {
                     onChange={handleChange}
                     placeholder="name@company.com"
                     required
+                    readOnly={Boolean(invitedEmail)}
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white placeholder:text-gray-500 transition-all focus:bg-white/10"
                 />
             </div>

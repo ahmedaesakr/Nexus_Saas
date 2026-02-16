@@ -6,75 +6,65 @@
    Swiss Design Web, and Vercel Best Practices
    ============================================ */
 
-:root {
+@theme {
   /* === Brand Colors === */
-  --primary: #0d59f2;
-  --primary-hover: #0b4bcc;
-  --primary-glow: rgba(13, 89, 242, 0.4);
+  --color-primary: #0d59f2;
+  --color-primary-hover: #0b4bcc;
+  --color-primary-glow: rgba(13, 89, 242, 0.4);
 
   /* === Curated Color Palette: Midnight Nexus === */
-  --midnight-950: #02040a;
-  --midnight-900: #050a14;
-  --midnight-800: #0c1018;
-  --midnight-700: #0f1623;
-  --midnight-600: #1a2238;
-  --midnight-500: #2d374f;
+  --color-midnight-950: #02040a;
+  --color-midnight-900: #050a14;
+  --color-midnight-800: #0c1018;
+  --color-midnight-700: #0f1623;
+  --color-midnight-600: #1a2238;
+  --color-midnight-500: #2d374f;
 
   /* === Light Mode Colors === */
-  --background-light: #f5f6f8;
-  --surface-light: #ffffff;
-  --text-primary-light: #0f172a;
-  --text-secondary-light: #64748b;
+  --color-background-light: #f5f6f8;
+  --color-surface-light: #ffffff;
+  --color-text-primary-light: #0f172a;
+  --color-text-secondary-light: #64748b;
 
   /* === Dark Mode Colors === */
-  --background-dark: #050a14;
-  --surface-dark: #0c1018; /* Card Background */
+  --color-background-dark: #050a14;
+  --color-surface-dark: #0c1018;
 
   /* Theme Colors */
-  --bg-deepest: #02040a;
-  --bg-base: #050a14;
-  --bg-surface: #0c1018;
-  --bg-elevated: #1e293b;
+  --color-bg-deepest: #02040a;
+  --color-bg-base: #050a14;
+  --color-bg-surface: #0c1018;
+  --color-bg-elevated: #1e293b;
 
-  --color-primary: #0d59f2;
-  --color-primary-hover: #3374f4;
-  --sidebar-dark: #0d121c;
-  --surface-dark: #0c1018;
-  --text-primary-dark: #f8fafc;
-  --text-secondary-dark: #94a3b8;
+  --color-sidebar-dark: #0d121c;
+  --color-text-primary-dark: #f8fafc;
+  --color-text-secondary-dark: #94a3b8;
 
-  /* === Layout Variables (Locked Grid) === */
-  --pad-mobile: 16px;
-  /* px-4 */
-  --pad-desktop: 32px;
-  /* px-8 */
-  --max-width: 100%;
-  /* LOCKED to edges, no max-width cap */
+  /* === Liquid Glass System === */
+  --color-glass-bg: rgba(255, 255, 255, 0.05);
+  --color-glass-bg-elevated: rgba(255, 255, 255, 0.08);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glass-border-strong: rgba(255, 255, 255, 0.15);
 
-  /* === 2026 Liquid Glass System === */
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-bg-elevated: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-border-strong: rgba(255, 255, 255, 0.15);
-  --glass-blur: 20px;
-  --glass-saturate: 180%;
+  --spacing-pad-mobile: 16px;
+  --spacing-pad-desktop: 32px;
 
   /* === Semantic Colors === */
-  --success: #22c55e;
-  --success-bg: rgba(34, 197, 94, 0.1);
-  --warning: #f59e0b;
-  --warning-bg: rgba(245, 158, 11, 0.1);
-  --error: #ef4444;
-  --error-bg: rgba(239, 68, 68, 0.1);
-  --info: #3b82f6;
-  --info-bg: rgba(59, 130, 246, 0.1);
+  --color-success: #22c55e;
+  --color-success-bg: rgba(34, 197, 94, 0.1);
+  --color-warning: #f59e0b;
+  --color-warning-bg: rgba(245, 158, 11, 0.1);
+  --color-error: #ef4444;
+  --color-error-bg: rgba(239, 68, 68, 0.1);
+  --color-info: #3b82f6;
+  --color-info-bg: rgba(59, 130, 246, 0.1);
 
   /* === Motion UX 2026 Timing === */
-  --duration-instant: 100ms;
-  --duration-fast: 200ms;
-  --duration-normal: 300ms;
-  --duration-slow: 500ms;
-  --duration-slower: 800ms;
+  --animate-duration-instant: 100ms;
+  --animate-duration-fast: 200ms;
+  --animate-duration-normal: 300ms;
+  --animate-duration-slow: 500ms;
+  --animate-duration-slower: 800ms;
 
   /* === Easing Functions === */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -84,13 +74,13 @@
   --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
   /* === Spacing Scale === */
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-2xl: 48px;
-  --space-3xl: 64px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
 
   /* === Border Radius Scale === */
   --radius-sm: 8px;
@@ -105,23 +95,23 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
   --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.2);
-  --shadow-glow: 0 0 40px var(--primary-glow);
-  --shadow-glow-lg: 0 0 60px var(--primary-glow);
-
-  /* === Neumorphism (Clean 2026) === */
-  --neu-bg: #e0e5ec;
-  --neu-shadow-light: #ffffff;
-  --neu-shadow-dark: #a3b1c6;
+  --shadow-glow: 0 0 40px rgba(13, 89, 242, 0.4);
 }
 
-/* === Dark Mode Variables === */
+:root {
+  --glass-blur: 20px;
+  --glass-saturate: 180%;
+  --max-width: 100%;
+
+  /* Background and Foreground mappings for Next.js defaults if needed */
+  --background: var(--color-background-light);
+  --foreground: var(--color-text-primary-light);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: var(--background-dark);
-    --foreground: var(--text-primary-dark);
-    --surface: var(--surface-dark);
-    --text-primary: var(--text-primary-dark);
-    --text-secondary: var(--text-secondary-dark);
+    --background: var(--color-background-dark);
+    --foreground: var(--color-text-primary-dark);
   }
 }
 
@@ -172,8 +162,8 @@ body.dark {
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
-  font-feature-settings: 'liga';
   -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
 
@@ -183,8 +173,8 @@ body.dark {
 
 .liquid-glass {
   background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-2xl);
   box-shadow:
@@ -658,8 +648,8 @@ body.dark {
 
 /* Blur Background */
 .blur-bg {
-  backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
 }
 
 /* Hide scrollbar but keep functionality */

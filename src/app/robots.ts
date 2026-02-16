@@ -1,37 +1,30 @@
 import { MetadataRoute } from 'next';
 
-/**
- * Robots.txt Generator for Nexus Flow AI Platform
- * 
- * Best practices implemented:
- * - Allow all crawlers by default
- * - Reference sitemap for discovery
- * - Block sensitive routes (API, internal paths)
- * - Allow main pages for indexing
- */
-
 export default function robots(): MetadataRoute.Robots {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://nexusflow.app';
+    const baseUrl = (process.env.NEXT_PUBLIC_BASE_URL || 'https://nexusflow.app').replace(/\/$/, '');
 
     return {
-        rules: [
-            {
-                userAgent: '*',
-                allow: '/',
-                disallow: [
-                    '/api/',           // API routes should not be indexed
-                    '/_next/',         // Next.js internals
-                    '/private/',       // Future private routes
-                    '/*.json$',        // JSON files
-                ],
-            },
-            {
-                userAgent: 'Googlebot',
-                allow: '/',
-                disallow: ['/api/'],
-            },
+        rules: {
+            userAgent: '*',
+            allow: '/',
+            disallow: [
+                '/api/',
+                '/_next/',
+                '/dashboard',
+                '/workflows',
+                '/agents',
+                '/executions',
+                '/integrations',
+                '/templates',
+                '/users',
+                '/settings',
+                '/login',
+                '/signup',
+            ],
+        },
+        sitemap: [
+            `${baseUrl}/sitemap.xml`,
         ],
-        sitemap: `${baseUrl}/sitemap.xml`,
         host: baseUrl,
     };
 }

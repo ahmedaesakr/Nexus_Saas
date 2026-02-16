@@ -1,6 +1,8 @@
 import { Handle, Position } from "@xyflow/react";
+import { Icons } from "../../ui/Icons";
+import { WorkflowNodeData } from "../../../types/workflow";
 
-export function TriggerNode({ data, selected }: { data: any; selected?: boolean }) {
+export function TriggerNode({ data, selected }: { data: WorkflowNodeData; selected?: boolean }) {
     return (
         <div
             className={`
@@ -11,7 +13,7 @@ export function TriggerNode({ data, selected }: { data: any; selected?: boolean 
         >
             <div className="flex items-center gap-3 mb-3 border-b border-white/5 pb-2">
                 <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-amber-400 text-lg">bolt</span>
+                    <Icons.Trigger className="w-5 h-5 text-amber-400" />
                 </div>
                 <div>
                     <div className="font-semibold text-white text-sm">{data.label || "Trigger"}</div>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { Icons } from "../ui/Icons";
 
 export function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -35,7 +36,7 @@ export function Navbar() {
             <div className="container flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2 text-2xl font-bold tracking-tighter group">
                     <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-[0_0_20px_rgba(13,89,242,0.5)] group-hover:scale-105 transition-transform">
-                        <span className="material-symbols-outlined text-white">dataset</span>
+                        <Icons.Logo className="w-6 h-6 text-white" />
                     </div>
                     <span>Nexus Flow</span>
                 </Link>
@@ -73,9 +74,11 @@ export function Navbar() {
                         className="md:hidden p-2 text-gray-300 hover:text-white"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     >
-                        <span className="material-symbols-outlined text-2xl">
-                            {mobileMenuOpen ? "close" : "menu"}
-                        </span>
+                        {mobileMenuOpen ? (
+                            <Icons.Close className="w-6 h-6" />
+                        ) : (
+                            <Icons.Menu className="w-6 h-6" />
+                        )}
                     </button>
                 </div>
             </div>

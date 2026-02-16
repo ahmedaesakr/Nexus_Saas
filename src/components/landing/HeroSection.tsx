@@ -2,11 +2,16 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Icons } from "../ui/Icons";
 
 export function HeroSection() {
     return (
         <section className="relative z-10 pt-40 pb-20 md:pt-48 md:pb-32 overflow-hidden">
-            {/* Background Ambience */}
+            {/* ... */}
+            <button className="w-full sm:w-auto px-8 py-4 bg-white/5 text-white rounded-xl text-lg font-bold hover:bg-white/10 border border-white/10 backdrop-blur-sm transition-all flex items-center justify-center gap-2 group hover:-translate-y-1">
+                <Icons.Play className="w-6 h-6 group-hover:scale-110 transition-transform text-primary" />
+                Watch Demo
+            </button>
             <div className="absolute inset-0 z-0 pointer-events-none">
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px]" />
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[120px]" />

@@ -5,6 +5,10 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
     title: "Sign Up",
     description: "Create your Nexus Flow account and start automating workflows",
+    robots: {
+        index: false,
+        follow: false,
+    },
     alternates: {
         canonical: "/signup",
     },

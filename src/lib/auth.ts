@@ -78,9 +78,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
                 // MOCK ADMIN BYPASS
                 if (session.user.email === "admin@nexus.flow") {
-                    // @ts-ignore
                     session.user.role = "OWNER";
-                    // @ts-ignore
                     session.user.organizationId = "mock-org-id";
                     return session;
                 }
@@ -93,9 +91,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     });
 
                     if (dbUser) {
-                        // @ts-ignore: handling prisma null vs next-auth undefined
                         session.user.organizationId = dbUser.organizationId || undefined;
-                        // @ts-ignore
                         session.user.role = dbUser.role;
                     }
                 } catch (e) {
@@ -107,7 +103,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         jwt: async ({ token, user }) => {
             if (user) {
                 token.id = user.id || "";
-                // @ts-ignore
                 token.role = user.role;
             }
             return token;
