@@ -35,9 +35,10 @@ export function Sidebar() {
             {/* Mobile Toggle Button */}
             <button
                 onClick={() => setIsMobileOpen(true)}
+                aria-label="Open sidebar"
                 className="md:hidden fixed top-4 left-4 z-50 p-2 bg-[#0c1018] border border-white/10 rounded-lg text-white shadow-lg"
             >
-                <span className="material-symbols-outlined">menu</span>
+                <span className="material-symbols-outlined" aria-hidden="true">menu</span>
             </button>
 
             {/* Mobile Overlay */}
@@ -70,14 +71,18 @@ export function Sidebar() {
                     </Link>
                     <button
                         onClick={() => setIsMobileOpen(false)}
+                        aria-label="Close sidebar"
                         className="md:hidden text-gray-500 hover:text-white"
                     >
-                        <span className="material-symbols-outlined">close</span>
+                        <span className="material-symbols-outlined" aria-hidden="true">close</span>
                     </button>
                 </div>
 
                 {/* Navigation */}
-                <nav className="flex-1 px-4 py-6 space-y-8 overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+                <nav
+                    aria-label="Main navigation"
+                    className="flex-1 px-4 py-6 space-y-8 overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
+                >
                     <div>
                         <p className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Platform</p>
                         <div className="space-y-1">
@@ -97,10 +102,13 @@ export function Sidebar() {
                                         {isActive && (
                                             <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-50" />
                                         )}
-                                        <span className={cn(
-                                            "material-symbols-outlined text-[20px] transition-colors relative z-10",
-                                            isActive ? "text-white" : "text-gray-500 group-hover:text-white"
-                                        )}>
+                                        <span
+                                            className={cn(
+                                                "material-symbols-outlined text-[20px] transition-colors relative z-10",
+                                                isActive ? "text-white" : "text-gray-500 group-hover:text-white"
+                                            )}
+                                            aria-hidden="true"
+                                        >
                                             {item.icon}
                                         </span>
                                         <span className="relative z-10">{item.name}</span>
@@ -126,10 +134,13 @@ export function Sidebar() {
                                                 : "text-gray-400 hover:text-white hover:bg-white/5"
                                         )}
                                     >
-                                        <span className={cn(
-                                            "material-symbols-outlined text-[20px] transition-colors relative z-10",
-                                            isActive ? "text-white" : "text-gray-500 group-hover:text-white"
-                                        )}>
+                                        <span
+                                            className={cn(
+                                                "material-symbols-outlined text-[20px] transition-colors relative z-10",
+                                                isActive ? "text-white" : "text-gray-500 group-hover:text-white"
+                                            )}
+                                            aria-hidden="true"
+                                        >
                                             {item.icon}
                                         </span>
                                         <span className="relative z-10">{item.name}</span>
@@ -173,8 +184,9 @@ export function Sidebar() {
                             onClick={() => signOut()}
                             className="text-gray-500 hover:text-white transition-colors p-1 rounded hover:bg-white/10"
                             title="Sign Out"
+                            aria-label="Sign out"
                         >
-                            <span className="material-symbols-outlined text-lg">logout</span>
+                            <span className="material-symbols-outlined text-lg" aria-hidden="true">logout</span>
                         </button>
                     </div>
                 </div>
