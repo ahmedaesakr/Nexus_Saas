@@ -6,7 +6,7 @@ export default function AuthLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="min-h-screen grid lg:grid-cols-2 bg-background-dark text-white font-sans">
+        <div className="min-h-screen grid lg:grid-cols-2 bg-[#050a14] text-white font-sans">
             {/* Left: Branding & Visuals */}
             <div className="hidden lg:flex flex-col justify-between p-12 relative overflow-hidden bg-[#02040a]">
                 {/* Background Effects */}
@@ -47,7 +47,7 @@ export default function AuthLayout({
             </div>
 
             {/* Right: Content */}
-            <div className="flex items-center justify-center p-8 bg-background-dark relative">
+            <div className="flex items-center justify-center p-8 bg-[#050a14] relative">
                 <div className="absolute top-0 right-0 p-8">
                     <Link href="/" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
                         Back to Home
