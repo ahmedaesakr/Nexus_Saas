@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 
 type BillingUsageResponse = {
     plan: "FREE" | "STARTER" | "PRO" | "ENTERPRISE";
@@ -58,6 +59,8 @@ export default function SettingsPage() {
     const [teamStatus, setTeamStatus] = useState<string | null>(null);
     const [inviteEmail, setInviteEmail] = useState("");
     const [inviteRole, setInviteRole] = useState<"ADMIN" | "MEMBER" | "VIEWER">("MEMBER");
+    const [isSaving, setIsSaving] = useState(false);
+    const [isInviting, setIsInviting] = useState(false);
 
     const tabs = [
         { id: "general", label: "General", icon: "settings" },
@@ -117,6 +120,7 @@ export default function SettingsPage() {
     }, []);
 
     const saveGeneralSettings = async () => {
+        setIsSaving(true);
         setGeneralStatus(null);
 
         try {
@@ -137,6 +141,8 @@ export default function SettingsPage() {
             setGeneralStatus("Workspace settings saved.");
         } catch (error) {
             setGeneralStatus(error instanceof Error ? error.message : "Failed to save settings");
+        } finally {
+            setIsSaving(false);
         }
     };
 
@@ -194,6 +200,7 @@ export default function SettingsPage() {
     };
 
     const sendInvite = async () => {
+        setIsInviting(true);
         setTeamStatus(null);
 
         try {
@@ -213,6 +220,8 @@ export default function SettingsPage() {
             setTeamStatus("Invite sent.");
         } catch (error) {
             setTeamStatus(error instanceof Error ? error.message : "Failed to send invite");
+        } finally {
+            setIsInviting(false);
         }
     };
 
@@ -273,10 +282,11 @@ export default function SettingsPage() {
                             <div className="pt-6 border-t border-white/10">
                                 <button
                                     onClick={saveGeneralSettings}
-                                    disabled={!organization || (organization.role !== "OWNER" && organization.role !== "ADMIN")}
-                                    className="px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium transition-colors shadow-[0_0_15px_rgba(13,89,242,0.2)] disabled:opacity-50 disabled:cursor-not-allowed"
+                                    disabled={!organization || (organization.role !== "OWNER" && organization.role !== "ADMIN") || isSaving}
+                                    className="px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium transition-colors shadow-[0_0_15px_rgba(13,89,242,0.2)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                                 >
-                                    Save Changes
+                                    {isSaving && <Loader2 className="w-4 h-4 animate-spin" />}
+                                    {isSaving ? "Saving..." : "Save Changes"}
                                 </button>
                                 {generalStatus && <p className="text-sm text-gray-400 mt-3">{generalStatus}</p>}
                             </div>
@@ -379,10 +389,11 @@ export default function SettingsPage() {
                                         </select>
                                         <button
                                             onClick={sendInvite}
-                                            disabled={!inviteEmail}
-                                            className="px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-hover disabled:opacity-50 disabled:cursor-not-allowed"
+                                            disabled={!inviteEmail || isInviting}
+                                            className="px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-hover disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                                         >
-                                            Send Invite
+                                            {isInviting && <Loader2 className="w-4 h-4 animate-spin" />}
+                                            {isInviting ? "Sending..." : "Send Invite"}
                                         </button>
                                     </div>
                                 </div>
