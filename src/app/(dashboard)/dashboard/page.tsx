@@ -3,6 +3,7 @@ import { getAuthContext } from "@/lib/server/auth-context";
 import { redirect } from "next/navigation";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
+import { DashboardRefreshButton } from "@/components/dashboard/DashboardRefreshButton";
 
 export default async function DashboardPage() {
     const context = await getAuthContext();
@@ -61,9 +62,7 @@ export default async function DashboardPage() {
                     <span className="text-sm text-gray-500">
                         Organization: {context.organizationId === "mock-org-id" ? "Demo Org" : "Pro Plan"}
                     </span>
-                    <a href="/dashboard" className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-colors">
-                        <span className="material-symbols-outlined">refresh</span>
-                    </a>
+                    <DashboardRefreshButton />
                 </div>
             </div>
 
