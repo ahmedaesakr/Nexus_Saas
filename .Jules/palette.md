@@ -1,0 +1,1 @@
+## 2024-05-28 - Dashboard Refresh UX\n**Learning:** Next.js `router.refresh()` provides a smooth data refresh without reload, but needs `useTransition` to capture the pending state for loading indicators.\n**Action:** Use `startTransition(() => router.refresh())` pattern for all server-side data refresh actions to provide immediate visual feedback.
