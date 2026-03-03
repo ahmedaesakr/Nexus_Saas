@@ -1,0 +1,1 @@
+## 2024-03-03 - Initial Learnings\n**Learning:** Discovered memory notes indicating project uses Google Material Symbols Outlined (text ligatures) for icons, requiring aria-hidden='true' and parent buttons needing explicit aria-label attributes.\n**Action:** Will look for icon-only buttons missing aria-labels and icons missing aria-hidden.
