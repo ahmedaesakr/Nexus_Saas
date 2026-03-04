@@ -1,0 +1,3 @@
+## 2024-08-16 - Material Symbols Outlined Accessibility
+**Learning:** Google Material Symbols Outlined uses text ligatures (e.g., `<span className="material-symbols-outlined">menu</span>`). Without intervention, screen readers will read the literal text "menu" out loud to the user instead of understanding it's a graphical icon. Furthermore, icon-only buttons need an explicit, descriptive accessible name since the icon text itself is hidden.
+**Action:** Always add `aria-hidden="true"` to elements utilizing the `material-symbols-outlined` class to hide the ligature text from screen readers. Concurrently, ensure that any parent interactive element (like a button) wrapping these icons has an appropriate `aria-label` attribute providing the necessary context.
