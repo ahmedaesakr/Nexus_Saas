@@ -1,0 +1,1 @@
+## 2024-03-05 - Initial observation\n**Learning:** The project relies heavily on Google Material Symbols Outlined icons for UI elements.\n**Action:** Need to ensure all icon-only buttons have proper aria-labels and the icons themselves have aria-hidden='true'.
