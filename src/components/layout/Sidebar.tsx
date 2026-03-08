@@ -35,9 +35,10 @@ export function Sidebar() {
             {/* Mobile Toggle Button */}
             <button
                 onClick={() => setIsMobileOpen(true)}
-                className="md:hidden fixed top-4 left-4 z-50 p-2 bg-[#0c1018] border border-white/10 rounded-lg text-white shadow-lg"
+                className="md:hidden fixed top-4 left-4 z-50 p-2 bg-[#0c1018] border border-white/10 rounded-lg text-white shadow-lg focus-visible:ring-2 focus-visible:ring-primary focus:outline-none"
+                aria-label="Open navigation menu"
             >
-                <span className="material-symbols-outlined">menu</span>
+                <span className="material-symbols-outlined" aria-hidden="true">menu</span>
             </button>
 
             {/* Mobile Overlay */}
@@ -62,17 +63,18 @@ export function Sidebar() {
             >
                 {/* Logo */}
                 <div className="h-16 flex items-center justify-between px-6 border-b border-white/10 shrink-0 bg-[#0c1018]">
-                    <Link href="/dashboard" className="flex items-center gap-2 font-bold text-lg text-white group">
+                    <Link href="/dashboard" className="flex items-center gap-2 font-bold text-lg text-white group focus-visible:ring-2 focus-visible:ring-primary focus:outline-none rounded-lg">
                         <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shadow-[0_0_15px_rgba(13,89,242,0.4)] group-hover:shadow-[0_0_25px_rgba(13,89,242,0.6)] transition-all">
-                            <span className="material-symbols-outlined text-white text-lg">dataset</span>
+                            <span className="material-symbols-outlined text-white text-lg" aria-hidden="true">dataset</span>
                         </div>
                         <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 group-hover:to-white transition-colors">Nexus Flow</span>
                     </Link>
                     <button
                         onClick={() => setIsMobileOpen(false)}
-                        className="md:hidden text-gray-500 hover:text-white"
+                        className="md:hidden text-gray-500 hover:text-white focus-visible:ring-2 focus-visible:ring-primary rounded-lg focus:outline-none"
+                        aria-label="Close navigation menu"
                     >
-                        <span className="material-symbols-outlined">close</span>
+                        <span className="material-symbols-outlined" aria-hidden="true">close</span>
                     </button>
                 </div>
 
@@ -97,10 +99,13 @@ export function Sidebar() {
                                         {isActive && (
                                             <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-50" />
                                         )}
-                                        <span className={cn(
-                                            "material-symbols-outlined text-[20px] transition-colors relative z-10",
-                                            isActive ? "text-white" : "text-gray-500 group-hover:text-white"
-                                        )}>
+                                        <span
+                                            className={cn(
+                                                "material-symbols-outlined text-[20px] transition-colors relative z-10",
+                                                isActive ? "text-white" : "text-gray-500 group-hover:text-white"
+                                            )}
+                                            aria-hidden="true"
+                                        >
                                             {item.icon}
                                         </span>
                                         <span className="relative z-10">{item.name}</span>
@@ -126,10 +131,13 @@ export function Sidebar() {
                                                 : "text-gray-400 hover:text-white hover:bg-white/5"
                                         )}
                                     >
-                                        <span className={cn(
-                                            "material-symbols-outlined text-[20px] transition-colors relative z-10",
-                                            isActive ? "text-white" : "text-gray-500 group-hover:text-white"
-                                        )}>
+                                        <span
+                                            className={cn(
+                                                "material-symbols-outlined text-[20px] transition-colors relative z-10",
+                                                isActive ? "text-white" : "text-gray-500 group-hover:text-white"
+                                            )}
+                                            aria-hidden="true"
+                                        >
                                             {item.icon}
                                         </span>
                                         <span className="relative z-10">{item.name}</span>
@@ -171,10 +179,11 @@ export function Sidebar() {
                         </div>
                         <button
                             onClick={() => signOut()}
-                            className="text-gray-500 hover:text-white transition-colors p-1 rounded hover:bg-white/10"
+                            className="text-gray-500 hover:text-white transition-colors p-1 rounded hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-primary focus:outline-none"
+                            aria-label="Sign Out"
                             title="Sign Out"
                         >
-                            <span className="material-symbols-outlined text-lg">logout</span>
+                            <span className="material-symbols-outlined text-lg" aria-hidden="true">logout</span>
                         </button>
                     </div>
                 </div>
