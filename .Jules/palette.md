@@ -1,0 +1,3 @@
+## 2024-05-24 - Icon Buttons using Text Ligatures
+**Learning:** Google Material Symbols Outlined uses text ligatures (e.g., `menu`, `close`, `logout`). If these icons are used inside buttons without an `aria-label`, screen readers may read the text of the ligature, confusing users. Furthermore, the span element containing the ligature should have `aria-hidden="true"` so that the text isn't announced as visible content.
+**Action:** When creating icon-only buttons using text ligatures for icons, always provide an `aria-label` on the parent button and add `aria-hidden="true"` on the element containing the text ligature.
