@@ -1,0 +1,3 @@
+## 2024-03-14 - Hiding Google Material Symbols Ligatures
+**Learning:** Google Material Symbols Outlined uses text ligatures (e.g., `<span class="material-symbols-outlined">menu</span>`) to display icons. Screen readers will literally read the text "menu" or "close" inside these spans, which can be confusing or redundant, especially if the parent button already has a proper `aria-label`.
+**Action:** Always add `aria-hidden="true"` to `material-symbols-outlined` spans, and ensure the parent button or link has a descriptive `aria-label` if it relies solely on the icon for meaning. Also, remember to add keyboard focus states (`focus-visible:ring-2 focus-visible:ring-primary focus:outline-none`) to interactive icon-only elements.
