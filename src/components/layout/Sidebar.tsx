@@ -35,9 +35,12 @@ export function Sidebar() {
             {/* Mobile Toggle Button */}
             <button
                 onClick={() => setIsMobileOpen(true)}
-                className="md:hidden fixed top-4 left-4 z-50 p-2 bg-[#0c1018] border border-white/10 rounded-lg text-white shadow-lg"
+                className="md:hidden fixed top-4 left-4 z-50 p-2 bg-[#0c1018] border border-white/10 rounded-lg text-white shadow-lg focus-visible:ring-2 focus-visible:ring-primary focus:outline-none"
+                aria-label="Open navigation menu"
+                aria-expanded={isMobileOpen}
+                aria-controls="mobile-navigation"
             >
-                <span className="material-symbols-outlined">menu</span>
+                <span className="material-symbols-outlined" aria-hidden="true">menu</span>
             </button>
 
             {/* Mobile Overlay */}
@@ -55,6 +58,7 @@ export function Sidebar() {
 
             {/* Sidebar */}
             <aside
+                id="mobile-navigation"
                 className={cn(
                     "fixed left-0 top-0 z-50 h-screen w-64 border-r border-white/10 bg-[#0c1018] flex flex-col transition-transform duration-300 md:translate-x-0",
                     isMobileOpen ? "translate-x-0" : "-translate-x-full"
@@ -70,9 +74,10 @@ export function Sidebar() {
                     </Link>
                     <button
                         onClick={() => setIsMobileOpen(false)}
-                        className="md:hidden text-gray-500 hover:text-white"
+                        className="md:hidden text-gray-500 hover:text-white focus-visible:ring-2 focus-visible:ring-primary focus:outline-none rounded-lg"
+                        aria-label="Close navigation menu"
                     >
-                        <span className="material-symbols-outlined">close</span>
+                        <span className="material-symbols-outlined" aria-hidden="true">close</span>
                     </button>
                 </div>
 
@@ -171,10 +176,11 @@ export function Sidebar() {
                         </div>
                         <button
                             onClick={() => signOut()}
-                            className="text-gray-500 hover:text-white transition-colors p-1 rounded hover:bg-white/10"
+                            className="text-gray-500 hover:text-white transition-colors p-1 rounded hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-primary focus:outline-none"
                             title="Sign Out"
+                            aria-label="Sign out"
                         >
-                            <span className="material-symbols-outlined text-lg">logout</span>
+                            <span className="material-symbols-outlined text-lg" aria-hidden="true">logout</span>
                         </button>
                     </div>
                 </div>
