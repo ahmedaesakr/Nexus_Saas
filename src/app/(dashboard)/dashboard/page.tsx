@@ -61,8 +61,8 @@ export default async function DashboardPage() {
                     <span className="text-sm text-gray-500">
                         Organization: {context.organizationId === "mock-org-id" ? "Demo Org" : "Pro Plan"}
                     </span>
-                    <a href="/dashboard" className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-colors">
-                        <span className="material-symbols-outlined">refresh</span>
+                    <a href="/dashboard" aria-label="Refresh dashboard" className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-colors">
+                        <span className="material-symbols-outlined" aria-hidden="true">refresh</span>
                     </a>
                 </div>
             </div>
