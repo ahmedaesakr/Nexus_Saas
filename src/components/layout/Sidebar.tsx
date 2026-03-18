@@ -35,9 +35,10 @@ export function Sidebar() {
             {/* Mobile Toggle Button */}
             <button
                 onClick={() => setIsMobileOpen(true)}
-                className="md:hidden fixed top-4 left-4 z-50 p-2 bg-[#0c1018] border border-white/10 rounded-lg text-white shadow-lg"
+                aria-label="Open navigation menu"
+                className="md:hidden fixed top-4 left-4 z-50 p-2 bg-[#0c1018] border border-white/10 rounded-lg text-white shadow-lg focus-visible:ring-2 focus-visible:ring-primary focus:outline-none"
             >
-                <span className="material-symbols-outlined">menu</span>
+                <span className="material-symbols-outlined" aria-hidden="true">menu</span>
             </button>
 
             {/* Mobile Overlay */}
@@ -70,9 +71,10 @@ export function Sidebar() {
                     </Link>
                     <button
                         onClick={() => setIsMobileOpen(false)}
-                        className="md:hidden text-gray-500 hover:text-white"
+                        aria-label="Close navigation menu"
+                        className="md:hidden text-gray-500 hover:text-white focus-visible:ring-2 focus-visible:ring-primary focus:outline-none rounded"
                     >
-                        <span className="material-symbols-outlined">close</span>
+                        <span className="material-symbols-outlined" aria-hidden="true">close</span>
                     </button>
                 </div>
 
@@ -88,7 +90,7 @@ export function Sidebar() {
                                         key={item.name}
                                         href={item.href}
                                         className={cn(
-                                            "flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 group relative overflow-hidden",
+                                            "flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 group relative overflow-hidden focus-visible:ring-2 focus-visible:ring-primary focus:outline-none",
                                             isActive
                                                 ? "bg-primary text-white shadow-[0_0_20px_rgba(13,89,242,0.3)]"
                                                 : "text-gray-400 hover:text-white hover:bg-white/5"
@@ -100,7 +102,7 @@ export function Sidebar() {
                                         <span className={cn(
                                             "material-symbols-outlined text-[20px] transition-colors relative z-10",
                                             isActive ? "text-white" : "text-gray-500 group-hover:text-white"
-                                        )}>
+                                        )} aria-hidden="true">
                                             {item.icon}
                                         </span>
                                         <span className="relative z-10">{item.name}</span>
@@ -120,7 +122,7 @@ export function Sidebar() {
                                         key={item.name}
                                         href={item.href}
                                         className={cn(
-                                            "flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 group relative",
+                                            "flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 group relative focus-visible:ring-2 focus-visible:ring-primary focus:outline-none",
                                             isActive
                                                 ? "bg-primary text-white shadow-[0_0_20px_rgba(13,89,242,0.3)]"
                                                 : "text-gray-400 hover:text-white hover:bg-white/5"
@@ -129,7 +131,7 @@ export function Sidebar() {
                                         <span className={cn(
                                             "material-symbols-outlined text-[20px] transition-colors relative z-10",
                                             isActive ? "text-white" : "text-gray-500 group-hover:text-white"
-                                        )}>
+                                        )} aria-hidden="true">
                                             {item.icon}
                                         </span>
                                         <span className="relative z-10">{item.name}</span>
@@ -142,7 +144,10 @@ export function Sidebar() {
 
                 {/* User Plan */}
                 <div className="p-4 border-t border-white/10 bg-[#0c1018]">
-                    <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 border border-white/10 relative overflow-hidden group hover:border-primary/30 transition-colors cursor-pointer">
+                    <button
+                        className="w-full text-left p-4 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 border border-white/10 relative overflow-hidden group hover:border-primary/30 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-primary focus:outline-none"
+                        aria-label="Upgrade to Pro Plan. Current usage: 7,500 of 10k executions"
+                    >
                         <div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/20 transition-colors" />
 
                         <div className="flex items-center justify-between mb-2 relative z-10">
@@ -158,7 +163,7 @@ export function Sidebar() {
                             <span>7,500 / 10k execs</span>
                             <span className="group-hover:text-white transition-colors">Upgrade</span>
                         </div>
-                    </div>
+                    </button>
 
                     {/* User Profile Mini */}
                     <div className="mt-4 flex items-center gap-3">
@@ -171,10 +176,11 @@ export function Sidebar() {
                         </div>
                         <button
                             onClick={() => signOut()}
-                            className="text-gray-500 hover:text-white transition-colors p-1 rounded hover:bg-white/10"
+                            className="text-gray-500 hover:text-white transition-colors p-1 rounded hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-primary focus:outline-none"
+                            aria-label="Sign Out"
                             title="Sign Out"
                         >
-                            <span className="material-symbols-outlined text-lg">logout</span>
+                            <span className="material-symbols-outlined text-lg" aria-hidden="true">logout</span>
                         </button>
                     </div>
                 </div>
