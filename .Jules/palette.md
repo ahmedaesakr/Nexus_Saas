@@ -1,0 +1,3 @@
+## 2024-05-24 - Material Symbols Accessibility Pattern
+**Learning:** Google Material Symbols Outlined uses text ligatures (e.g. `menu`, `close`) which are read aloud by screen readers if not explicitly hidden.
+**Action:** Always add `aria-hidden="true"` to `<span className="material-symbols-outlined">` elements, and ensure their parent interactive element (button/link) has a proper `aria-label` and `focus-visible:ring-2 focus-visible:ring-primary focus:outline-none` classes if it does not contain visible text.
