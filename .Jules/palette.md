@@ -1,0 +1,3 @@
+## 2024-07-25 - [Material Symbols Accessibility]
+**Learning:** Google Material Symbols Outlined uses text ligatures (e.g., `<span className="material-symbols-outlined">menu</span>`). This causes screen readers to read the actual word ("menu") aloud. For icon-only buttons, this might conflict or sound unpolished compared to an explicit ARIA label. Furthermore, decorative icons shouldn't be read.
+**Action:** When using `material-symbols-outlined` inside interactive elements, always set `aria-hidden="true"` on the span, and ensure the parent button has an explicit, descriptive `aria-label` along with standard focus states (e.g. `focus-visible:ring-2 focus-visible:ring-primary focus:outline-none`).
