@@ -47,7 +47,7 @@ export default function AuthLayout({
             </div>
 
             {/* Right: Content */}
-            <div className="flex items-center justify-center p-8 bg-background-dark relative">
+            <div className="flex items-center justify-center p-8 bg-[#030407] relative">
                 <div className="absolute top-0 right-0 p-8">
                     <Link href="/" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
                         Back to Home

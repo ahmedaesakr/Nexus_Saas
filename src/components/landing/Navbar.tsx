@@ -113,7 +113,7 @@ export function Navbar() {
                                     Dashboard
                                 </Link>
                                 <Link
-                                    href="/dashboard"
+                                    href="/signup"
                                     onClick={() => setMobileMenuOpen(false)}
                                     className="w-full py-3 text-center bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20"
                                 >
