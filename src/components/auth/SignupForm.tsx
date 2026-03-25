@@ -43,7 +43,6 @@ export function SignupForm() {
 
             toast.success("Account created! Signing you in...");
 
-            // Auto sign-in
             const result = await signIn("credentials", {
                 email: formData.email,
                 password: formData.password,
@@ -77,7 +76,7 @@ export function SignupForm() {
                     onChange={handleChange}
                     placeholder="John Doe"
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white placeholder:text-gray-500 transition-all focus:bg-white/10"
+                    className="field-input px-4 py-3.5"
                 />
             </div>
 
@@ -93,7 +92,7 @@ export function SignupForm() {
                     placeholder="name@company.com"
                     required
                     readOnly={Boolean(invitedEmail)}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white placeholder:text-gray-500 transition-all focus:bg-white/10"
+                    className="field-input px-4 py-3.5"
                 />
             </div>
 
@@ -109,7 +108,7 @@ export function SignupForm() {
                     placeholder="Create a password"
                     required
                     minLength={8}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white placeholder:text-gray-500 transition-all focus:bg-white/10"
+                    className="field-input px-4 py-3.5"
                 />
                 <p className="text-xs text-gray-500">Must be at least 8 characters</p>
             </div>
@@ -117,11 +116,11 @@ export function SignupForm() {
             <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-3.5 rounded-xl bg-primary hover:bg-primary-hover text-white font-semibold shadow-[0_0_20px_rgba(13,89,242,0.3)] hover:shadow-[0_0_30px_rgba(13,89,242,0.5)] transition-all btn-tactile disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="primary-button btn-tactile w-full py-3.5 disabled:opacity-50 disabled:cursor-not-allowed"
             >
                 {isLoading ? (
                     <>
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin" />
                         Creating account...
                     </>
                 ) : (

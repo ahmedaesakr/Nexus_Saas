@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "Sign Up",
-    description: "Create your Aura account and start automating workflows",
+    description: "Create your Nexus Flow account and start orchestrating workflows",
     robots: {
         index: false,
         follow: false,
@@ -17,11 +17,11 @@ export const metadata: Metadata = {
 
 export default function SignupPage() {
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 liquid-glass liquid-glass-elevated p-8 rounded-[28px]">
             <div className="text-center space-y-2">
                 <h1 className="text-3xl font-bold tracking-tight text-white">Get started free</h1>
                 <p className="text-gray-400">
-                    Join thousands of teams automating their work
+                    Launch your first autonomous workflow system
                 </p>
             </div>
 

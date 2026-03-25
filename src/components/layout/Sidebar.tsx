@@ -23,7 +23,6 @@ export function Sidebar() {
     const { data: session } = useSession();
     const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-    // Close sidebar on route change (mobile)
     useEffect(() => {
         setIsMobileOpen(false);
     }, [pathname]);
@@ -32,16 +31,14 @@ export function Sidebar() {
 
     return (
         <>
-            {/* Mobile Toggle Button */}
             <button
                 onClick={() => setIsMobileOpen(true)}
                 aria-label="Open navigation menu"
-                className="md:hidden fixed top-4 left-4 z-[60] p-2 bg-[#0A0D14] border border-white/10 rounded-lg text-white shadow-lg"
+                className="md:hidden fixed top-4 left-4 z-[60] p-2 liquid-glass text-white shadow-lg"
             >
                 <span className="material-symbols-outlined">menu</span>
             </button>
 
-            {/* Mobile Overlay */}
             <AnimatePresence>
                 {isMobileOpen && (
                     <motion.div
@@ -54,20 +51,18 @@ export function Sidebar() {
                 )}
             </AnimatePresence>
 
-            {/* Sidebar */}
             <aside
                 className={cn(
-                    "fixed left-0 top-0 z-50 h-screen w-64 border-r border-white/10 bg-[#0A0D14] flex flex-col transition-transform duration-300 md:translate-x-0",
+                    "fixed left-0 top-0 z-50 h-screen w-64 border-r border-white/8 bg-[#090c09]/92 backdrop-blur-xl flex flex-col transition-transform duration-300 md:translate-x-0",
                     isMobileOpen ? "translate-x-0" : "-translate-x-full"
                 )}
             >
-                {/* Logo */}
-                <div className="h-16 flex items-center justify-between px-6 border-b border-white/10 shrink-0 bg-[#0A0D14]">
+                <div className="h-16 flex items-center justify-between px-6 border-b border-white/8 shrink-0 bg-transparent">
                     <Link href="/dashboard" className="flex items-center gap-2 font-bold text-lg text-white group">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00E5FF] to-[#00B8CC] flex items-center justify-center shadow-[0_0_15px_rgba(0,229,255,0.4)] group-hover:shadow-[0_0_25px_rgba(0,229,255,0.6)] transition-all">
+                        <div className="brand-mark w-8 h-8 rounded-lg flex items-center justify-center transition-all">
                             <span className="material-symbols-outlined text-black text-lg">dataset</span>
                         </div>
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 group-hover:to-white transition-colors">Aura</span>
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-primary group-hover:to-white transition-colors">Nexus</span>
                     </Link>
                     <button
                         onClick={() => setIsMobileOpen(false)}
@@ -78,7 +73,6 @@ export function Sidebar() {
                     </button>
                 </div>
 
-                {/* Navigation */}
                 <nav className="flex-1 px-4 py-6 space-y-8 overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
                     <div>
                         <p className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Platform</p>
@@ -90,9 +84,9 @@ export function Sidebar() {
                                         key={item.name}
                                         href={item.href}
                                         className={cn(
-                                            "flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 group relative overflow-hidden",
+                                            "flex items-center gap-3 px-3 py-2.5 rounded-2xl text-sm font-medium transition-all duration-200 group relative overflow-hidden",
                                             isActive
-                                                ? "bg-primary text-black shadow-[0_0_20px_rgba(0,229,255,0.3)]"
+                                                ? "bg-primary text-black shadow-[0_0_22px_rgba(140,255,75,0.24)]"
                                                 : "text-gray-400 hover:text-white hover:bg-white/5"
                                         )}
                                     >
@@ -122,9 +116,9 @@ export function Sidebar() {
                                         key={item.name}
                                         href={item.href}
                                         className={cn(
-                                            "flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 group relative",
+                                            "flex items-center gap-3 px-3 py-2.5 rounded-2xl text-sm font-medium transition-all duration-200 group relative",
                                             isActive
-                                                ? "bg-primary text-black shadow-[0_0_20px_rgba(0,229,255,0.3)]"
+                                                ? "bg-primary text-black shadow-[0_0_22px_rgba(140,255,75,0.24)]"
                                                 : "text-gray-400 hover:text-white hover:bg-white/5"
                                         )}
                                     >
@@ -142,9 +136,8 @@ export function Sidebar() {
                     </div>
                 </nav>
 
-                {/* User Plan */}
-                <div className="p-4 border-t border-white/10 bg-[#0A0D14]">
-                    <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 border border-white/10 relative overflow-hidden group hover:border-primary/30 transition-colors cursor-pointer">
+                <div className="p-4 border-t border-white/8 bg-transparent">
+                    <div className="p-4 rounded-[22px] liquid-glass relative overflow-hidden group hover:border-primary/30 transition-colors cursor-pointer">
                         <div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/20 transition-colors" />
 
                         <div className="flex items-center justify-between mb-2 relative z-10">
@@ -153,7 +146,7 @@ export function Sidebar() {
                         </div>
 
                         <div className="w-full bg-black/40 h-1.5 rounded-full overflow-hidden mb-2 relative z-10">
-                            <div className="bg-gradient-to-r from-[#FF3B30] via-[#FF9500] to-[#00E5FF] h-full w-[75%] rounded-full shadow-[0_0_10px_rgba(0,229,255,0.5)]" />
+                            <div className="bg-gradient-to-r from-[#375d1f] via-[#8cff4b] to-[#d4ffb8] h-full w-[75%] rounded-full shadow-[0_0_10px_rgba(140,255,75,0.5)]" />
                         </div>
 
                         <div className="flex justify-between items-center text-[10px] text-gray-400 relative z-10">
@@ -162,7 +155,6 @@ export function Sidebar() {
                         </div>
                     </div>
 
-                    {/* User Profile Mini */}
                     <div className="mt-4 flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-700 to-gray-600 border border-white/10 flex items-center justify-center text-xs font-bold text-white">
                             {user?.name?.[0] || "U"}

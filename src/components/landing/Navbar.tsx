@@ -2,14 +2,12 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Icons } from "../ui/Icons";
 
 export function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -21,9 +19,9 @@ export function Navbar() {
 
     const navLinks = [
         { label: "Features", href: "#features" },
-        { label: "Solutions", href: "/#solutions" }, // Use absolute path for cross-page nav if needed
+        { label: "Solutions", href: "/#solutions" },
         { label: "Pricing", href: "/#pricing" },
-        { label: "Templates", href: "/templates" }, // Link to actual page
+        { label: "Templates", href: "/templates" },
     ];
 
     return (
@@ -35,13 +33,12 @@ export function Navbar() {
         >
             <div className="container flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2 text-2xl font-bold tracking-tighter group">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-[#00B8CC] flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.5)] group-hover:scale-105 transition-transform">
+                    <div className="brand-mark w-10 h-10 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform">
                         <Icons.Logo className="w-6 h-6 text-black" />
                     </div>
-                    <span>Aura</span>
+                    <span>Nexus Flow</span>
                 </Link>
 
-                {/* Desktop Nav */}
                 <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
                     {navLinks.map((link) => (
                         <Link
@@ -64,12 +61,11 @@ export function Navbar() {
                     </Link>
                     <Link
                         href="/signup"
-                        className="hidden md:block px-5 py-2.5 bg-white text-black rounded-lg text-sm font-bold hover:bg-gray-200 transition-colors btn-tactile shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                        className="hidden md:inline-flex primary-button px-5 py-2.5 text-sm"
                     >
                         Start Free Trial
                     </Link>
 
-                    {/* Mobile Menu Toggle */}
                     <button
                         className="md:hidden p-2 text-gray-300 hover:text-white"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -84,14 +80,13 @@ export function Navbar() {
                 </div>
             </div>
 
-            {/* Mobile Menu */}
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-[#030407] border-b border-white/10 overflow-hidden"
+                        className="md:hidden bg-[#070a07]/95 border-b border-white/10 overflow-hidden backdrop-blur-xl"
                     >
                         <div className="container py-6 flex flex-col gap-4">
                             {navLinks.map((link) => (
@@ -108,14 +103,14 @@ export function Navbar() {
                                 <Link
                                     href="/dashboard"
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="w-full py-3 text-center text-gray-300 hover:text-white border border-white/10 rounded-xl"
+                                    className="secondary-button w-full py-3 text-center"
                                 >
                                     Dashboard
                                 </Link>
                                 <Link
                                     href="/signup"
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="w-full py-3 text-center bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20"
+                                    className="primary-button w-full py-3 text-center"
                                 >
                                     Start Free Trial
                                 </Link>

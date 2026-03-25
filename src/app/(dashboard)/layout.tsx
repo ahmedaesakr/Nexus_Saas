@@ -7,9 +7,9 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="min-h-screen bg-[#030407] text-white">
+        <div className="app-shell min-h-screen text-white">
             <Sidebar />
-            <main className="md:pl-64 pl-0 min-h-screen transition-all duration-300">
+            <main className="md:pl-64 pl-0 min-h-screen transition-all duration-300 relative">
                 {children}
             </main>
             <OnboardingModal />

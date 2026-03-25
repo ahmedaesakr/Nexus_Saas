@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "Login",
-    description: "Sign in to your Aura account",
+    description: "Sign in to your Nexus Flow account",
     robots: {
         index: false,
         follow: false,
@@ -16,11 +16,11 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 liquid-glass liquid-glass-elevated p-8 rounded-[28px]">
             <div className="text-center space-y-2">
                 <h1 className="text-3xl font-bold tracking-tight text-white">Welcome back</h1>
                 <p className="text-gray-400">
-                    Enter your credentials to access your workspace
+                    Enter your credentials to access your control surface
                 </p>
             </div>
 

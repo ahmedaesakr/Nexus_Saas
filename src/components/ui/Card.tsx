@@ -11,10 +11,10 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
             <div
                 ref={ref}
                 className={cn(
-                    "rounded-xl transition-all duration-200",
-                    variant === "default" && "bg-white dark:bg-[#0A0D14] border border-gray-100 dark:border-white/5 shadow-sm",
-                    variant === "glass" && "bg-white/10 backdrop-blur-md border border-white/20 shadow-lg",
-                    variant === "outline" && "bg-transparent border border-gray-200 dark:border-white/10",
+                    "rounded-[24px] transition-all duration-200",
+                    variant === "default" && "surface-panel surface-highlight text-white",
+                    variant === "glass" && "liquid-glass liquid-glass-elevated text-white",
+                    variant === "outline" && "bg-transparent border border-primary/15 text-white",
                     className
                 )}
                 {...props}

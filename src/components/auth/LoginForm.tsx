@@ -33,7 +33,7 @@ export function LoginForm() {
                 router.push("/dashboard");
                 router.refresh();
             }
-        } catch (error) {
+        } catch {
             setError("Something went wrong");
             setIsLoading(false);
         }
@@ -44,7 +44,6 @@ export function LoginForm() {
 
     const handleAdminLogin = async () => {
         setIsLoading(true);
-        // Uses the special credential bypass in auth.ts
         const result = await signIn("credentials", {
             email: "admin@nexus.flow",
             password: "admin",
@@ -62,12 +61,11 @@ export function LoginForm() {
 
     return (
         <div className="space-y-6">
-            {/* Easy Admin Login (Development/Demo Only) */}
-            <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
+            <div className="p-4 rounded-2xl bg-primary/8 border border-primary/15">
                 <button
                     onClick={handleAdminLogin}
                     disabled={isLoading}
-                    className="w-full flex items-center justify-center gap-2 py-2 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors"
+                    className="w-full flex items-center justify-center gap-2 py-2 text-sm font-medium text-primary hover:text-primary-hover transition-colors"
                 >
                     <span className="material-symbols-outlined text-lg">admin_panel_settings</span>
                     Quick Admin Login (Dev)
@@ -76,7 +74,7 @@ export function LoginForm() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
                 {error && (
-                    <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+                    <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-2xl text-red-300 text-sm">
                         {error}
                     </div>
                 )}
@@ -91,7 +89,7 @@ export function LoginForm() {
                         type="email"
                         placeholder="name@company.com"
                         required
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white placeholder:text-gray-500 transition-all"
+                        className="field-input px-4 py-3.5"
                     />
                 </div>
 
@@ -113,18 +111,18 @@ export function LoginForm() {
                         type="password"
                         placeholder="••••••••"
                         required
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white placeholder:text-gray-500 transition-all"
+                        className="field-input px-4 py-3.5"
                     />
                 </div>
 
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-3.5 rounded-xl bg-primary hover:bg-primary-hover text-white font-semibold shadow-[0_0_20px_rgba(13,89,242,0.3)] hover:shadow-[0_0_30px_rgba(13,89,242,0.5)] transition-all btn-tactile disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="primary-button btn-tactile w-full py-3.5 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     {isLoading ? (
                         <>
-                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin" />
                             Signing in...
                         </>
                     ) : (
@@ -137,7 +135,7 @@ export function LoginForm() {
                         <span className="w-full border-t border-white/10" />
                     </div>
                     <div className="relative flex justify-center text-xs uppercase">
-                        <span className="bg-[#0b1221] px-2 text-gray-500"> {/* Use hex or variable for background match */}
+                        <span className="bg-[#0a0d0a] px-2 text-gray-500">
                             Or continue with
                         </span>
                     </div>
@@ -147,7 +145,7 @@ export function LoginForm() {
                     <button
                         type="button"
                         onClick={handleGithubLogin}
-                        className="flex items-center justify-center gap-2 px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all text-sm font-medium text-white"
+                        className="secondary-button px-4 py-3 text-sm font-medium"
                     >
                         <span className="material-symbols-outlined text-lg">code</span>
                         GitHub
@@ -155,7 +153,7 @@ export function LoginForm() {
                     <button
                         type="button"
                         onClick={handleGoogleLogin}
-                        className="flex items-center justify-center gap-2 px-4 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all text-sm font-medium text-white"
+                        className="secondary-button px-4 py-3 text-sm font-medium"
                     >
                         <span className="material-symbols-outlined text-lg">work</span>
                         Google

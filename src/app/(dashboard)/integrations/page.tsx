@@ -23,7 +23,7 @@ export default function IntegrationsPage() {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <h1 className="text-3xl font-bold text-white mb-2">Integrations</h1>
-                    <p className="text-gray-400">Connect Aura to your favorite tools.</p>
+                    <p className="text-gray-400">Connect Nexus Flow to your favorite tools.</p>
                 </div>
                 <div className="relative">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-gray-500 text-sm">search</span>

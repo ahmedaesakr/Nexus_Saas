@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const testimonials = [
     {
-        quote: "Aura has completely transformed how our sales team operates. We've automated 80% of our lead qualification process.",
+        quote: "Nexus Flow has completely transformed how our sales team operates. We've automated 80% of our lead qualification process.",
         author: "Sarah Jenkins",
         role: "VP of Sales",
         company: "TechGrowth Inc.",
@@ -18,7 +18,7 @@ const testimonials = [
         avatar: "https://i.pravatar.cc/150?u=michael"
     },
     {
-        quote: "I was skeptical about AI agents at first, but the accuracy and reliability of Aura blew me away. It's like hiring 10 extra employees.",
+        quote: "I was skeptical about AI agents at first, but the accuracy and reliability of Nexus Flow blew me away. It's like hiring 10 extra employees.",
         author: "Jessica Williams",
         role: "Marketing Director",
         company: "Creative Pulse",

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const faqs = [
     {
         question: "What types of workflows can I automate?",
-        answer: "Aura can automate almost any text-based or API-driven task. Common use cases include lead qualification, customer support triage, data entry, social media management, and report generation."
+        answer: "Nexus Flow can automate almost any text-based or API-driven task. Common use cases include lead qualification, customer support triage, data entry, social media management, and report generation."
     },
     {
         question: "Do I need to know how to code?",

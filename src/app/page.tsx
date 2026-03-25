@@ -11,7 +11,7 @@ import { FinalCTA } from "@/components/landing/FinalCTA";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[#030407] text-white selection:bg-primary selection:text-white font-sans">
+    <div className="app-shell min-h-screen text-white selection:bg-primary selection:text-black font-sans">
       <Navbar />
       <HeroSection />
       <BentoFeatureGrid />
