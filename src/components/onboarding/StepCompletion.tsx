@@ -25,7 +25,7 @@ export function StepCompletion({
                 {userData.templateId !== "scratch" && " Your started template is ready."}
             </p>
 
-            <div className="bg-[#0c1018] p-6 rounded-xl border border-white/10 w-full max-w-sm mb-8 text-left">
+            <div className="bg-[#0A0D14] p-6 rounded-xl border border-white/10 w-full max-w-sm mb-8 text-left">
                 <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Your Setup</h3>
                 <div className="space-y-3">
                     <div className="flex items-center gap-3">

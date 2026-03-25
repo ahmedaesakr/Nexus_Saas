@@ -27,7 +27,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 try {
                     const { email, password } = signInSchema.parse(credentials);
 
-                    // --- MOCK/ADMIN LOGIN (Nexus Flow Easy Mode) ---
+                    // --- MOCK/ADMIN LOGIN (Aura Easy Mode) ---
                     // In development/demo, allow "admin@nexus.flow" / "admin" to bypass password check AND DB check
                     if (
                         email === "admin@nexus.flow" &&

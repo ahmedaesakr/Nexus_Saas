@@ -125,7 +125,7 @@ export default function TeamPage() {
 
             {/* Invite Form */}
             {showInvite && (
-                <div className="p-6 bg-[#0c1018] border border-white/10 rounded-2xl flex flex-col sm:flex-row gap-4">
+                <div className="p-6 bg-[#0A0D14] border border-white/10 rounded-2xl flex flex-col sm:flex-row gap-4">
                     <input
                         type="email"
                         value={inviteEmail}
@@ -154,7 +154,7 @@ export default function TeamPage() {
             )}
 
             {/* Users Table */}
-            <div className="bg-[#0c1018] border border-white/10 rounded-2xl overflow-hidden">
+            <div className="bg-[#0A0D14] border border-white/10 rounded-2xl overflow-hidden">
                 <table className="w-full text-left border-collapse">
                     <thead>
                         <tr className="border-b border-white/10 bg-white/5">

@@ -18,14 +18,14 @@ export default function AnalyticsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="bg-[#0c1018] border border-white/10 rounded-xl p-6 animate-pulse">
+                    <div key={i} className="bg-[#0A0D14] border border-white/10 rounded-xl p-6 animate-pulse">
                         <div className="h-4 w-24 bg-white/5 rounded mb-4" />
                         <div className="h-8 w-16 bg-white/10 rounded" />
                     </div>
                 ))}
             </div>
 
-            <div className="bg-[#0c1018] border border-white/10 rounded-xl p-12 text-center">
+            <div className="bg-[#0A0D14] border border-white/10 rounded-xl p-12 text-center">
                 <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="material-symbols-outlined text-3xl text-gray-500">bar_chart</span>
                 </div>

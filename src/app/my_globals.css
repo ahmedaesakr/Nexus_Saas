@@ -9,16 +9,16 @@
 @theme {
   /* === Brand Colors === */
   --color-primary: #00E5FF;
-  --color-primary-hover: #00B8CC;
-  --color-primary-glow: rgba(0, 229, 255, 0.4);
+  --color-primary-hover: #0b4bcc;
+  --color-primary-glow: rgba(13, 89, 242, 0.4);
 
-  /* === Curated Color Palette: Midnight Aura === */
-  --color-midnight-950: #000000;
+  /* === Curated Color Palette: Midnight Nexus === */
+  --color-midnight-950: #02040a;
   --color-midnight-900: #030407;
   --color-midnight-800: #0A0D14;
-  --color-midnight-700: #121620;
-  --color-midnight-600: #1C2230;
-  --color-midnight-500: #2D3748;
+  --color-midnight-700: #0f1623;
+  --color-midnight-600: #1a2238;
+  --color-midnight-500: #2d374f;
 
   /* === Light Mode Colors === */
   --color-background-light: #f5f6f8;
@@ -31,14 +31,14 @@
   --color-surface-dark: #0A0D14;
 
   /* Theme Colors */
-  --color-bg-deepest: #000000;
+  --color-bg-deepest: #02040a;
   --color-bg-base: #030407;
   --color-bg-surface: #0A0D14;
-  --color-bg-elevated: #121620;
+  --color-bg-elevated: #1e293b;
 
-  --color-sidebar-dark: #07090E;
-  --color-text-primary-dark: #F8FAFC;
-  --color-text-secondary-dark: #A0AEC0;
+  --color-sidebar-dark: #0d121c;
+  --color-text-primary-dark: #f8fafc;
+  --color-text-secondary-dark: #94a3b8;
 
   /* === Liquid Glass System === */
   --color-glass-bg: rgba(255, 255, 255, 0.05);
@@ -93,27 +93,15 @@
   /* === Shadows === */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 40px rgba(0, 229, 255, 0.4);
-
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.2);
+  --shadow-glow: 0 0 40px rgba(13, 89, 242, 0.4);
 }
 
 :root {
   --glass-blur: 20px;
   --glass-saturate: 180%;
-
-  /* Fix: Map short aliases used in utility classes */
-  --primary: var(--color-primary);
-  --glass-bg: var(--color-glass-bg);
-  --glass-bg-elevated: var(--color-glass-bg-elevated);
-  --glass-border: var(--color-glass-border);
-  --glass-border-strong: var(--color-glass-border-strong);
-
-  /* Neumorphism (dark mode values) */
-  --neu-bg: #0A0D14;
-  --neu-shadow-dark: rgba(0, 0, 0, 0.5);
-  --neu-shadow-light: rgba(255, 255, 255, 0.03);
+  --max-width: 100%;
 
   /* Background and Foreground mappings for Next.js defaults if needed */
   --background: var(--color-background-light);
@@ -132,17 +120,17 @@
    ============================================ */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-jakarta), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--background-light);
+  color: var(--text-primary-light);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body.dark {
-  background: var(--color-background-dark);
-  color: var(--color-text-primary-dark);
+  background: var(--background-dark);
+  color: var(--text-primary-dark);
 }
 
 /* Smooth scrolling with performance consideration */
@@ -154,7 +142,7 @@ body.dark {
 
 /* Selection styling */
 ::selection {
-  background: var(--color-primary);
+  background: var(--primary);
   color: white;
 }
 
@@ -233,7 +221,7 @@ body.dark {
   box-shadow:
     4px 4px 8px var(--neu-shadow-dark),
     -4px -4px 8px var(--neu-shadow-light);
-  transition: all var(--animate-duration-fast) var(--ease-out);
+  transition: all var(--duration-fast) var(--ease-out);
 }
 
 .neu-button:hover {
@@ -264,7 +252,7 @@ body.dark {
     inset 0 -4px 0 rgba(0, 0, 0, 0.2),
     inset 0 4px 0 rgba(255, 255, 255, 0.2);
   transform-style: preserve-3d;
-  transition: all var(--animate-duration-normal) var(--ease-spring);
+  transition: all var(--duration-normal) var(--ease-spring);
   cursor: pointer;
 }
 
@@ -286,19 +274,18 @@ body.dark {
 
 /* Primary Clay Button (Brand Color) */
 .clay-button-primary {
-  background: linear-gradient(145deg, #00E5FF, #00B8CC);
-  color: #000000;
+  background: linear-gradient(145deg, #00E5FF, #0b4bcc);
   box-shadow:
-    0 10px 30px var(--color-primary-glow),
+    0 10px 30px var(--primary-glow),
     inset 0 -4px 0 rgba(0, 0, 0, 0.2),
-    inset 0 4px 0 rgba(255, 255, 255, 0.4);
+    inset 0 4px 0 rgba(255, 255, 255, 0.2);
 }
 
 .clay-button-primary:hover {
   box-shadow:
-    0 20px 40px rgba(0, 229, 255, 0.5),
+    0 20px 40px rgba(13, 89, 242, 0.5),
     inset 0 -4px 0 rgba(0, 0, 0, 0.2),
-    inset 0 4px 0 rgba(255, 255, 255, 0.5);
+    inset 0 4px 0 rgba(255, 255, 255, 0.3);
 }
 
 /* ============================================
@@ -309,17 +296,17 @@ body.dark {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: 200px;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
+  gap: var(--space-md);
+  padding: var(--space-md);
 }
 
 .bento-item {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-2xl);
-  padding: var(--spacing-lg);
+  padding: var(--space-lg);
   overflow: hidden;
-  transition: all var(--animate-duration-normal) var(--ease-out);
+  transition: all var(--duration-normal) var(--ease-out);
 }
 
 .bento-item:hover {
@@ -358,23 +345,11 @@ body.dark {
    ============================================ */
 
 .hyperbold {
-  font-family: var(--font-outfit);
   font-size: clamp(3rem, 10vw, 10rem);
   font-weight: 900;
   line-height: 0.9;
   letter-spacing: -0.04em;
   text-transform: uppercase;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.heading-font {
-  font-family: var(--font-outfit);
-  letter-spacing: -0.02em;
 }
 
 /* Fluid Typography Scale */
@@ -408,7 +383,7 @@ h6,
 
 /* Tactile Button States */
 .btn-tactile {
-  transition: transform var(--animate-duration-fast) var(--ease-spring);
+  transition: transform var(--duration-fast) var(--ease-spring);
 }
 
 .btn-tactile:hover {
@@ -417,14 +392,14 @@ h6,
 
 .btn-tactile:active {
   transform: scale(0.97);
-  transition-duration: var(--animate-duration-instant);
+  transition-duration: var(--duration-instant);
 }
 
 /* Hover Lift Effect */
 .hover-lift {
   transition:
-    transform var(--animate-duration-normal) var(--ease-out),
-    box-shadow var(--animate-duration-normal) var(--ease-out);
+    transform var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
 }
 
 .hover-lift:hover {
@@ -434,7 +409,7 @@ h6,
 
 /* Glow on Hover */
 .hover-glow {
-  transition: box-shadow var(--animate-duration-normal) var(--ease-out);
+  transition: box-shadow var(--duration-normal) var(--ease-out);
 }
 
 .hover-glow:hover {
@@ -538,24 +513,24 @@ h6,
 }
 
 .animate-slide-in-right {
-  animation: slideInRight var(--animate-duration-slow) var(--ease-out);
+  animation: slideInRight var(--duration-slow) var(--ease-out);
 }
 
 .animate-fade-in {
-  animation: fadeIn var(--animate-duration-normal) var(--ease-out);
+  animation: fadeIn var(--duration-normal) var(--ease-out);
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp var(--animate-duration-slow) var(--ease-out);
+  animation: fadeInUp var(--duration-slow) var(--ease-out);
 }
 
 .animate-scale-in {
-  animation: scaleIn var(--animate-duration-normal) var(--ease-out);
+  animation: scaleIn var(--duration-normal) var(--ease-out);
 }
 
 /* Staggered animations for lists */
 .stagger-children>* {
-  animation: fadeInUp var(--animate-duration-slow) var(--ease-out) forwards;
+  animation: fadeInUp var(--duration-slow) var(--ease-out) forwards;
   opacity: 0;
 }
 
@@ -660,7 +635,7 @@ h6,
 
 /* Gradient Text */
 .gradient-text {
-  background: linear-gradient(90deg, #FF3B30, #FF9500, #34C759, #00E5FF);
+  background: linear-gradient(135deg, var(--primary), #6366f1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -704,11 +679,4 @@ h6,
 
 .scrollbar-custom::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
-}
-
-@utility container {
-  width: 100%;
-  max-width: 1280px;
-  margin-inline: auto;
-  padding-inline: 1.5rem;
 }

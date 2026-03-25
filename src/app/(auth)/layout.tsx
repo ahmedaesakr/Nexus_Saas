@@ -6,7 +6,7 @@ export default function AuthLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="min-h-screen grid lg:grid-cols-2 bg-background-dark text-white font-sans">
+        <div className="min-h-screen grid lg:grid-cols-2 bg-[#030407] text-white font-sans">
             {/* Left: Branding & Visuals */}
             <div className="hidden lg:flex flex-col justify-between p-12 relative overflow-hidden bg-[#02040a]">
                 {/* Background Effects */}
@@ -18,7 +18,7 @@ export default function AuthLayout({
                         <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-[0_0_20px_rgba(13,89,242,0.5)]">
                             <span className="material-symbols-outlined text-white">dataset</span>
                         </div>
-                        Nexus Flow
+                        Aura
                     </Link>
                     <div className="mt-20">
                         <h1 className="text-5xl font-bold leading-tight mb-6 tracking-tight">Automate Work.<br />Amplify Teams.</h1>
@@ -34,7 +34,7 @@ export default function AuthLayout({
                                 <span key={i} className="material-symbols-outlined text-yellow-500 text-sm">star</span>
                             ))}
                         </div>
-                        <p className="text-lg font-medium mb-6 leading-relaxed">"Nexus Flow completely transformed how we handle sales ops. It feels like magic."</p>
+                        <p className="text-lg font-medium mb-6 leading-relaxed">"Aura completely transformed how we handle sales ops. It feels like magic."</p>
                         <div className="flex items-center gap-4">
                             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center text-white font-bold text-lg">AC</div>
                             <div>

@@ -12,7 +12,7 @@ export function ProgressSidebar({ step }: { step: number }) {
     ];
 
     return (
-        <div className="w-64 bg-black/20 border-r border-white/5 p-6 flex flex-col justify-between h-full bg-[#050a14]">
+        <div className="w-64 bg-black/20 border-r border-white/5 p-6 flex flex-col justify-between h-full bg-[#030407]">
             <div className="space-y-6">
                 <div>
                     <h3 className="text-white font-bold text-lg mb-1">Setup Nexus</h3>
@@ -31,11 +31,11 @@ export function ProgressSidebar({ step }: { step: number }) {
                                 <motion.div
                                     initial={false}
                                     animate={{
-                                        backgroundColor: isActive ? "#0d59f2" : isCompleted ? "#10b981" : "#1e293b",
+                                        backgroundColor: isActive ? "#00E5FF" : isCompleted ? "#10b981" : "#1e293b",
                                         borderColor: isActive ? "#3b82f6" : isCompleted ? "#34d399" : "#334155",
                                     }}
                                     className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-colors shadow-lg
-                                        ${isActive ? "shadow-primary/30 ring-2 ring-primary/20 ring-offset-1 ring-offset-[#0c1018]" : ""}
+                                        ${isActive ? "shadow-primary/30 ring-2 ring-primary/20 ring-offset-1 ring-offset-[#0A0D14]" : ""}
                                     `}
                                 >
                                     <span className={`material-symbols-outlined text-[16px] ${isCompleted || isActive ? "text-white" : "text-gray-500"}`}>

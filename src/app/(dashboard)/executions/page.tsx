@@ -73,7 +73,7 @@ export default function ExecutionsPage() {
             </div>
 
             {/* Execution Table */}
-            <div className="bg-[#0c1018] border border-white/10 rounded-2xl overflow-hidden">
+            <div className="bg-[#0A0D14] border border-white/10 rounded-2xl overflow-hidden">
                 <table className="w-full text-left border-collapse">
                     <thead>
                         <tr className="border-b border-white/10 bg-white/5">

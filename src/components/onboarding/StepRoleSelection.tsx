@@ -26,7 +26,7 @@ export function StepRoleSelection({
             exit={{ opacity: 0, x: -20 }}
             className="flex flex-col h-full"
         >
-            <h2 className="text-2xl font-bold text-white mb-2">Welcome to Nexus Flow! 👋</h2>
+            <h2 className="text-2xl font-bold text-white mb-2">Welcome to Aura! 👋</h2>
             <p className="text-gray-400 mb-8">Let's personalize your workspace. What best describes your role?</p>
 
             <div className="grid grid-cols-2 gap-4 flex-1">

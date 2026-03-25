@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const faqs = [
     {
         question: "What types of workflows can I automate?",
-        answer: "Nexus Flow can automate almost any text-based or API-driven task. Common use cases include lead qualification, customer support triage, data entry, social media management, and report generation."
+        answer: "Aura can automate almost any text-based or API-driven task. Common use cases include lead qualification, customer support triage, data entry, social media management, and report generation."
     },
     {
         question: "Do I need to know how to code?",
@@ -46,12 +46,14 @@ export function FAQSection() {
                     {faqs.map((faq, index) => (
                         <div
                             key={index}
-                            className="rounded-xl bg-[#0c1018] border border-white/5 overflow-hidden"
+                            className="rounded-xl bg-[#0A0D14] border border-white/5 overflow-hidden"
                         >
                             <button
+                                id={`faq-btn-${index}`}
                                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                                 className="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors focus:outline-none"
-                                aria-expanded={openIndex === index}
+                                aria-expanded={openIndex === index ? "true" : "false"}
+                                aria-controls={`faq-answer-${index}`}
                             >
                                 <span className="font-semibold text-white">{faq.question}</span>
                                 <span className={`material-symbols-outlined transition-transform duration-300 ${openIndex === index ? 'rotate-180 text-primary' : 'text-gray-500'}`} aria-hidden="true">
@@ -61,6 +63,9 @@ export function FAQSection() {
                             <AnimatePresence>
                                 {openIndex === index && (
                                     <motion.div
+                                        id={`faq-answer-${index}`}
+                                        role="region"
+                                        aria-labelledby={`faq-btn-${index}`}
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: "auto", opacity: 1 }}
                                         exit={{ height: 0, opacity: 0 }}

@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "Login",
-    description: "Sign in to your Nexus Flow account",
+    description: "Sign in to your Aura account",
     robots: {
         index: false,
         follow: false,

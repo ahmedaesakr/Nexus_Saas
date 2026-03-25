@@ -139,7 +139,7 @@ function BuilderContent() {
 
     if (loading) {
         return (
-            <div className="h-[calc(100vh-64px)] flex items-center justify-center bg-[#0c1018] -m-8">
+            <div className="h-[calc(100vh-64px)] flex items-center justify-center bg-[#0A0D14] -m-8">
                 <div className="flex items-center gap-3 text-gray-400">
                     <div className="w-5 h-5 border-2 border-gray-500 border-t-primary rounded-full animate-spin" />
                     Loading workflow...
@@ -149,9 +149,9 @@ function BuilderContent() {
     }
 
     return (
-        <div className="h-[calc(100vh-64px)] flex flex-col bg-[#0c1018] overflow-hidden -m-8 rounded-none">
+        <div className="h-[calc(100vh-64px)] flex flex-col bg-[#0A0D14] overflow-hidden -m-8 rounded-none">
             {/* Builder Header */}
-            <header className="h-16 border-b border-white/10 bg-[#0c1018] flex items-center justify-between px-6 shrink-0 z-20">
+            <header className="h-16 border-b border-white/10 bg-[#0A0D14] flex items-center justify-between px-6 shrink-0 z-20">
                 <div className="flex items-center gap-4">
                     <Link href="/workflows" className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center border border-white/10 transition-colors">
                         <span className="material-symbols-outlined text-gray-400">arrow_back</span>
@@ -215,7 +215,7 @@ function BuilderContent() {
             {/* Main Area */}
             <div className="flex-1 flex overflow-hidden">
                 {/* Sidebar: Nodes Palette */}
-                <div className="w-64 border-r border-white/10 bg-[#0c1018] flex flex-col z-10 shrink-0">
+                <div className="w-64 border-r border-white/10 bg-[#0A0D14] flex flex-col z-10 shrink-0">
                     <div className="p-4 border-b border-white/10">
                         <div className="relative">
                             <span className="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-gray-500 text-sm">search</span>
@@ -278,7 +278,7 @@ function BuilderContent() {
                 </div>
 
                 {/* Canvas Area */}
-                <div className="flex-1 bg-[#050a14] relative overflow-hidden">
+                <div className="flex-1 bg-[#030407] relative overflow-hidden">
                     <WorkflowBuilder
                         nodes={nodes}
                         edges={edges}
@@ -291,8 +291,8 @@ function BuilderContent() {
                 </div>
 
                 {/* Properties Panel */}
-                <div className="w-80 border-l border-white/10 bg-[#0c1018] flex flex-col z-10 shrink-0 overflow-y-auto custom-scrollbar">
-                    <div className="p-4 border-b border-white/10 bg-[#0c1018] sticky top-0 z-10">
+                <div className="w-80 border-l border-white/10 bg-[#0A0D14] flex flex-col z-10 shrink-0 overflow-y-auto custom-scrollbar">
+                    <div className="p-4 border-b border-white/10 bg-[#0A0D14] sticky top-0 z-10">
                         <h3 className="text-sm font-bold text-white">Properties</h3>
                     </div>
                     <PropertiesPanel
@@ -314,7 +314,7 @@ function BuilderContent() {
 export default function WorkflowBuilderPage() {
     return (
         <Suspense fallback={
-            <div className="h-[calc(100vh-64px)] flex items-center justify-center bg-[#0c1018] -m-8">
+            <div className="h-[calc(100vh-64px)] flex items-center justify-center bg-[#0A0D14] -m-8">
                 <div className="flex items-center gap-3 text-gray-400">
                     <div className="w-5 h-5 border-2 border-gray-500 border-t-primary rounded-full animate-spin" />
                     Loading...

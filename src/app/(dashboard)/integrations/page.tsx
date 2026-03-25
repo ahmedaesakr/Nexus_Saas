@@ -23,7 +23,7 @@ export default function IntegrationsPage() {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <h1 className="text-3xl font-bold text-white mb-2">Integrations</h1>
-                    <p className="text-gray-400">Connect Nexus Flow to your favorite tools.</p>
+                    <p className="text-gray-400">Connect Aura to your favorite tools.</p>
                 </div>
                 <div className="relative">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-gray-500 text-sm">search</span>
@@ -56,7 +56,7 @@ export default function IntegrationsPage() {
                 {integrations
                     .filter(i => activeTab === 'all' || i.category === activeTab)
                     .map((app) => (
-                        <div key={app.name} className="p-6 bg-[#0c1018] border border-white/10 rounded-2xl hover:border-primary/30 transition-all group relative overflow-hidden">
+                        <div key={app.name} className="p-6 bg-[#0A0D14] border border-white/10 rounded-2xl hover:border-primary/30 transition-all group relative overflow-hidden">
 
                             <div className="flex justify-between items-start mb-6">
                                 <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-primary/30 transition-colors">

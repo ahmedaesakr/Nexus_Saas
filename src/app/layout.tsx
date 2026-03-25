@@ -1,19 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
-const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
+const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" });
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://nexusflow.app';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Nexus Flow - AI Workflow Automation Platform',
-    template: '%s | Nexus Flow',
+    default: 'Aura - Next-Gen Workflow Automation',
+    template: '%s | Aura',
   },
-  description: 'Automate your business processes with intelligent AI agents. Build complex workflows visually and let autonomous agents execute them 24/7.',
+  description: 'Automate your business processes with Aura. Build complex workflows visually and let autonomous agents execute them 24/7.',
   keywords: [
     'AI automation',
     'workflow automation',
@@ -22,9 +23,9 @@ export const metadata: Metadata = {
     'SaaS',
     'B2B'
   ],
-  authors: [{ name: 'Nexus Flow Team' }],
-  creator: 'Nexus Flow Inc.',
-  publisher: 'Nexus Flow Inc.',
+  authors: [{ name: 'Aura Team' }],
+  creator: 'Aura Inc.',
+  publisher: 'Aura Inc.',
   robots: {
     index: true,
     follow: true,
@@ -40,24 +41,24 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: baseUrl,
-    siteName: 'Nexus Flow',
-    title: 'Nexus Flow - Automate Work. Amplify Teams.',
+    siteName: 'Aura',
+    title: 'Aura - Automate Work. Amplify Teams.',
     description: 'Build AI-powered workflows that run 24/7. From sales follow-ups to customer onboarding—let intelligent agents handle the repetitive work.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Nexus Flow Platform Preview',
+        alt: 'Aura Platform Preview',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nexus Flow - AI Workflow Automation',
-    description: 'The no-code platform for building autonomous AI agents.',
+    title: 'Aura - Next-Gen Automation',
+    description: 'The definitive platform for building autonomous AI agents.',
     images: ['/og-image.png'],
-    creator: '@nexusflow',
+    creator: '@aurahq',
   },
   icons: {
     icon: '/favicon.ico',
@@ -72,8 +73,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f5f6f8' },
-    { media: '(prefers-color-scheme: dark)', color: '#050a14' },
+    { media: '(prefers-color-scheme: light)', color: '#030407' },
+    { media: '(prefers-color-scheme: dark)', color: '#030407' },
   ],
 };
 
@@ -90,7 +91,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={`${inter.className} antialiased selection:bg-primary selection:text-white`}>
+      <body className={`${outfit.variable} ${jakarta.variable} font-sans antialiased selection:bg-primary selection:text-white`}>
         <Providers key="providers">
           {children}
         </Providers>

@@ -15,14 +15,14 @@ export function FinalCTA() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="max-w-4xl mx-auto"
+                    className="w-full max-w-4xl mx-auto px-4"
                 >
-                    <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
+                    <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight heading-font">
                         Ready to Start Your <br />
                         <span className="gradient-text">Automation Journey?</span>
                     </h2>
-                    <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-                        Join thousands of forward-thinking teams using Nexus Flow to
+                    <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
+                        Join thousands of forward-thinking teams using Aura to
                         work smarter, not harder. Start for free today.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

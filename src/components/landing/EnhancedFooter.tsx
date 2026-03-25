@@ -30,9 +30,11 @@ const footerLinks = {
     ]
 };
 
-const SocialIcon = ({ name, Icon }: { name: string; Icon: any }) => (
+const SocialIcon = ({ name, Icon, href }: { name: string; Icon: any; href: string }) => (
     <a
-        href="#"
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
         className="w-10 h-10 rounded-full bg-white/5 hover:bg-primary hover:text-white text-gray-400 flex items-center justify-center transition-all group"
         aria-label={`Follow us on ${name}`}
     >
@@ -50,17 +52,17 @@ export function EnhancedFooter() {
                             <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-[0_0_20px_rgba(13,89,242,0.5)] group-hover:scale-110 transition-transform">
                                 <Icons.Logo className="w-6 h-6 text-white" />
                             </div>
-                            <span>Nexus Flow</span>
+                            <span>Aura</span>
                         </Link>
                         <p className="text-gray-400 max-w-sm mb-8 leading-relaxed">
                             Automate your business workflows with intelligent AI agents.
                             Build, deploy, and scale without limits.
                         </p>
                         <div className="flex gap-4">
-                            <SocialIcon name="Twitter" Icon={Icons.Twitter} />
-                            <SocialIcon name="GitHub" Icon={Icons.GitHub} />
-                            <SocialIcon name="Discord" Icon={Icons.Discord} />
-                            <SocialIcon name="LinkedIn" Icon={Icons.LinkedIn} />
+                            <SocialIcon name="Twitter" Icon={Icons.Twitter} href="https://twitter.com/aura_hq" />
+                            <SocialIcon name="GitHub" Icon={Icons.GitHub} href="https://github.com/aura-hq" />
+                            <SocialIcon name="Discord" Icon={Icons.Discord} href="https://discord.gg/aura" />
+                            <SocialIcon name="LinkedIn" Icon={Icons.LinkedIn} href="https://linkedin.com/company/aura" />
                         </div>
                     </div>
 
@@ -86,7 +88,7 @@ export function EnhancedFooter() {
                 </div>
 
                 <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-                    <p>© 2026 Nexus Flow Inc. All rights reserved.</p>
+                    <p>© 2026 Aura Inc. All rights reserved.</p>
                     <div className="flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                         All systems operational

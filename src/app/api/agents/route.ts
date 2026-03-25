@@ -28,10 +28,9 @@ export async function GET(req: Request) {
       orderBy: { createdAt: "desc" },
     });
 
-    // Parse JSON string fields for SQLite compatibility
-    const parsedAgents = agents.map((a) => ({
-      ...a,
-      tools: typeof a.tools === "string" ? JSON.parse(a.tools) : a.tools,
+    const parsedAgents = agents.map((agent) => ({
+      ...agent,
+      tools: agent.tools ? JSON.parse(agent.tools) : [],
     }));
 
     return NextResponse.json(parsedAgents);
@@ -76,9 +75,8 @@ export async function POST(req: Request) {
       );
     }
 
-    // Stringify JSON fields for SQLite compatibility
     const createData: any = { ...data };
-    if (Array.isArray(data.tools)) {
+    if (data.tools) {
       createData.tools = JSON.stringify(data.tools);
     }
 

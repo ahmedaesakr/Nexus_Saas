@@ -14,7 +14,7 @@ export default function GlobalError({
     }, [error]);
 
     return (
-        <div className="min-h-screen bg-[#050a14] flex flex-col items-center justify-center text-center px-6">
+        <div className="min-h-screen bg-[#030407] flex flex-col items-center justify-center text-center px-6">
             {/* Glowing orb background */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-500/5 rounded-full blur-[120px]" />

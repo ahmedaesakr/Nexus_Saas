@@ -35,7 +35,7 @@ export function Sidebar() {
             {/* Mobile Toggle Button */}
             <button
                 onClick={() => setIsMobileOpen(true)}
-                className="md:hidden fixed top-4 left-4 z-50 p-2 bg-[#0c1018] border border-white/10 rounded-lg text-white shadow-lg"
+                className="md:hidden fixed top-4 left-4 z-[60] p-2 bg-[#0A0D14] border border-white/10 rounded-lg text-white shadow-lg"
             >
                 <span className="material-symbols-outlined">menu</span>
             </button>
@@ -56,17 +56,17 @@ export function Sidebar() {
             {/* Sidebar */}
             <aside
                 className={cn(
-                    "fixed left-0 top-0 z-50 h-screen w-64 border-r border-white/10 bg-[#0c1018] flex flex-col transition-transform duration-300 md:translate-x-0",
+                    "fixed left-0 top-0 z-50 h-screen w-64 border-r border-white/10 bg-[#0A0D14] flex flex-col transition-transform duration-300 md:translate-x-0",
                     isMobileOpen ? "translate-x-0" : "-translate-x-full"
                 )}
             >
                 {/* Logo */}
-                <div className="h-16 flex items-center justify-between px-6 border-b border-white/10 shrink-0 bg-[#0c1018]">
+                <div className="h-16 flex items-center justify-between px-6 border-b border-white/10 shrink-0 bg-[#0A0D14]">
                     <Link href="/dashboard" className="flex items-center gap-2 font-bold text-lg text-white group">
-                        <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shadow-[0_0_15px_rgba(13,89,242,0.4)] group-hover:shadow-[0_0_25px_rgba(13,89,242,0.6)] transition-all">
-                            <span className="material-symbols-outlined text-white text-lg">dataset</span>
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00E5FF] to-[#00B8CC] flex items-center justify-center shadow-[0_0_15px_rgba(0,229,255,0.4)] group-hover:shadow-[0_0_25px_rgba(0,229,255,0.6)] transition-all">
+                            <span className="material-symbols-outlined text-black text-lg">dataset</span>
                         </div>
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 group-hover:to-white transition-colors">Nexus Flow</span>
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 group-hover:to-white transition-colors">Aura</span>
                     </Link>
                     <button
                         onClick={() => setIsMobileOpen(false)}
@@ -90,7 +90,7 @@ export function Sidebar() {
                                         className={cn(
                                             "flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 group relative overflow-hidden",
                                             isActive
-                                                ? "bg-primary text-white shadow-[0_0_20px_rgba(13,89,242,0.3)]"
+                                                ? "bg-primary text-black shadow-[0_0_20px_rgba(0,229,255,0.3)]"
                                                 : "text-gray-400 hover:text-white hover:bg-white/5"
                                         )}
                                     >
@@ -99,7 +99,7 @@ export function Sidebar() {
                                         )}
                                         <span className={cn(
                                             "material-symbols-outlined text-[20px] transition-colors relative z-10",
-                                            isActive ? "text-white" : "text-gray-500 group-hover:text-white"
+                                            isActive ? "text-black" : "text-gray-500 group-hover:text-white"
                                         )}>
                                             {item.icon}
                                         </span>
@@ -122,13 +122,13 @@ export function Sidebar() {
                                         className={cn(
                                             "flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 group relative",
                                             isActive
-                                                ? "bg-primary text-white shadow-[0_0_20px_rgba(13,89,242,0.3)]"
+                                                ? "bg-primary text-black shadow-[0_0_20px_rgba(0,229,255,0.3)]"
                                                 : "text-gray-400 hover:text-white hover:bg-white/5"
                                         )}
                                     >
                                         <span className={cn(
                                             "material-symbols-outlined text-[20px] transition-colors relative z-10",
-                                            isActive ? "text-white" : "text-gray-500 group-hover:text-white"
+                                            isActive ? "text-black" : "text-gray-500 group-hover:text-white"
                                         )}>
                                             {item.icon}
                                         </span>
@@ -141,7 +141,7 @@ export function Sidebar() {
                 </nav>
 
                 {/* User Plan */}
-                <div className="p-4 border-t border-white/10 bg-[#0c1018]">
+                <div className="p-4 border-t border-white/10 bg-[#0A0D14]">
                     <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 border border-white/10 relative overflow-hidden group hover:border-primary/30 transition-colors cursor-pointer">
                         <div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/20 transition-colors" />
 
@@ -151,7 +151,7 @@ export function Sidebar() {
                         </div>
 
                         <div className="w-full bg-black/40 h-1.5 rounded-full overflow-hidden mb-2 relative z-10">
-                            <div className="bg-gradient-to-r from-primary to-purple-500 h-full w-[75%] rounded-full shadow-[0_0_10px_rgba(13,89,242,0.5)]" />
+                            <div className="bg-gradient-to-r from-[#FF3B30] via-[#FF9500] to-[#00E5FF] h-full w-[75%] rounded-full shadow-[0_0_10px_rgba(0,229,255,0.5)]" />
                         </div>
 
                         <div className="flex justify-between items-center text-[10px] text-gray-400 relative z-10">

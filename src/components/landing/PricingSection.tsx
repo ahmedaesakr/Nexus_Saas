@@ -93,9 +93,9 @@ export function PricingSection() {
                         <span className={`text-sm font-medium ${!isYearly ? 'text-white' : 'text-gray-500'}`}>Monthly</span>
                         <button
                             onClick={() => setIsYearly(!isYearly)}
-                            className="w-14 h-7 bg-white/10 rounded-full relative transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[#050a14] cursor-pointer"
+                            className="w-14 h-7 bg-white/10 rounded-full relative transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[#030407] cursor-pointer"
                             role="switch"
-                            aria-checked={isYearly}
+                            aria-checked={isYearly ? "true" : "false"}
                             aria-label="Toggle yearly billing"
                         >
                             <div className={`w-5 h-5 rounded-full bg-primary absolute top-1 transition-all ${isYearly ? 'left-8' : 'left-1'}`} />
@@ -115,8 +115,8 @@ export function PricingSection() {
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
                             className={`relative p-8 rounded-2xl border flex flex-col ${plan.popular
-                                ? 'bg-[#0c1018] border-primary shadow-[0_0_30px_rgba(13,89,242,0.15)] scale-105 z-10'
-                                : 'bg-[#0c1018]/50 border-white/10 hover:border-white/20'
+                                ? 'bg-[#0A0D14] border-primary shadow-[0_0_30px_rgba(13,89,242,0.15)] scale-105 z-10'
+                                : 'bg-[#0A0D14]/50 border-white/10 hover:border-white/20'
                                 }`}
                         >
                             {plan.popular && (
@@ -128,7 +128,11 @@ export function PricingSection() {
                             <div className="mb-8">
                                 <h3 className="text-lg font-bold text-white mb-2">{plan.name}</h3>
                                 <div className="flex items-end gap-1 mb-2">
-                                    <span className="text-4xl font-bold text-white">{plan.price}</span>
+                                    <span className="text-4xl font-bold text-white">
+                                        {isYearly && plan.price !== "Custom" && plan.price !== "$0"
+                                            ? `$${Math.round(parseInt(plan.price.replace('$', '')) * 0.8)}`
+                                            : plan.price}
+                                    </span>
                                     {plan.period && <span className="text-gray-500 mb-1">{plan.period}</span>}
                                 </div>
                                 <p className="text-sm text-gray-400">{plan.description}</p>

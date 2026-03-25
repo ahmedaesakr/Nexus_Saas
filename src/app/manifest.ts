@@ -2,13 +2,13 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        name: 'Nexus Flow - AI Automation Platform',
-        short_name: 'Nexus Flow',
+        name: 'Aura - AI Automation Platform',
+        short_name: 'Aura',
         description: 'Build and deploy autonomous AI agents to automate your business workflows.',
         start_url: '/',
         display: 'standalone',
-        background_color: '#050a14',
-        theme_color: '#0d59f2',
+        background_color: '#030407',
+        theme_color: '#00E5FF',
         icons: [
             {
                 src: '/icon-192.png',

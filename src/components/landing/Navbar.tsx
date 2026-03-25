@@ -29,16 +29,16 @@ export function Navbar() {
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${scrolled
-                ? "bg-[#050a14]/80 backdrop-blur-md border-white/10 py-3"
+                ? "liquid-glass py-3 border-transparent"
                 : "bg-transparent border-transparent py-5"
                 }`}
         >
             <div className="container flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2 text-2xl font-bold tracking-tighter group">
-                    <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-[0_0_20px_rgba(13,89,242,0.5)] group-hover:scale-105 transition-transform">
-                        <Icons.Logo className="w-6 h-6 text-white" />
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-[#00B8CC] flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.5)] group-hover:scale-105 transition-transform">
+                        <Icons.Logo className="w-6 h-6 text-black" />
                     </div>
-                    <span>Nexus Flow</span>
+                    <span>Aura</span>
                 </Link>
 
                 {/* Desktop Nav */}
@@ -57,10 +57,10 @@ export function Navbar() {
 
                 <div className="flex items-center gap-4">
                     <Link
-                        href="/login"
+                        href="/dashboard"
                         className="hidden md:block text-sm font-medium text-gray-400 hover:text-white transition-colors"
                     >
-                        Sign In
+                        Dashboard
                     </Link>
                     <Link
                         href="/signup"
@@ -91,7 +91,7 @@ export function Navbar() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-[#050a14] border-b border-white/10 overflow-hidden"
+                        className="md:hidden bg-[#030407] border-b border-white/10 overflow-hidden"
                     >
                         <div className="container py-6 flex flex-col gap-4">
                             {navLinks.map((link) => (
@@ -106,14 +106,14 @@ export function Navbar() {
                             ))}
                             <div className="flex flex-col gap-3 mt-4">
                                 <Link
-                                    href="/login"
+                                    href="/dashboard"
                                     onClick={() => setMobileMenuOpen(false)}
                                     className="w-full py-3 text-center text-gray-300 hover:text-white border border-white/10 rounded-xl"
                                 >
-                                    Sign In
+                                    Dashboard
                                 </Link>
                                 <Link
-                                    href="/signup"
+                                    href="/dashboard"
                                     onClick={() => setMobileMenuOpen(false)}
                                     className="w-full py-3 text-center bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20"
                                 >

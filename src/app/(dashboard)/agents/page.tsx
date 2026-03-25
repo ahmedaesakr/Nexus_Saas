@@ -53,7 +53,7 @@ export default function AgentsPage() {
                 {agents.map((agent) => (
                     <div
                         key={agent.id}
-                        className="group p-6 bg-[#0c1018] border border-white/10 rounded-2xl hover:border-primary/30 transition-all hover:-translate-y-1 cursor-pointer overflow-hidden relative"
+                        className="group p-6 bg-[#0A0D14] border border-white/10 rounded-2xl hover:border-primary/30 transition-all hover:-translate-y-1 cursor-pointer overflow-hidden relative"
                     >
                         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/10 transition-colors" />
 

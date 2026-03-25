@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const testimonials = [
     {
-        quote: "Nexus Flow has completely transformed how our sales team operates. We've automated 80% of our lead qualification process.",
+        quote: "Aura has completely transformed how our sales team operates. We've automated 80% of our lead qualification process.",
         author: "Sarah Jenkins",
         role: "VP of Sales",
         company: "TechGrowth Inc.",
@@ -18,7 +18,7 @@ const testimonials = [
         avatar: "https://i.pravatar.cc/150?u=michael"
     },
     {
-        quote: "I was skeptical about AI agents at first, but the accuracy and reliability of Nexus Flow blew me away. It's like hiring 10 extra employees.",
+        quote: "I was skeptical about AI agents at first, but the accuracy and reliability of Aura blew me away. It's like hiring 10 extra employees.",
         author: "Jessica Williams",
         role: "Marketing Director",
         company: "Creative Pulse",
@@ -28,7 +28,7 @@ const testimonials = [
 
 export function TestimonialsSection() {
     return (
-        <section className="py-24 bg-[#0c1018] relative z-10 border-y border-white/5">
+        <section className="py-24 bg-[#0A0D14] relative z-10 border-y border-white/5">
             <div className="container">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold mb-6">
@@ -47,7 +47,7 @@ export function TestimonialsSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="p-8 rounded-2xl bg-[#050a14] border border-white/5 relative"
+                            className="p-8 rounded-2xl bg-[#030407] border border-white/5 relative"
                         >
                             <span className="material-symbols-outlined text-4xl text-primary/20 absolute top-8 left-8" aria-hidden="true">format_quote</span>
                             <p className="text-gray-300 mb-8 relative z-10 pt-6 italic leading-relaxed">

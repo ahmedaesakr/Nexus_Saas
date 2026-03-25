@@ -73,8 +73,8 @@ export function TestRunModal({
                 exit={{ opacity: 0 }}
                 className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
             >
-                <div className="w-full max-w-2xl bg-[#0c1018] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[80vh]">
-                    <div className="p-4 border-b border-white/10 flex justify-between items-center bg-[#0c1018]">
+                <div className="w-full max-w-2xl bg-[#0A0D14] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[80vh]">
+                    <div className="p-4 border-b border-white/10 flex justify-between items-center bg-[#0A0D14]">
                         <h3 className="font-bold text-white flex items-center gap-2">
                             <span className="material-symbols-outlined text-primary">play_circle</span>
                             Test Run Simulation
@@ -84,7 +84,7 @@ export function TestRunModal({
                         </button>
                     </div>
 
-                    <div className="p-6 overflow-y-auto bg-[#050a14] font-mono text-sm space-y-2 flex-1 custom-scrollbar">
+                    <div className="p-6 overflow-y-auto bg-[#030407] font-mono text-sm space-y-2 flex-1 custom-scrollbar">
                         {logs.map((log, i) => (
                             <motion.div
                                 key={i}
@@ -107,7 +107,7 @@ export function TestRunModal({
                         )}
                     </div>
 
-                    <div className="p-4 border-t border-white/10 bg-[#0c1018] flex justify-end">
+                    <div className="p-4 border-t border-white/10 bg-[#0A0D14] flex justify-end">
                         <button
                             onClick={onClose}
                             className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white text-sm font-medium rounded-lg transition-colors"

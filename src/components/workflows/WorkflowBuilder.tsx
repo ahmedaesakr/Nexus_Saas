@@ -113,7 +113,7 @@ function Flow({
     }, [onNodeSelect]);
 
     return (
-        <div className="w-full h-full bg-[#050a14]" ref={reactFlowWrapper}>
+        <div className="w-full h-full bg-[#030407]" ref={reactFlowWrapper}>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
@@ -129,8 +129,8 @@ function Flow({
                 fitView
                 className="touch-none"
             >
-                <Controls className="!bg-[#0c1018] !border-white/10 !text-white [&>button]:!fill-white [&>button:hover]:!bg-white/10" />
-                <MiniMap className="!bg-[#0c1018] !border-white/10" nodeColor="#3b82f6" maskColor="rgba(0, 0, 0, 0.7)" />
+                <Controls className="!bg-[#0A0D14] !border-white/10 !text-white [&>button]:!fill-white [&>button:hover]:!bg-white/10" />
+                <MiniMap className="!bg-[#0A0D14] !border-white/10" nodeColor="#3b82f6" maskColor="rgba(0, 0, 0, 0.7)" />
                 <Background color="#1e293b" gap={16} />
             </ReactFlow>
         </div>

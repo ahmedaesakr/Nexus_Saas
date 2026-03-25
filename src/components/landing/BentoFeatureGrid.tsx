@@ -11,9 +11,9 @@ export function BentoFeatureGrid() {
                     <p className="text-xl text-gray-400">Everything you need to orchestrate complex business processes.</p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+                <div className="bento-grid">
                     {/* Visual Builder - Large Card */}
-                    <div className="md:col-span-2 md:row-span-2 bg-[#0c1018]/50 border border-white/10 rounded-3xl p-10 relative group overflow-hidden hover:border-white/20 transition-all hover:bg-[#0c1018]">
+                    <div className="bento-item featured hover-lift relative group flex flex-col justify-between">
                         <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-30 transition-opacity rotate-12 translate-x-10 -translate-y-10">
                             <span className="material-symbols-outlined text-9xl" aria-hidden="true">account_tree</span>
                         </div>
@@ -28,7 +28,7 @@ export function BentoFeatureGrid() {
                                 </p>
                             </div>
                             {/* Mock UI Representation */}
-                            <div className="w-full h-48 bg-[#050a14] rounded-xl border border-white/10 mt-8 relative overflow-hidden shadow-2xl">
+                            <div className="w-full h-48 bg-[#030407] rounded-xl border border-white/10 mt-8 relative overflow-hidden shadow-2xl">
                                 <div className="absolute top-4 left-4 right-4 h-2 bg-white/10 rounded-full" />
                                 <div className="absolute top-10 left-4 w-1/3 h-20 bg-primary/20 rounded-lg border border-primary/30 backdrop-blur-sm" />
                                 <div className="absolute top-10 right-4 w-1/3 h-20 bg-indigo-500/20 rounded-lg border border-indigo-500/30 backdrop-blur-sm" />
@@ -40,7 +40,7 @@ export function BentoFeatureGrid() {
                     </div>
 
                     {/* AI Agents */}
-                    <div className="bg-[#0c1018]/50 border border-white/10 rounded-3xl p-8 relative group hover:-translate-y-2 transition-transform duration-300 hover:bg-[#0c1018] hover:shadow-xl">
+                    <div className="bento-item hover-lift relative group">
                         <div className="w-12 h-12 rounded-lg bg-indigo-500/20 flex items-center justify-center mb-6">
                             <span className="material-symbols-outlined text-indigo-400 text-2xl" aria-hidden="true">psychology</span>
                         </div>
@@ -49,7 +49,7 @@ export function BentoFeatureGrid() {
                     </div>
 
                     {/* Integrations */}
-                    <div className="bg-[#0c1018]/50 border border-white/10 rounded-3xl p-8 relative group hover:-translate-y-2 transition-transform duration-300 hover:bg-[#0c1018] hover:shadow-xl">
+                    <div className="bento-item hover-lift relative group">
                         <div className="w-12 h-12 rounded-lg bg-pink-500/20 flex items-center justify-center mb-6">
                             <span className="material-symbols-outlined text-pink-400 text-2xl" aria-hidden="true">hub</span>
                         </div>
@@ -58,7 +58,7 @@ export function BentoFeatureGrid() {
                     </div>
 
                     {/* Analytics - Wide */}
-                    <div className="md:col-span-3 bg-[#0c1018]/50 border border-white/10 rounded-3xl p-8 flex flex-col md:flex-row items-center gap-8 hover:bg-[#0c1018] transition-colors group">
+                    <div className="bento-item wide flex flex-col md:flex-row items-center gap-8 hover-lift group">
                         <div className="flex-1">
                             <div className="w-12 h-12 rounded-lg bg-green-500/20 flex items-center justify-center mb-6">
                                 <span className="material-symbols-outlined text-green-400 text-2xl" aria-hidden="true">monitoring</span>
@@ -68,7 +68,7 @@ export function BentoFeatureGrid() {
                                 Track every execution. See exactly how much time and money your automations are saving your team in real-time.
                             </p>
                         </div>
-                        <div className="flex-1 w-full h-40 bg-[#050a14] rounded-xl border border-white/10 flex items-end p-4 gap-2 shadow-inner">
+                        <div className="flex-1 w-full h-40 bg-[#030407] rounded-xl border border-white/10 flex items-end p-4 gap-2 shadow-inner">
                             <div className="w-1/5 h-[40%] bg-primary/30 rounded-t-lg transition-all group-hover:h-[45%]" />
                             <div className="w-1/5 h-[60%] bg-primary/40 rounded-t-lg transition-all group-hover:h-[65%]" />
                             <div className="w-1/5 h-[50%] bg-primary/50 rounded-t-lg transition-all group-hover:h-[55%]" />

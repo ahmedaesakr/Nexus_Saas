@@ -73,10 +73,10 @@ export async function sendWelcomeEmail(email: string, name: string): Promise<voi
 export async function sendTeamInviteEmail(email: string, inviteUrl: string): Promise<void> {
   await sendEmail({
     to: email,
-    subject: "You're invited to a Nexus Flow workspace",
+    subject: "You're invited to a Aura workspace",
     html: `
       <h1>Workspace Invitation</h1>
-      <p>You were invited to join a Nexus Flow workspace.</p>
+      <p>You were invited to join a Aura workspace.</p>
       <p>Accept your invite here:</p>
       <a href="${inviteUrl}">${inviteUrl}</a>
       <p>This link expires in 7 days.</p>

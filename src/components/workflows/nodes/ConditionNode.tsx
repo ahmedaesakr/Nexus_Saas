@@ -20,12 +20,12 @@ export function ConditionNode({ data, selected }: { data: any; selected?: boolea
                 {data.expression || "If variable == value"}
             </div>
 
-            <div className="absolute -bottom-3 left-1/4 -translate-x-1/2 bg-[#0c1018] px-2 py-0.5 rounded text-[10px] text-green-400 border border-green-500/30">
+            <div className="absolute -bottom-3 left-1/4 -translate-x-1/2 bg-[#0A0D14] px-2 py-0.5 rounded text-[10px] text-green-400 border border-green-500/30">
                 TRUE
             </div>
             <Handle type="source" position={Position.Bottom} id="true" className="!bg-green-500 !w-3 !h-3 !left-1/4" />
 
-            <div className="absolute -bottom-3 left-3/4 -translate-x-1/2 bg-[#0c1018] px-2 py-0.5 rounded text-[10px] text-red-400 border border-red-500/30">
+            <div className="absolute -bottom-3 left-3/4 -translate-x-1/2 bg-[#0A0D14] px-2 py-0.5 rounded text-[10px] text-red-400 border border-red-500/30">
                 FALSE
             </div>
             <Handle type="source" position={Position.Bottom} id="false" className="!bg-red-500 !w-3 !h-3 !left-3/4" />

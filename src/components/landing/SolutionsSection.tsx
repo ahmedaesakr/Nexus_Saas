@@ -78,7 +78,7 @@ export function SolutionsSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className={`p-6 rounded-2xl bg-[#0c1018] border ${solution.border} hover:bg-white/5 transition-all group liquid-glass`}
+                            className={`p-6 rounded-2xl bg-[#0A0D14] border ${solution.border} hover:bg-white/5 transition-all group liquid-glass`}
                         >
                             <div className={`w-12 h-12 rounded-lg ${solution.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                                 <span className={`material-symbols-outlined ${solution.color} text-2xl`}>

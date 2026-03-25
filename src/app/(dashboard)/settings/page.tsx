@@ -244,7 +244,7 @@ export default function SettingsPage() {
                 </div>
 
                 {/* Content Area */}
-                <div className="flex-1 bg-[#0c1018] border border-white/10 rounded-2xl p-8 min-h-[500px]">
+                <div className="flex-1 bg-[#0A0D14] border border-white/10 rounded-2xl p-8 min-h-[500px]">
                     {activeTab === "general" && (
                         <div className="space-y-6 animate-fade-in">
                             <h2 className="text-xl font-bold text-white mb-4">Workspace General</h2>

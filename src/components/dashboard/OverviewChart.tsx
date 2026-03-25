@@ -25,8 +25,8 @@ export function OverviewChart() {
                 >
                     <defs>
                         <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#0d59f2" stopOpacity={0.3} />
-                            <stop offset="95%" stopColor="#0d59f2" stopOpacity={0} />
+                            <stop offset="5%" stopColor="#00E5FF" stopOpacity={0.3} />
+                            <stop offset="95%" stopColor="#00E5FF" stopOpacity={0} />
                         </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1e293b" />
@@ -44,7 +44,7 @@ export function OverviewChart() {
                     />
                     <Tooltip
                         contentStyle={{
-                            backgroundColor: '#0c1018',
+                            backgroundColor: '#0A0D14',
                             borderRadius: '8px',
                             border: '1px solid #1e293b',
                             boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.5)',
@@ -55,7 +55,7 @@ export function OverviewChart() {
                     <Area
                         type="monotone"
                         dataKey="value"
-                        stroke="#0d59f2"
+                        stroke="#00E5FF"
                         strokeWidth={3}
                         fillOpacity={1}
                         fill="url(#colorValue)"

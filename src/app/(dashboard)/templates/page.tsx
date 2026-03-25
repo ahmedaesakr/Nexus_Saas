@@ -49,9 +49,9 @@ export default function TemplatesPage() {
                         placeholder="Search templates..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="px-4 py-2 rounded-lg bg-[#0c1018] border border-white/10 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none min-w-[240px]"
+                        className="px-4 py-2 rounded-lg bg-[#0A0D14] border border-white/10 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none min-w-[240px]"
                     />
-                    <div className="flex bg-[#0c1018] rounded-lg border border-white/10 p-1">
+                    <div className="flex bg-[#0A0D14] rounded-lg border border-white/10 p-1">
                         {categories.map((cat) => (
                             <button
                                 key={cat.id}

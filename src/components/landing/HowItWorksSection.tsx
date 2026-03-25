@@ -26,10 +26,10 @@ const steps = [
 export function HowItWorksSection() {
     return (
         <section className="py-32 relative z-10 bg-gradient-to-b from-transparent to-[#02040a]">
-            {/* Connecting Line (Desktop) */}
-            <div className="hidden md:block absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent -translate-y-12" />
-
+            {/* Connecting Line (Desktop) Container */}
             <div className="container relative">
+                <div className="hidden md:block absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent -translate-y-12" />
+                
                 <div className="text-center mb-20">
                     <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4 inline-block border border-primary/20">
                         How It Works
@@ -54,7 +54,7 @@ export function HowItWorksSection() {
                                 {step.number}
                             </div>
 
-                            <div className="bg-[#0c1018] border border-white/10 p-8 rounded-2xl hover:border-primary/50 transition-colors h-full flex flex-col items-center text-center relative z-10 liquid-glass">
+                            <div className="bg-[#0A0D14] border border-white/10 p-8 rounded-2xl hover:border-primary/50 transition-colors h-full flex flex-col items-center text-center relative z-10 liquid-glass">
                                 <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(13,89,242,0.4)] group-hover:scale-110 transition-transform duration-300">
                                     <span className="material-symbols-outlined text-white text-3xl">
                                         {step.icon}

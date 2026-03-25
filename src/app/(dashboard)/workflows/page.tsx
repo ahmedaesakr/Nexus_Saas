@@ -98,7 +98,7 @@ export default function WorkflowsPage() {
                     <Link
                         key={workflow.id}
                         href={`/workflows/builder?id=${workflow.id}`}
-                        className="group relative p-6 bg-[#0c1018] border border-white/10 rounded-2xl hover:border-primary/30 transition-all hover:-translate-y-1 cursor-pointer overflow-hidden"
+                        className="group relative p-6 bg-[#0A0D14] border border-white/10 rounded-2xl hover:border-primary/30 transition-all hover:-translate-y-1 cursor-pointer overflow-hidden"
                     >
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 

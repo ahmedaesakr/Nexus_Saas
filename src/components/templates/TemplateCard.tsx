@@ -20,7 +20,7 @@ export function TemplateCard({
     };
 
     return (
-        <div className="group relative bg-[#0c1018] border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-all hover:shadow-xl flex flex-col h-full hover:-translate-y-1 duration-300">
+        <div className="group relative bg-[#0A0D14] border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-all hover:shadow-xl flex flex-col h-full hover:-translate-y-1 duration-300">
             {/* Header / Banner */}
             <div className="h-32 bg-white/5 relative overflow-hidden flex items-center justify-center">
                 <div className={`absolute inset-0 opacity-10 ${categoryColors[template.category]}`} />

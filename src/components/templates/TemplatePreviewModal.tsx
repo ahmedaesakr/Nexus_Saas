@@ -51,9 +51,9 @@ export function TemplatePreviewModal({
                 exit={{ opacity: 0 }}
                 className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
             >
-                <div className="w-full max-w-5xl h-[80vh] bg-[#0c1018] border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col relative">
+                <div className="w-full max-w-5xl h-[80vh] bg-[#0A0D14] border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col relative">
                     {/* Header */}
-                    <div className="h-16 px-6 border-b border-white/10 flex items-center justify-between bg-[#0c1018]">
+                    <div className="h-16 px-6 border-b border-white/10 flex items-center justify-between bg-[#0A0D14]">
                         <div>
                             <h2 className="text-xl font-bold text-white flex items-center gap-3">
                                 {template.title}
@@ -69,7 +69,7 @@ export function TemplatePreviewModal({
 
                     <div className="flex-1 flex overflow-hidden">
                         {/* Sidebar Info */}
-                        <div className="w-80 border-r border-white/10 bg-[#050a14] p-6 overflow-y-auto">
+                        <div className="w-80 border-r border-white/10 bg-[#030407] p-6 overflow-y-auto">
                             <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-4">Description</h3>
                             <p className="text-sm text-gray-400 mb-8 leading-relaxed">
                                 {template.description}
@@ -107,7 +107,7 @@ export function TemplatePreviewModal({
                         </div>
 
                         {/* Preview */}
-                        <div className="flex-1 bg-[#050a14] relative">
+                        <div className="flex-1 bg-[#030407] relative">
                             <ReactFlowProvider>
                                 <ReactFlow
                                     defaultNodes={template.nodes}
@@ -119,14 +119,14 @@ export function TemplatePreviewModal({
                                     nodesConnectable={false}
                                 >
                                     <Background color="#1e293b" gap={16} />
-                                    <Controls className="!bg-[#0c1018] !border-white/10 !text-white [&>button]:!fill-white [&>button:hover]:!bg-white/10" />
+                                    <Controls className="!bg-[#0A0D14] !border-white/10 !text-white [&>button]:!fill-white [&>button:hover]:!bg-white/10" />
                                 </ReactFlow>
                             </ReactFlowProvider>
                         </div>
                     </div>
 
                     {/* Footer Actions */}
-                    <div className="p-4 border-t border-white/10 bg-[#0c1018] flex justify-end gap-3">
+                    <div className="p-4 border-t border-white/10 bg-[#0A0D14] flex justify-end gap-3">
                         <button
                             onClick={onClose}
                             className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white text-sm font-medium rounded-lg transition-colors"
