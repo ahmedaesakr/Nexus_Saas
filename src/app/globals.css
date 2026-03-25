@@ -46,8 +46,8 @@
   --color-glass-border: rgba(255, 255, 255, 0.1);
   --color-glass-border-strong: rgba(255, 255, 255, 0.15);
 
-  --spacing-pad-mobile: 16px;
-  --spacing-pad-desktop: 32px;
+  --ui-pad-mobile: 16px;
+  --ui-pad-desktop: 32px;
 
   /* === Semantic Colors === */
   --color-success: #22c55e;
@@ -73,29 +73,29 @@
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-  /* === Spacing Scale === */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-2xl: 48px;
-  --spacing-3xl: 64px;
+  /* === Spacing Scale (prefixed ui- to avoid overriding Tailwind v4 tokens) === */
+  --ui-spacing-xs: 4px;
+  --ui-spacing-sm: 8px;
+  --ui-spacing-md: 16px;
+  --ui-spacing-lg: 24px;
+  --ui-spacing-xl: 32px;
+  --ui-spacing-2xl: 48px;
+  --ui-spacing-3xl: 64px;
 
-  /* === Border Radius Scale === */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-2xl: 24px;
-  --radius-full: 9999px;
+  /* === Border Radius Scale (prefixed ui- to avoid overriding Tailwind v4 tokens) === */
+  --ui-radius-sm: 8px;
+  --ui-radius-md: 12px;
+  --ui-radius-lg: 16px;
+  --ui-radius-xl: 20px;
+  --ui-radius-2xl: 24px;
+  --ui-radius-full: 9999px;
 
-  /* === Shadows === */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 40px rgba(0, 229, 255, 0.4);
+  /* === Shadows (prefixed ui- to avoid overriding Tailwind v4 tokens) === */
+  --ui-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --ui-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --ui-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --ui-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.6);
+  --ui-shadow-glow: 0 0 40px rgba(0, 229, 255, 0.4);
 
 }
 
@@ -188,7 +188,7 @@ body.dark {
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   border: 1px solid var(--glass-border);
-  border-radius: var(--radius-2xl);
+  border-radius: var(--ui-radius-2xl);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
@@ -219,7 +219,7 @@ body.dark {
 
 .neu-card {
   background: var(--neu-bg);
-  border-radius: var(--radius-xl);
+  border-radius: var(--ui-radius-xl);
   box-shadow:
     8px 8px 16px var(--neu-shadow-dark),
     -8px -8px 16px var(--neu-shadow-light);
@@ -228,7 +228,7 @@ body.dark {
 .neu-button {
   background: var(--neu-bg);
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--ui-radius-md);
   padding: 16px 32px;
   box-shadow:
     4px 4px 8px var(--neu-shadow-dark),
@@ -255,7 +255,7 @@ body.dark {
 .clay-button {
   background: linear-gradient(145deg, #6366f1, #4f46e5);
   border: none;
-  border-radius: var(--radius-xl);
+  border-radius: var(--ui-radius-xl);
   padding: 16px 32px;
   color: white;
   font-weight: 600;
@@ -309,22 +309,22 @@ body.dark {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: 200px;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
+  gap: 16px;
+  padding: 16px;
 }
 
 .bento-item {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  border-radius: var(--radius-2xl);
-  padding: var(--spacing-lg);
+  border-radius: var(--ui-radius-2xl);
+  padding: 24px;
   overflow: hidden;
   transition: all var(--animate-duration-normal) var(--ease-out);
 }
 
 .bento-item:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   border-color: var(--glass-border-strong);
 }
 
@@ -429,7 +429,7 @@ h6,
 
 .hover-lift:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 /* Glow on Hover */
@@ -438,7 +438,7 @@ h6,
 }
 
 .hover-glow:hover {
-  box-shadow: var(--shadow-glow);
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.4);
 }
 
 /* ============================================
@@ -453,7 +453,7 @@ h6,
       rgba(255, 255, 255, 0.05) 100%);
   background-size: 200% 100%;
   animation: skeleton-pulse 1.5s ease-in-out infinite;
-  border-radius: var(--radius-sm);
+  border-radius: var(--ui-radius-sm);
 }
 
 @keyframes skeleton-pulse {
