@@ -35,6 +35,7 @@ export function Sidebar() {
             {/* Mobile Toggle Button */}
             <button
                 onClick={() => setIsMobileOpen(true)}
+                aria-label="Open navigation menu"
                 className="md:hidden fixed top-4 left-4 z-[60] p-2 bg-[#0A0D14] border border-white/10 rounded-lg text-white shadow-lg"
             >
                 <span className="material-symbols-outlined">menu</span>
@@ -70,6 +71,7 @@ export function Sidebar() {
                     </Link>
                     <button
                         onClick={() => setIsMobileOpen(false)}
+                        aria-label="Close navigation menu"
                         className="md:hidden text-gray-500 hover:text-white"
                     >
                         <span className="material-symbols-outlined">close</span>
