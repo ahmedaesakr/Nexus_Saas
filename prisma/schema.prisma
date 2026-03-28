@@ -7,7 +7,7 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-// ==================== AUTH ====================
+// ==================== AUTH & USERS ====================
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -16,147 +16,63 @@ model User {
   image         String?
   password      String?
   role          String      @default("MEMBER")
-  
+
+  accounts      Account[]
+  sessions      Session[]
+
   organizationId String?
   organization   Organization? @relation(fields: [organizationId], references: [id])
-  
-  workflows     Workflow[]
-  executions    Execution[]
-  
+
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
 
 model Organization {
-  id          String   @id @default(cuid())
-  name        String
-  slug        String   @unique
-  logo        String?
-  
-  plan        String     @default("FREE")
+  id               String   @id @default(cuid())
+  name             String
+  slug             String   @unique
+  logo             String?
+  plan             String   @default("FREE")
   stripeCustomerId String?
-  
-  users       User[]
-  workflows   Workflow[]
-  agents      Agent[]
-  integrations Integration[]
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+
+  users            User[]
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }
 
+// ==================== NEXTAUTH MODELS ====================
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-// ==================== WORKFLOWS ====================
-model Workflow {
-  id          String   @id @default(cuid())
-  name        String
-  description String?
-  icon        String?
-  
-  // Visual builder data (nodes, edges, etc.)
-  definition  String
-  
-  status      String @default("DRAFT")
-  isTemplate  Boolean  @default(false)
-  
-  organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id])
-  
-  createdById String
-  createdBy   User     @relation(fields: [createdById], references: [id])
-  
-  executions  Execution[]
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  @@unique([provider, providerAccountId])
 }
 
-
-
-// ==================== AI AGENTS ====================
-model Agent {
-  id          String   @id @default(cuid())
-  name        String
-  description String?
-  avatar      String?
-  
-  // Agent configuration
-  systemPrompt String
-  model       String   @default("claude-3-sonnet")
-  temperature Float    @default(0.7)
-  tools       String     // Available tools/functions
-  
-  organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id])
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-// ==================== EXECUTIONS ====================
-model Execution {
-  id          String   @id @default(cuid())
-  
-  workflowId  String
-  workflow    Workflow @relation(fields: [workflowId], references: [id])
-  
-  triggeredById String?
-  triggeredBy   User?    @relation(fields: [triggeredById], references: [id])
-  
-  status      String @default("PENDING")
-  
-  // Input data that triggered this execution
-  input       String?
-  
-  // Result data after completion
-  output      String?
-  
-  // Step-by-step logs
-  logs        ExecutionLog[]
-  
-  startedAt   DateTime?
-  completedAt DateTime?
-  
-  createdAt   DateTime @default(now())
-}
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
 
-model ExecutionLog {
-  id          String   @id @default(cuid())
-  
-  executionId String
-  execution   Execution @relation(fields: [executionId], references: [id])
-  
-  nodeId      String   // Which node in the workflow
-  nodeName    String
-  
-  status      String
-  message     String?
-  data        String?
-  
-  timestamp   DateTime @default(now())
-}
-
-
-
-// ==================== INTEGRATIONS ====================
-model Integration {
-  id          String   @id @default(cuid())
-  
-  provider    String   // "slack", "gmail", "salesforce", etc.
-  name        String
-  
-  // OAuth tokens (encrypted)
-  accessToken  String?
-  refreshToken String?
-  expiresAt    DateTime?
-  
-  // Provider-specific config
-  config      String?
-  
-  organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id])
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  @@unique([identifier, token])
 }

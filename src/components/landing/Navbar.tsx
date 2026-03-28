@@ -21,7 +21,6 @@ export function Navbar() {
         { label: "Features", href: "#features" },
         { label: "Solutions", href: "/#solutions" },
         { label: "Pricing", href: "/#pricing" },
-        { label: "Templates", href: "/templates" },
     ];
 
     return (
@@ -36,7 +35,7 @@ export function Navbar() {
                     <div className="brand-mark w-10 h-10 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform">
                         <Icons.Logo className="w-6 h-6 text-black" />
                     </div>
-                    <span>Nexus Flow</span>
+                    <span>Nexus</span>
                 </Link>
 
                 <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">

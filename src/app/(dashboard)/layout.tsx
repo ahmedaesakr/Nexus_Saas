@@ -1,18 +1,16 @@
 import { Sidebar } from "@/components/layout/Sidebar";
-import { OnboardingModal } from "@/components/onboarding/OnboardingModal";
+import { Topbar } from "@/components/layout/Topbar";
 
-export default function DashboardLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
-    return (
-        <div className="app-shell min-h-screen text-white">
-            <Sidebar />
-            <main className="md:pl-64 pl-0 min-h-screen transition-all duration-300 relative">
-                {children}
-            </main>
-            <OnboardingModal />
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="app-shell" style={{ display: "flex" }}>
+      <Sidebar />
+      <div className="layout-main">
+        <Topbar />
+        <div className="layout-content animate-fade-in">
+          {children}
         </div>
-    );
+      </div>
+    </div>
+  );
 }

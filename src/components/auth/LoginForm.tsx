@@ -6,160 +6,130 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
 export function LoginForm() {
-    const router = useRouter();
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsLoading(true);
-        setError(null);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+    const formData = new FormData(e.currentTarget);
+    const result = await signIn("credentials", {
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
+      redirect: false,
+    });
+    if (result?.error) {
+      setError("Invalid credentials. Try admin@nexus.flow / admin");
+      setIsLoading(false);
+    } else {
+      router.push("/dashboard");
+      router.refresh();
+    }
+  };
 
-        const formData = new FormData(e.currentTarget);
-        const email = formData.get("email") as string;
-        const password = formData.get("password") as string;
+  const handleDemoLogin = async () => {
+    setIsLoading(true);
+    const result = await signIn("credentials", {
+      email: "admin@nexus.flow",
+      password: "admin",
+      redirect: false,
+    });
+    if (!result?.error) {
+      router.push("/dashboard");
+      router.refresh();
+    } else {
+      setIsLoading(false);
+      setError("Demo login failed.");
+    }
+  };
 
-        try {
-            const result = await signIn("credentials", {
-                email,
-                password,
-                redirect: false,
-            });
+  return (
+    <div>
+      {/* Header */}
+      <div style={{ marginBottom: 28 }}>
+        <h2 style={{ fontSize: 22, fontWeight: 800, letterSpacing: "-0.03em", marginBottom: 4 }}>Access Mission Control</h2>
+        <p style={{ fontSize: 12, color: "#555" }}>Sign in to your Nexus workspace</p>
+      </div>
 
-            if (result?.error) {
-                setError("Invalid email or password");
-                setIsLoading(false);
-            } else {
-                router.push("/dashboard");
-                router.refresh();
-            }
-        } catch {
-            setError("Something went wrong");
-            setIsLoading(false);
-        }
-    };
+      {/* Demo access shortcut */}
+      <button
+        onClick={handleDemoLogin}
+        disabled={isLoading}
+        style={{
+          width: "100%",
+          padding: "10px 16px",
+          background: "rgba(74,222,128,0.07)",
+          border: "1px solid rgba(74,222,128,0.2)",
+          borderRadius: 6,
+          color: "#4ade80",
+          fontSize: 12,
+          fontWeight: 600,
+          cursor: "pointer",
+          marginBottom: 20,
+          transition: "background 150ms",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 6,
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(74,222,128,0.12)")}
+        onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(74,222,128,0.07)")}
+      >
+        <span style={{ fontSize: 14 }}>⚡</span>
+        Enter with Demo Account
+      </button>
 
-    const handleGoogleLogin = () => signIn("google", { callbackUrl: "/dashboard" });
-    const handleGithubLogin = () => signIn("github", { callbackUrl: "/dashboard" });
+      {/* Divider */}
+      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+        <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.07)" }} />
+        <span style={{ fontSize: 10, color: "#444", textTransform: "uppercase", letterSpacing: "0.08em" }}>or sign in manually</span>
+        <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.07)" }} />
+      </div>
 
-    const handleAdminLogin = async () => {
-        setIsLoading(true);
-        const result = await signIn("credentials", {
-            email: "admin@nexus.flow",
-            password: "admin",
-            redirect: false,
-        });
+      {/* Form */}
+      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        {error && (
+          <div style={{ padding: "10px 12px", background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.2)", borderRadius: 6, fontSize: 12, color: "#ef4444" }}>
+            {error}
+          </div>
+        )}
 
-        if (!result?.error) {
-            router.push("/dashboard");
-            router.refresh();
-        } else {
-            setIsLoading(false);
-            setError("Admin login failed");
-        }
-    };
-
-    return (
-        <div className="space-y-6">
-            <div className="p-4 rounded-2xl bg-primary/8 border border-primary/15">
-                <button
-                    onClick={handleAdminLogin}
-                    disabled={isLoading}
-                    className="w-full flex items-center justify-center gap-2 py-2 text-sm font-medium text-primary hover:text-primary-hover transition-colors"
-                >
-                    <span className="material-symbols-outlined text-lg">admin_panel_settings</span>
-                    Quick Admin Login (Dev)
-                </button>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-                {error && (
-                    <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-2xl text-red-300 text-sm">
-                        {error}
-                    </div>
-                )}
-
-                <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium text-gray-300">
-                        Email
-                    </label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="name@company.com"
-                        required
-                        className="field-input px-4 py-3.5"
-                    />
-                </div>
-
-                <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                        <label htmlFor="password" className="text-sm font-medium text-gray-300">
-                            Password
-                        </label>
-                        <Link
-                            href="/forgot-password"
-                            className="text-sm font-medium text-primary hover:text-primary-hover transition-colors"
-                        >
-                            Forgot password?
-                        </Link>
-                    </div>
-                    <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        placeholder="••••••••"
-                        required
-                        className="field-input px-4 py-3.5"
-                    />
-                </div>
-
-                <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="primary-button btn-tactile w-full py-3.5 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                    {isLoading ? (
-                        <>
-                            <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin" />
-                            Signing in...
-                        </>
-                    ) : (
-                        "Sign in"
-                    )}
-                </button>
-
-                <div className="relative">
-                    <div className="absolute inset-0 flex items-center">
-                        <span className="w-full border-t border-white/10" />
-                    </div>
-                    <div className="relative flex justify-center text-xs uppercase">
-                        <span className="bg-[#0a0d0a] px-2 text-gray-500">
-                            Or continue with
-                        </span>
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                    <button
-                        type="button"
-                        onClick={handleGithubLogin}
-                        className="secondary-button px-4 py-3 text-sm font-medium"
-                    >
-                        <span className="material-symbols-outlined text-lg">code</span>
-                        GitHub
-                    </button>
-                    <button
-                        type="button"
-                        onClick={handleGoogleLogin}
-                        className="secondary-button px-4 py-3 text-sm font-medium"
-                    >
-                        <span className="material-symbols-outlined text-lg">work</span>
-                        Google
-                    </button>
-                </div>
-            </form>
+        <div>
+          <label className="form-label">Email address</label>
+          <input name="email" type="email" className="form-input" placeholder="name@company.com" required />
         </div>
-    );
+
+        <div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 5 }}>
+            <label className="form-label" style={{ margin: 0 }}>Password</label>
+            <a href="#" style={{ fontSize: 11, color: "#4ade80" }}>Forgot password?</a>
+          </div>
+          <input name="password" type="password" className="form-input" placeholder="••••••••" required />
+        </div>
+
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="btn btn-primary"
+          style={{ width: "100%", justifyContent: "center", padding: "10px", marginTop: 4, opacity: isLoading ? 0.6 : 1 }}
+        >
+          {isLoading ? "Authenticating..." : "Sign In →"}
+        </button>
+      </form>
+
+      <p style={{ marginTop: 20, fontSize: 12, color: "#444", textAlign: "center" }}>
+        No account?{" "}
+        <Link href="/signup" style={{ color: "#4ade80" }}>Create workspace</Link>
+      </p>
+
+      <div style={{ marginTop: 20, padding: "10px 12px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 6 }}>
+        <div style={{ fontSize: 10, color: "#444", fontFamily: "monospace" }}>Demo credentials:</div>
+        <div style={{ fontSize: 11, color: "#555", fontFamily: "monospace", marginTop: 3 }}>
+          admin@nexus.flow / admin
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -2,177 +2,77 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { useState, useEffect } from "react";
-import { useSession, signOut } from "next-auth/react";
-import { motion, AnimatePresence } from "framer-motion";
+import { signOut } from "next-auth/react";
 
-const navigation = [
-    { name: "Dashboard", href: "/dashboard", icon: "grid_view" },
-    { name: "Workflows", href: "/workflows", icon: "account_tree" },
-    { name: "Agents", href: "/agents", icon: "psychology" },
-    { name: "Templates", href: "/templates", icon: "library_books" },
-    { name: "Executions", href: "/executions", icon: "history" },
-    { name: "Integrations", href: "/integrations", icon: "hub" },
-    { name: "Team", href: "/users", icon: "group" },
-    { name: "Settings", href: "/settings", icon: "settings" },
+const NAV_ITEMS = [
+  { label: "Mission Control", href: "/dashboard", icon: "⊞" },
+  { label: "Project Workspace", href: "/dashboard/workspace", icon: "⊟" },
+  { label: "Data Command", href: "/dashboard/data", icon: "⊠" },
+  { label: "Everboarding Hub", href: "/dashboard/onboarding", icon: "⊡" },
+  { label: "System Settings", href: "/dashboard/settings", icon: "⚙" },
+];
+
+const BOTTOM_ITEMS = [
+  { label: "Support", href: "/dashboard/support", icon: "?" },
 ];
 
 export function Sidebar() {
-    const pathname = usePathname();
-    const { data: session } = useSession();
-    const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const pathname = usePathname();
 
-    useEffect(() => {
-        setIsMobileOpen(false);
-    }, [pathname]);
+  return (
+    <aside className="layout-sidebar">
+      {/* Logo */}
+      <div className="sidenav-logo">
+        <div className="sidenav-logo-mark">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <rect x="1" y="1" width="4" height="4" fill="#000" />
+            <rect x="7" y="1" width="4" height="4" fill="#000" />
+            <rect x="1" y="7" width="4" height="4" fill="#000" />
+            <rect x="7" y="7" width="4" height="4" fill="#000" opacity="0.5" />
+          </svg>
+        </div>
+        <div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: "#f0f0f0" }}>Nexus</div>
+          <div style={{ fontSize: 9, color: "#555", letterSpacing: "0.08em", textTransform: "uppercase" }}>Silent Authority</div>
+        </div>
+      </div>
 
-    const user = session?.user;
+      {/* Nav */}
+      <div style={{ flex: 1, overflowY: "auto", paddingTop: 8 }}>
+        <div className="sidenav-section-label">Navigation</div>
+        {NAV_ITEMS.map((item) => {
+          const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
+          return (
+            <Link key={item.href} href={item.href} className={`sidenav-item ${active ? "active" : ""}`}>
+              <span style={{ fontSize: 13, lineHeight: 1, fontFamily: "monospace" }}>{item.icon}</span>
+              {item.label}
+            </Link>
+          );
+        })}
 
-    return (
-        <>
-            <button
-                onClick={() => setIsMobileOpen(true)}
-                aria-label="Open navigation menu"
-                className="md:hidden fixed top-4 left-4 z-[60] p-2 liquid-glass text-white shadow-lg"
-            >
-                <span className="material-symbols-outlined">menu</span>
-            </button>
+        <div className="sidenav-new-btn" onClick={() => {}}>
+          <span style={{ fontSize: 16, lineHeight: 1 }}>+</span>
+          New Project
+        </div>
+      </div>
 
-            <AnimatePresence>
-                {isMobileOpen && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onClick={() => setIsMobileOpen(false)}
-                        className="md:hidden fixed inset-0 z-40 bg-black/80 backdrop-blur-sm"
-                    />
-                )}
-            </AnimatePresence>
-
-            <aside
-                className={cn(
-                    "fixed left-0 top-0 z-50 h-screen w-64 border-r border-white/8 bg-[#090c09]/92 backdrop-blur-xl flex flex-col transition-transform duration-300 md:translate-x-0",
-                    isMobileOpen ? "translate-x-0" : "-translate-x-full"
-                )}
-            >
-                <div className="h-16 flex items-center justify-between px-6 border-b border-white/8 shrink-0 bg-transparent">
-                    <Link href="/dashboard" className="flex items-center gap-2 font-bold text-lg text-white group">
-                        <div className="brand-mark w-8 h-8 rounded-lg flex items-center justify-center transition-all">
-                            <span className="material-symbols-outlined text-black text-lg">dataset</span>
-                        </div>
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-primary group-hover:to-white transition-colors">Nexus</span>
-                    </Link>
-                    <button
-                        onClick={() => setIsMobileOpen(false)}
-                        aria-label="Close navigation menu"
-                        className="md:hidden text-gray-500 hover:text-white"
-                    >
-                        <span className="material-symbols-outlined">close</span>
-                    </button>
-                </div>
-
-                <nav className="flex-1 px-4 py-6 space-y-8 overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
-                    <div>
-                        <p className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Platform</p>
-                        <div className="space-y-1">
-                            {navigation.slice(0, 4).map((item) => {
-                                const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
-                                return (
-                                    <Link
-                                        key={item.name}
-                                        href={item.href}
-                                        className={cn(
-                                            "flex items-center gap-3 px-3 py-2.5 rounded-2xl text-sm font-medium transition-all duration-200 group relative overflow-hidden",
-                                            isActive
-                                                ? "bg-primary text-black shadow-[0_0_22px_rgba(140,255,75,0.24)]"
-                                                : "text-gray-400 hover:text-white hover:bg-white/5"
-                                        )}
-                                    >
-                                        {isActive && (
-                                            <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-50" />
-                                        )}
-                                        <span className={cn(
-                                            "material-symbols-outlined text-[20px] transition-colors relative z-10",
-                                            isActive ? "text-black" : "text-gray-500 group-hover:text-white"
-                                        )}>
-                                            {item.icon}
-                                        </span>
-                                        <span className="relative z-10">{item.name}</span>
-                                    </Link>
-                                );
-                            })}
-                        </div>
-                    </div>
-
-                    <div>
-                        <p className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Configuration</p>
-                        <div className="space-y-1">
-                            {navigation.slice(4).map((item) => {
-                                const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
-                                return (
-                                    <Link
-                                        key={item.name}
-                                        href={item.href}
-                                        className={cn(
-                                            "flex items-center gap-3 px-3 py-2.5 rounded-2xl text-sm font-medium transition-all duration-200 group relative",
-                                            isActive
-                                                ? "bg-primary text-black shadow-[0_0_22px_rgba(140,255,75,0.24)]"
-                                                : "text-gray-400 hover:text-white hover:bg-white/5"
-                                        )}
-                                    >
-                                        <span className={cn(
-                                            "material-symbols-outlined text-[20px] transition-colors relative z-10",
-                                            isActive ? "text-black" : "text-gray-500 group-hover:text-white"
-                                        )}>
-                                            {item.icon}
-                                        </span>
-                                        <span className="relative z-10">{item.name}</span>
-                                    </Link>
-                                );
-                            })}
-                        </div>
-                    </div>
-                </nav>
-
-                <div className="p-4 border-t border-white/8 bg-transparent">
-                    <div className="p-4 rounded-[22px] liquid-glass relative overflow-hidden group hover:border-primary/30 transition-colors cursor-pointer">
-                        <div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/20 transition-colors" />
-
-                        <div className="flex items-center justify-between mb-2 relative z-10">
-                            <span className="text-xs font-semibold text-white">Pro Plan</span>
-                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/20 font-medium">Active</span>
-                        </div>
-
-                        <div className="w-full bg-black/40 h-1.5 rounded-full overflow-hidden mb-2 relative z-10">
-                            <div className="bg-gradient-to-r from-[#375d1f] via-[#8cff4b] to-[#d4ffb8] h-full w-[75%] rounded-full shadow-[0_0_10px_rgba(140,255,75,0.5)]" />
-                        </div>
-
-                        <div className="flex justify-between items-center text-[10px] text-gray-400 relative z-10">
-                            <span>7,500 / 10k execs</span>
-                            <span className="group-hover:text-white transition-colors">Upgrade</span>
-                        </div>
-                    </div>
-
-                    <div className="mt-4 flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-700 to-gray-600 border border-white/10 flex items-center justify-center text-xs font-bold text-white">
-                            {user?.name?.[0] || "U"}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-white truncate">{user?.name || "User"}</p>
-                            <p className="text-xs text-gray-500 truncate">{user?.email || "user@nexusflow.app"}</p>
-                        </div>
-                        <button
-                            onClick={() => signOut()}
-                            className="text-gray-500 hover:text-white transition-colors p-1 rounded hover:bg-white/10"
-                            title="Sign Out"
-                        >
-                            <span className="material-symbols-outlined text-lg">logout</span>
-                        </button>
-                    </div>
-                </div>
-            </aside>
-        </>
-    );
+      {/* Bottom */}
+      <div className="sidenav-bottom">
+        {BOTTOM_ITEMS.map((item) => (
+          <Link key={item.href} href={item.href} className={`sidenav-item ${pathname === item.href ? "active" : ""}`}>
+            <span style={{ fontSize: 13 }}>{item.icon}</span>
+            {item.label}
+          </Link>
+        ))}
+        <button
+          onClick={() => signOut({ callbackUrl: "/login" })}
+          className="sidenav-item"
+          style={{ background: "none", border: "none", cursor: "pointer", width: "100%", textAlign: "left" }}
+        >
+          <span style={{ fontSize: 12, opacity: 0.6 }}>⬡</span>
+          Logout
+        </button>
+      </div>
+    </aside>
+  );
 }
