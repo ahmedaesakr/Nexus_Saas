@@ -1,4 +1,25 @@
-const COLS = [
+type KanbanCard = {
+  id: string;
+  title: string;
+  desc: string;
+  tag: string;
+  tagColor: string;
+  priority: number;
+  time?: string;
+  done?: boolean;
+  avatars?: string[];
+  progress?: number;
+  comments?: number;
+  hasImage?: boolean;
+};
+
+const COLS: Array<{
+  id: string;
+  label: string;
+  count: number;
+  color: string;
+  cards: KanbanCard[];
+}> = [
   {
     id: "todo",
     label: "TO DO",

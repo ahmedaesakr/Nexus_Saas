@@ -65,7 +65,7 @@ export default function DashboardPage() {
             ⚡ AI-DRIVEN INSIGHTS
           </div>
           <p style={{ fontSize: 13, color: "#ccc", margin: 0, lineHeight: 1.5 }}>
-            Neural processing suggests optimizing project <strong style={{ color: "#f0f0f0" }}>"Aethelgard"</strong>. Estimated throughput increase:{" "}
+            Neural processing suggests optimizing project <strong style={{ color: "#f0f0f0" }}>&quot;Aethelgard&quot;</strong>. Estimated throughput increase:{" "}
             <strong style={{ color: "#4ade80" }}>14.2%.</strong>
           </p>
           <div style={{ display: "flex", gap: 8, marginTop: 12 }}>

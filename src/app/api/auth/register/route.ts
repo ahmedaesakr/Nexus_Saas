@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { hash } from "bcryptjs";
 import { prisma } from "@/lib/db";
 import { z } from "zod";
-import { verifyInviteToken } from "@/lib/server/invite-token";
+import { verifyInviteTokenAsync } from "@/lib/server/invite-token";
 import type { Role } from "@/lib/server/auth-context";
 
 const registerSchema = z.object({
@@ -69,7 +69,7 @@ export async function POST(req: Request) {
         let role: Role = "OWNER";
 
         if (inviteToken) {
-            const invitePayload = verifyInviteToken(inviteToken);
+            const invitePayload = await verifyInviteTokenAsync(inviteToken);
             if (!invitePayload) {
                 return NextResponse.json(
                     { message: "Invalid or expired invite token" },

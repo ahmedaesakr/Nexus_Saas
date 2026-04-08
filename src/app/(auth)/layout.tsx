@@ -36,7 +36,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             ))}
           </div>
           <p style={{ fontSize: 13, color: "#888", lineHeight: 1.5, margin: "0 0 12px" }}>
-            "Nexus gave us an operator-grade workflow layer. The product feels premium, but the real win is how quickly our automations became reliable."
+            &quot;Nexus gave us an operator-grade workflow layer. The product feels premium, but the real win is how quickly our automations became reliable.&quot;
           </p>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#4ade80", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: "#000" }}>AC</div>
