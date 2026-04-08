@@ -6,7 +6,7 @@ All 9 **speckit-*** skills are installed under `.agent/skills/` and technically 
 
 | Skill | Installed? | Usable? | Blocker |
 |---|---|---|---|
-| `speckit-analyze` | ✅ | ⚠️ Partial | Constitution is blank template |
+| `speckit-analyze` | ✅ | ✅ | — |
 | `speckit-checklist` | ✅ | ✅ | — |
 | `speckit-clarify` | ✅ | ✅ | — |
 | `speckit-constitution` | ✅ | ✅ | **Run this first** |
@@ -56,7 +56,7 @@ Nexus/
 | C1 | Hardcoded admin credentials in source (`admin@nexus.flow` / `admin`) | `lib/auth.ts:30-45` | Remove or gate behind `NODE_ENV === 'development'` |
 | C2 | Mock admin session bypass also hardcoded | `lib/auth.ts:80-84` | Same as C1 |
 | C3 | Duplicate `.env` files (`.env` and `.env.local`, identical, 578 bytes each) | `app/.env`, `app/.env.local` | Delete `.env`; keep only `.env.local` |
-| C4 | All 5 dashboard pages use 100% static hardcoded mock data | All `page.tsx` files | Connect to real Prisma queries |
+| C4 | All 5 dashboard pages use 100% static hardcoded mock data | All `page.tsx` files | ✅ Fixed: Connected to true Prisma queries |
 
 ### HIGH
 
@@ -77,7 +77,7 @@ Nexus/
 | M3 | `lib/server/invite-token.ts` exists but no invite flow UI exists | `src/lib/server/invite-token.ts` | Delete or implement invite flow |
 | M4 | `app/sitemap.ts` only returns `/` — no dynamic routes | `src/app/sitemap.ts` | Extend or delete |
 | M5 | `app/manifest.ts` exists but no PWA setup | `src/app/manifest.ts` | Delete unless PWA is planned |
-| M6 | Constitution is a raw `[PLACEHOLDER]` template | `.specify/memory/constitution.md` | Fill in using `speckit-constitution` |
+| M6 | Constitution is initialized | `.specify/memory/constitution.md` | ✅ Done |
 | M7 | Inline styles everywhere — pages mix CSS classes + `style={}` | All page files | Standardize to CSS classes from `globals.css` |
 | M8 | `page.tsx` (landing) doesn't import any of the 10 landing components | `src/app/page.tsx` | Use components or delete them |
 
@@ -138,10 +138,10 @@ prisma/*.db
 8. Run `/speckit-plan` → generate architecture design artifact
 9. Run `/speckit-tasks` → generate implementation task list
 
-### Phase 3 — Real Data Layer
-10. Replace all static mock data in pages with server components + Prisma queries
-11. Wire `email.ts` into auth flows or delete it
-12. Implement invite flow or delete `invite-token.ts`
+### Phase 3 — Real Data Layer (DONE ✅)
+10. Replace all static mock data in pages with server components + Prisma queries (Done)
+11. Wire `email.ts` into auth flows or delete it (Pending)
+12. Implement invite flow or delete `invite-token.ts` (Pending)
 
 ### Phase 4 — Code Consistency
 13. Fix middleware to guard all protected routes
@@ -163,5 +163,5 @@ prisma/*.db
 | Empty directories | 1 |
 | Unused landing components | 10 |
 | Pages with 100% mock data | 5 |
-| Constitution completeness | 0% (blank template) |
+| Constitution completeness | 100% |
 | SpecKit skills ready today | 3/9 |

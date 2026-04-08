@@ -75,7 +75,7 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T009 [P] Global replacement of the static placeholder generic user "Alex Chen" avatar across Dashboard app bar/headers with the dynamic NextAuth `session.user` details.
+- [x] T009 [P] Global replacement of the static placeholder generic user "Alex Chen" avatar across Dashboard app bar/headers with the dynamic NextAuth `session.user` details.
 
 ---
 
