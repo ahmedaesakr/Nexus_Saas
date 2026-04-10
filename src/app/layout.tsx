@@ -1,21 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-import { Providers } from "./providers";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: { default: "Nexus — Mission Control", template: "%s | Nexus" },
-  description: "Nexus is an operational dashboard for modern teams.",
+  title: "Nexus — AI Website Builder",
+  description: "Build fully functional, SEO-optimized websites in seconds with AI.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Providers>{children}</Providers>
-      </body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
